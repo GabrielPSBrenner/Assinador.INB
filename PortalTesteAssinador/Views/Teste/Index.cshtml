@@ -1,0 +1,32 @@
+﻿@model IEnumerable<PortalTesteAssinador.Models.Anexo>
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>Codigo</th>
+        <th>Versão</th>
+        <th>Assinar</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(model => item.Codigo)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Versao)
+        </td>
+        <td>@Html.ActionLink("Assinar", "Assinar", new { Codigo = item.Codigo, Versao = item.Versao })
+        </td>
+    </tr>
+}
+
+</table>

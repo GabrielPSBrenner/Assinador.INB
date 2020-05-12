@@ -1,0 +1,6 @@
+C:\Projetos\INB.Assinador\INB.Assinador.Integracao\obj\Debug\INB.Assinador.Integracao.csprojAssemblyReference.cache
+C:\Projetos\INB.Assinador\INB.Assinador.Integracao\obj\Debug\INB.Assinador.Integracao.csproj.CoreCompileInputs.cache
+C:\Projetos\INB.Assinador\INB.Assinador.Integracao\bin\Debug\INB.Assinador.Integracao.dll
+C:\Projetos\INB.Assinador\INB.Assinador.Integracao\bin\Debug\INB.Assinador.Integracao.pdb
+C:\Projetos\INB.Assinador\INB.Assinador.Integracao\obj\Debug\INB.Assinador.Integracao.dll
+C:\Projetos\INB.Assinador\INB.Assinador.Integracao\obj\Debug\INB.Assinador.Integracao.pdb

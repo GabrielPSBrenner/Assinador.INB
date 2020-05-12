@@ -1,0 +1,102 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1062
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.View", "INB.Assinador.View\INB.Assinador.View.csproj", "{2D639E35-7C0C-4CD4-8851-0A6F4B83527C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.Model", "INB.Assinador.Model\INB.Assinador.Model.csproj", "{FF79E0A8-F6E6-4C68-B659-51707E0CFF13}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "INB.PDF", "INB.PDFVIEW\INB.PDF.vbproj", "{0A8C8A1F-418C-46DD-A7BA-A8063C9EEAE2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentação", "Documentação", "{066A8D57-8759-4954-99B3-66FABA535431}"
+	ProjectSection(SolutionItems) = preProject
+		FreeTimeStampServer.txt = FreeTimeStampServer.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.Integracao", "INB.Assinador.Integracao\INB.Assinador.Integracao.csproj", "{AC13F565-70DF-4EAA-AB11-0D51DA2B93DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.TesteClientTCP", "INB.Assinador.TesteClientTCP\INB.Assinador.TesteClientTCP.csproj", "{53649AE3-194A-40DB-BC2D-5B59DBE424AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalTesteAssinador", "PortalTesteAssinador\PortalTesteAssinador.csproj", "{256987EF-E57E-4481-81CE-919CC70DE57B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.Model_IT", "INB.Assinador.Model_IT\INB.Assinador.Model_IT.csproj", "{87A20C57-31C8-4464-8095-0F4A9CB8FCF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.Helper", "INB.Assinador.Helper\INB.Assinador.Helper.csproj", "{1B590121-4822-444E-BD52-DAD0505A7ECC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D639E35-7C0C-4CD4-8851-0A6F4B83527C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D639E35-7C0C-4CD4-8851-0A6F4B83527C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D639E35-7C0C-4CD4-8851-0A6F4B83527C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D639E35-7C0C-4CD4-8851-0A6F4B83527C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF79E0A8-F6E6-4C68-B659-51707E0CFF13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF79E0A8-F6E6-4C68-B659-51707E0CFF13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF79E0A8-F6E6-4C68-B659-51707E0CFF13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF79E0A8-F6E6-4C68-B659-51707E0CFF13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A8C8A1F-418C-46DD-A7BA-A8063C9EEAE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A8C8A1F-418C-46DD-A7BA-A8063C9EEAE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A8C8A1F-418C-46DD-A7BA-A8063C9EEAE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A8C8A1F-418C-46DD-A7BA-A8063C9EEAE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC13F565-70DF-4EAA-AB11-0D51DA2B93DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC13F565-70DF-4EAA-AB11-0D51DA2B93DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC13F565-70DF-4EAA-AB11-0D51DA2B93DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC13F565-70DF-4EAA-AB11-0D51DA2B93DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53649AE3-194A-40DB-BC2D-5B59DBE424AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53649AE3-194A-40DB-BC2D-5B59DBE424AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53649AE3-194A-40DB-BC2D-5B59DBE424AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53649AE3-194A-40DB-BC2D-5B59DBE424AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{256987EF-E57E-4481-81CE-919CC70DE57B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{256987EF-E57E-4481-81CE-919CC70DE57B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{256987EF-E57E-4481-81CE-919CC70DE57B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{256987EF-E57E-4481-81CE-919CC70DE57B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87A20C57-31C8-4464-8095-0F4A9CB8FCF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87A20C57-31C8-4464-8095-0F4A9CB8FCF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87A20C57-31C8-4464-8095-0F4A9CB8FCF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87A20C57-31C8-4464-8095-0F4A9CB8FCF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B590121-4822-444E-BD52-DAD0505A7ECC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B590121-4822-444E-BD52-DAD0505A7ECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B590121-4822-444E-BD52-DAD0505A7ECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B590121-4822-444E-BD52-DAD0505A7ECC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D03AB13-A689-4C19-8604-92390DFC4B0A}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 9
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs.inbnet2.inb.gov.br:8080/tfs/inbcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = INB.Assinador.Model\\INB.Assinador.Model.csproj
+		SccProjectName1 = INB.Assinador.Model
+		SccLocalPath1 = INB.Assinador.Model
+		SccProjectUniqueName2 = INB.Assinador.View\\INB.Assinador.View.csproj
+		SccProjectName2 = INB.Assinador.View
+		SccLocalPath2 = INB.Assinador.View
+		SccProjectUniqueName3 = INB.PDFVIEW\\INB.PDF.vbproj
+		SccProjectName3 = INB.PDFVIEW
+		SccLocalPath3 = INB.PDFVIEW
+		SccProjectUniqueName4 = INB.Assinador.Integracao\\INB.Assinador.Integracao.csproj
+		SccProjectName4 = INB.Assinador.Integracao
+		SccLocalPath4 = INB.Assinador.Integracao
+		SccProjectUniqueName5 = INB.Assinador.TesteClientTCP\\INB.Assinador.TesteClientTCP.csproj
+		SccProjectName5 = INB.Assinador.TesteClientTCP
+		SccLocalPath5 = INB.Assinador.TesteClientTCP
+		SccProjectUniqueName6 = PortalTesteAssinador\\PortalTesteAssinador.csproj
+		SccProjectName6 = PortalTesteAssinador
+		SccLocalPath6 = PortalTesteAssinador
+		SccProjectUniqueName7 = INB.Assinador.Model_IT\\INB.Assinador.Model_IT.csproj
+		SccProjectName7 = INB.Assinador.Model_IT
+		SccLocalPath7 = INB.Assinador.Model_IT
+		SccProjectUniqueName8 = INB.Assinador.Helper\\INB.Assinador.Helper.csproj
+		SccProjectName8 = INB.Assinador.Helper
+		SccLocalPath8 = INB.Assinador.Helper
+	EndGlobalSection
+EndGlobal

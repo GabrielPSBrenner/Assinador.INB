@@ -1,0 +1,11 @@
+C:\Projetos\INB.Assinador\INB.Assinador.TesteClientTCP\bin\Debug\INB.Assinador.TesteClientTCP.exe
+C:\Projetos\INB.Assinador\INB.Assinador.TesteClientTCP\bin\Debug\INB.Assinador.TesteClientTCP.pdb
+C:\Projetos\INB.Assinador\INB.Assinador.TesteClientTCP\bin\Debug\INB.Assinador.Integracao.dll
+C:\Projetos\INB.Assinador\INB.Assinador.TesteClientTCP\bin\Debug\INB.Assinador.Integracao.pdb
+C:\Projetos\INB.Assinador\INB.Assinador.TesteClientTCP\obj\Debug\INB.Assinador.TesteClientTCP.csprojAssemblyReference.cache
+C:\Projetos\INB.Assinador\INB.Assinador.TesteClientTCP\obj\Debug\INB.Assinador.TesteClientTCP.FrmTeste.resources
+C:\Projetos\INB.Assinador\INB.Assinador.TesteClientTCP\obj\Debug\INB.Assinador.TesteClientTCP.csproj.GenerateResource.cache
+C:\Projetos\INB.Assinador\INB.Assinador.TesteClientTCP\obj\Debug\INB.Assinador.TesteClientTCP.csproj.CoreCompileInputs.cache
+C:\Projetos\INB.Assinador\INB.Assinador.TesteClientTCP\obj\Debug\INB.Assinador.TesteClientTCP.csproj.CopyComplete
+C:\Projetos\INB.Assinador\INB.Assinador.TesteClientTCP\obj\Debug\INB.Assinador.TesteClientTCP.exe
+C:\Projetos\INB.Assinador\INB.Assinador.TesteClientTCP\obj\Debug\INB.Assinador.TesteClientTCP.pdb
