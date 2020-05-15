@@ -424,7 +424,7 @@
             this.MaximizeBox = false;
             this.Name = "FrmAssinador";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Selecionar o certificado que será utilizado para assinar";
+            this.Text = "Assinador Eletrônico da INB";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmAssinador_FormClosing);
             this.Load += new System.EventHandler(this.FrmAssinador_Load);
             this.MnuBandeja.ResumeLayout(false);

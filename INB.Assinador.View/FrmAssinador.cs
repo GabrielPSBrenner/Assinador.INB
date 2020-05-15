@@ -10,6 +10,7 @@ using System.Threading;
 using System.Windows.Forms;
 using INB.Assinador.Integracao;
 using System.IO;
+using System.Diagnostics;
 
 namespace INB.Assinador.View
 {
@@ -49,7 +50,25 @@ namespace INB.Assinador.View
         }
         private void FrmAssinador_Load(object sender, EventArgs e)
         {
+            try { 
+                INB.Assinador.Helper.Certificado.InstalaCertificadoTimeStamp();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro ao instalar o certificado do TimeStamp:" + ex.Message + ".", ProductName, MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+            }
+
+            try
+            {
+
+                INB.Assinador.Helper.Registro.SetStartup(true, Process.GetCurrentProcess().ProcessName);
+            }
+            catch (Exception ex)
+            { }
+
             CboDigestAlgorithm.SelectedIndex = 2;
+            
+
             CarregaCertificado();
             ReadSettings();
 
@@ -85,6 +104,11 @@ namespace INB.Assinador.View
 
         private void ReadSettings()
         {
+            if (!Directory.Exists(System.AppDomain.CurrentDomain.BaseDirectory + "Temp\\"))
+            {
+                Directory.CreateDirectory(System.AppDomain.CurrentDomain.BaseDirectory + "Temp\\");
+            }
+
             Configuration configuration = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
             try
             {
@@ -111,6 +135,21 @@ namespace INB.Assinador.View
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private string getFileName(string path, string file, string complemento = "_assinado")
+        {
+            string NewFileName = file + complemento;
+            if (File.Exists(path + NewFileName + ".pdf"))
+            {
+                NewFileName = getFileName(path, NewFileName, "_assinado");
+            }
+            else
+            {
+                NewFileName += complemento + ".pdf";
+            }
+
+            return NewFileName;
         }
 
         public bool AssinarArquivo(string Arquivo, out string returnFileName, bool SemAbrir = false)
@@ -169,17 +208,20 @@ namespace INB.Assinador.View
                     string SignedFileName;
                     //******
                     //pensar quando já tiver o nome do arquivo
-                    SignedFileName = Arquivo.Substring(0, Arquivo.Length - 4) + "_assinado.pdf";
+                    string FileName = Path.GetFileName(Arquivo);
+                    string PathFile = Path.GetFullPath(Arquivo);
 
+                    FileName = getFileName(PathFile, FileName.Substring(0, FileName.Length - 4));
 
-                    returnFileName = SignedFileName;
+                    SignedFileName = PathFile + FileName;
 
-
+                
+                    // returnFileName = SignedFileName;
                     INB.Assinador.Model.AssinaComTokenITextSharp.AssinaPDF(Arquivo, SignedFileName, CboCertificados.SelectedValue.ToString(), Pagina, X, Y, _Escala, ChkCargo.Checked, ChkCREA.Checked, ChkCRM.Checked, TxtCargo.Text, TxtCRMCREA.Text, ChkCarimboTempo.Checked,TxtTimeStampServer.Text,TxtUsuarioTS.Text, TxtSenhaTS.Text, "", ChkAplicaPolitica.Checked, CboDigestAlgorithm.Text);
 
                     if (SemAbrir == false)
                     {
-                        if (MessageBox.Show("Arquivo assinado com sucesso.Deseja abri-lo?", "Assinador INB", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        if (MessageBox.Show("Arquivo assinado com sucesso.Deseja abri-lo?", ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             System.Diagnostics.Process.Start(SignedFileName);
                         }
@@ -195,6 +237,7 @@ namespace INB.Assinador.View
             if (CboCertificados.Items.Count == 0 || CboCertificados.SelectedIndex == -1)
             {
                 MessageBox.Show("Por favor, selecione um certificado válido.", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                BtnAtualizar_Click(sender, e);
                 CboCertificados.Focus();
             }
             else
@@ -203,7 +246,7 @@ namespace INB.Assinador.View
                 openFileDialog1.FileName = "";
                 if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
                 {
-                    string ArquivoAssinado;
+                    string ArquivoAssinado;                    
                     AssinarArquivo(openFileDialog1.FileName, out ArquivoAssinado);
                 }
                 AtualizaSettings();

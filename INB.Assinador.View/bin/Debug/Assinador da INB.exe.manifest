@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="Assinador da INB.exe" version="1.1.0.2" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
-  <description asmv2:iconFile="Signature-digital-smartphone-mobile-512 (1).ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <asmv1:assemblyIdentity name="Assinador da INB.exe" version="1.1.0.14" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="assinatura2.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Assinador da INB" version="1.1.0.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="Assinador da INB" version="1.1.0.13" language="neutral" processorArchitecture="msil" />
     <commandLine file="Assinador da INB.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Assinador da INB.exe" size="1112976">
-      <assemblyIdentity name="Assinador da INB" version="1.1.0.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Assinador da INB.exe" size="1420688">
+      <assemblyIdentity name="Assinador da INB" version="1.1.0.13" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>/9eV7rhZhfcqgi4s4WuAs7xleDxagWwag72D2NF9+50=</dsig:DigestValue>
+        <dsig:DigestValue>tcvHuTuqqKtEUZamgVT2h8KJSazmkKcpxOJK8KODb7U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,19 +62,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>DO1PpADGO4fRMumQZ53Z0rRBppenCbZQN4GJhu++pxU=</dsig:DigestValue>
+        <dsig:DigestValue>liwl0bIvhQCg70RZMrV8M/2K76UNneE66OnP4uGPU0k=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="INB.Assinador.Helper.dll" size="44544">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="INB.Assinador.Helper.dll" size="143872">
       <assemblyIdentity name="INB.Assinador.Helper" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>RXl15OGPy6QK313LLXU9YLVHn4sHQIig7HgH7YDT8xA=</dsig:DigestValue>
+        <dsig:DigestValue>9U3mVxbM92r4TQsKtkd9Kc43NIVX23jzdBgFKPvIy10=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -98,19 +98,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>6V5/LE5VAX4p4Mt3nk4M+0JsDhzPAbGxqT4vWAZqAOc=</dsig:DigestValue>
+        <dsig:DigestValue>KwYT8yxqbwHD7M/sc/LzP31w1v5LhkJ451VV9flE370=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="INB.PDF.dll" size="280576">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="INB.PDF.dll" size="276992">
       <assemblyIdentity name="INB.PDF" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>W7RGbl0q0KdCDSl+sKPkqYF6dM7gUE3lI0oLISlo77M=</dsig:DigestValue>
+        <dsig:DigestValue>O/hw3ulJ1XtdiRYYvGwKI43XJqj6QB9RxFVDKFqzzpo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -122,7 +122,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>811Na2xXmEyPvuZZBq/zsYSbmLDBMLDH4CCHDg3iSLo=</dsig:DigestValue>
+        <dsig:DigestValue>Ci4O97WezkrOLC1pgxyXEAe9kQsFONdyAK/AmFgYvGQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -162,16 +162,25 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Assinador da INB.exe.config" size="410">
+  <file name="Assinador da INB.exe.config" size="1255">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>LS1wNqVBHc3O3zuNwS3TU1mB0N5+OxBdOPuCG83cBYw=</dsig:DigestValue>
+      <dsig:DigestValue>9rV5ZVuw2pv+MioyVFF2ThJJejNxUBbnVyxuHrpdRNQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Signature-digital-smartphone-mobile-512 (1).ico" size="4286">
+  <file name="assinatura.ico" size="112067">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>OdJ+Yne32uHEBXU61ItJ5zrpp0zJ+5AFjVHSiPJghsk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="assinatura1.ico" size="4286">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -180,7 +189,16 @@
       <dsig:DigestValue>AfJNsncYzR+u+gh9fne3Ej9KIZaM8s5IpebyxmrVYLQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Temp\XMLFile.xml" size="45" writeableType="applicationData">
+  <file name="assinatura2.ico" size="104915">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>BEZp/xmiPL9YqbshE3ucT6bHG9vuMUFiaOGOBtqcBbA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Temp\XMLFile.xml" size="45">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />

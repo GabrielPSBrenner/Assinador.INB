@@ -1,8 +1,8 @@
 C:\Projetos\INB.Assinador\INB.Assinador.Helper\bin\Debug\INB.Assinador.Helper.dll
 C:\Projetos\INB.Assinador\INB.Assinador.Helper\bin\Debug\INB.Assinador.Helper.pdb
 C:\Projetos\INB.Assinador\INB.Assinador.Helper\obj\Debug\INB.Assinador.Helper.csprojAssemblyReference.cache
+C:\Projetos\INB.Assinador\INB.Assinador.Helper\obj\Debug\INB.Assinador.Helper.Properties.Resources.resources
+C:\Projetos\INB.Assinador\INB.Assinador.Helper\obj\Debug\INB.Assinador.Helper.csproj.GenerateResource.cache
 C:\Projetos\INB.Assinador\INB.Assinador.Helper\obj\Debug\INB.Assinador.Helper.csproj.CoreCompileInputs.cache
 C:\Projetos\INB.Assinador\INB.Assinador.Helper\obj\Debug\INB.Assinador.Helper.dll
 C:\Projetos\INB.Assinador\INB.Assinador.Helper\obj\Debug\INB.Assinador.Helper.pdb
-C:\Projetos\INB.Assinador\INB.Assinador.Helper\obj\Debug\INB.Assinador.Helper.Properties.Resources.resources
-C:\Projetos\INB.Assinador\INB.Assinador.Helper\obj\Debug\INB.Assinador.Helper.csproj.GenerateResource.cache
