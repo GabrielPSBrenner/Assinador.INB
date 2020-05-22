@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="Assinador da INB.exe" version="1.1.0.38" publicKeyToken="8ffd04309e0021c9" language="neutral" processorArchitecture="msil" type="win32" />
+  <description asmv2:iconFile="assinatura2.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="Assinador da INB" version="1.1.0.38" language="neutral" processorArchitecture="msil" />
+    <commandLine file="Assinador da INB.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Assinador da INB.exe" size="1435024">
+      <assemblyIdentity name="Assinador da INB" version="1.1.0.38" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>Jtexo5wno8sPnckiFCwAvG7UQkDNm3cFyOK94xsbIw4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AxInterop.AcroPDFLib.dll" size="8192">
+      <assemblyIdentity name="AxInterop.AcroPDFLib" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>xkPW80y1D5y2KSQRo8biXf1kyCZQ7hq8bEiLXXh1Ax0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="INB.Assinador.Helper.dll" size="145408">
+      <assemblyIdentity name="INB.Assinador.Helper" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>bOEjwx0MT7urxxyJTfaZjhoFJMWm3sIWUKXwbXGa3kA=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="INB.Assinador.Integracao.dll" size="11776">
+      <assemblyIdentity name="INB.Assinador.Integracao" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>p0skmsH+f57mD9jxLF+Zyn+Ta11BiTO4q60oehlTWeI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="INB.Assinador.Model.dll" size="187392">
+      <assemblyIdentity name="INB.Assinador.Model" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>+gHfNozBBO2pxcdwykvb9UyHyXm56lmrnnLpOSAGxeg=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="INB.PDF.dll" size="279040">
+      <assemblyIdentity name="INB.PDF" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>F6Va+7J2rULVuRITYWvHZEVfHI3/UUAlMDZKO/eUUbs=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.AcroPDFLib.dll" size="11776">
+      <assemblyIdentity name="Interop.AcroPDFLib" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>GxDfLd3XA+uvjMJ+1AQo3vPKT/yqgCJqO/NaiDNg/cM=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="itextsharp.dll" size="4079616">
+      <assemblyIdentity name="itextsharp" version="5.5.13.1" publicKeyToken="8354AE6D2174DDCA" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>VUC+CCHYMD3JRf0r0cYggs26RiYOUniYX6CGYkLerdI=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PdfLibNet32.dll" size="1513984">
+      <assemblyIdentity name="PdfLibNet32" version="1.0.6.8" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>ds38lDke2ty/IK2u9ZnTaiuJHWGXUD2l2QaxwPNRVxE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="tessnet2_32.dll" size="1455104">
+      <assemblyIdentity name="tessnet2_32" version="2.0.4.0" publicKeyToken="1550524B5BA07E29" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>nEZAx+dDvUXIQFO3ptqm1Wiovg+AypMc4FgfYPozbco=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="Assinador da INB.exe.config" size="1255">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>9rV5ZVuw2pv+MioyVFF2ThJJejNxUBbnVyxuHrpdRNQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="assinatura.ico" size="112067">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>OdJ+Yne32uHEBXU61ItJ5zrpp0zJ+5AFjVHSiPJghsk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="assinatura1.ico" size="4286">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>AfJNsncYzR+u+gh9fne3Ej9KIZaM8s5IpebyxmrVYLQ=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="assinatura2.ico" size="104915">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>BEZp/xmiPL9YqbshE3ucT6bHG9vuMUFiaOGOBtqcBbA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Temp\Apresentacao.pdf" size="1605119">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>W4U2PIOrjV7VNT51p8350+07HJlr26pcX7Id1vk2edA=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Temp\XMLFile.xml" size="45">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>y0/qSVb8ZZDx3VO/7K5NafADxvau0UlF51D4wJZf+QI=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=INB\1495" issuerKeyHash="8a5c38b51a950c9466c59eaf910d62e2105e02ff" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>ps+O13Kx/Ys8G6W+pY2O5FjF5crsIG84wMRWx1cwxL4=</DigestValue></Reference></SignedInfo><SignatureValue>CoNosKuZujdIap4Ku8nHaWeJsc/ln4IcWxXwaveGqrvorZr3WTHJCPPsr9G5b4B4ovLfzw6IK7Sw5+AFuCv9zFWsGAdm0Vvcqzhg/2KaSaKx4bbRQ+fNvcVAYyvXGhEdxi84+UQXiVxFr99j5eF9vBeaT8WV9fBvpq/cTc/TaaU=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>pUl7v9xPkANiBe/Mrdd26+Xw3VAtbFDnxzAhPLGG6d24Q+RfiUGV3fmrnKIk1oSc5oDD8NJcPmv8YG3yD9p4Ill7hDCx0/B/wtBX6/WSKJI3ME6yiy2TV2bRsdsZjnZ1P3iC0Wt9CesBdwgvsKl0yU2VMe29fRxK/WK3pJ7aFLU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="bec43057c756c4c0386f20eccae5c558e48e8da5bea51b3c8bfdb172d78ecfa6" Description="" Url=""><as:assemblyIdentity name="Assinador da INB.exe" version="1.1.0.38" publicKeyToken="8ffd04309e0021c9" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=INB\1495</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>rINon6THC9ky8LaJWiin9JZSjx/rn8YT667lIAq9OQo=</DigestValue></Reference></SignedInfo><SignatureValue>Y5U5zfgYGO09OaxekJnQKlxVv6dPQ8k1PCyfax8qEgIxHPGHu3LGLXBv19AX8gnymwivaEiP5yWXTspAJCjWK2XumDg4dLK0lkdpEvpzrAbnCC/tYFebwFl1ERVmR4bONMH8dWgMqFsljyQ1aXNMMvJl3/G2dTJxMQrS7sRtsyk=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>pUl7v9xPkANiBe/Mrdd26+Xw3VAtbFDnxzAhPLGG6d24Q+RfiUGV3fmrnKIk1oSc5oDD8NJcPmv8YG3yD9p4Ill7hDCx0/B/wtBX6/WSKJI3ME6yiy2TV2bRsdsZjnZ1P3iC0Wt9CesBdwgvsKl0yU2VMe29fRxK/WK3pJ7aFLU=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIBuTCCASKgAwIBAgIQWOMq2iu2daNCRpieoFTN3TANBgkqhkiG9w0BAQsFADAbMRkwFwYDVQQDHhAASQBOAEIAXAAxADQAOQA1MB4XDTIwMDUwNDIxMzExM1oXDTIxMDUwNTAzMzExM1owGzEZMBcGA1UEAx4QAEkATgBCAFwAMQA0ADkANTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEApUl7v9xPkANiBe/Mrdd26+Xw3VAtbFDnxzAhPLGG6d24Q+RfiUGV3fmrnKIk1oSc5oDD8NJcPmv8YG3yD9p4Ill7hDCx0/B/wtBX6/WSKJI3ME6yiy2TV2bRsdsZjnZ1P3iC0Wt9CesBdwgvsKl0yU2VMe29fRxK/WK3pJ7aFLUCAwEAATANBgkqhkiG9w0BAQsFAAOBgQA4lWQUFaVECkdqEpl9xqz2sX8TgJTgSwoKTxBHogvKNcrnzT3TpnF9ehO9+NEptWd3JxAnS1xKUuEGM4nTS9ptfy83ldMpMPFT3VLvCUM2yqPRmgThls/jGdZ263a/ABm6wovukCjCo36D2STG6tcHABy9POo8oxqpKs9V+3Oqow==</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

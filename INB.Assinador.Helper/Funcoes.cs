@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +18,16 @@ namespace INB.Assinador.Helper
                              .ToArray();
         }
 
+
+        //public static byte[] ObjToByteArray(object stream)
+        //{
+        //    ((Stream)stream).Position = 0;
+        //    byte[] buffer = new byte[((Stream)stream).Length];
+        //    for (int totalBytesCopied = 0; totalBytesCopied < ((Stream)stream).Length;)
+        //        totalBytesCopied += ((Stream)stream).Read(buffer, totalBytesCopied, Convert.ToInt32(((Stream)stream).Length) - totalBytesCopied);
+        //    return buffer;
+        //}
+
         public static byte[] ToByteArray(Stream stream)
         {
             stream.Position = 0;
@@ -26,5 +37,8 @@ namespace INB.Assinador.Helper
             return buffer;
         }
 
+
+
+        
     }
 }

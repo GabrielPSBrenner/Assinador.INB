@@ -31,10 +31,10 @@
     <ProductName>Assinador</ProductName>
     <PublisherName>Indústrias Nucleares do Brasil</PublisherName>
     <SuiteName>Assinador</SuiteName>
-    <MinimumRequiredVersion>1.1.0.7</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.1.0.24</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.html</WebPage>
-    <ApplicationRevision>14</ApplicationRevision>
+    <ApplicationRevision>39</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -105,15 +105,23 @@
     <Compile Include="FrmAssinador.Designer.cs">
       <DependentUpon>FrmAssinador.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmInfo.Designer.cs">
+      <DependentUpon>FrmInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\HandleCliNet.cs" />
     <Compile Include="Service\WSFile.cs" />
     <EmbeddedResource Include="AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAssinador.resx">
       <DependentUpon>FrmAssinador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmInfo.resx">
+      <DependentUpon>FrmInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -138,6 +146,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="Temp\Apresentacao.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -204,6 +215,8 @@
     <Content Include="assinatura.ico" />
     <Content Include="assinatura1.ico" />
     <Content Include="assinatura2.ico" />
+    <None Include="Resources\cancel.png" />
+    <None Include="Resources\refresh.png" />
     <Content Include="Temp\XMLFile.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

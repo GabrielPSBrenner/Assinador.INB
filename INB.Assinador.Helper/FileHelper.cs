@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using INB.Assinador.Integracao;
+
 
 namespace INB.Assinador.Helper
 {
@@ -44,5 +48,30 @@ namespace INB.Assinador.Helper
             return data;
         }
 
+
+        public static string FileToBase64(string fileName)
+        {
+            byte[] Arquivo = ReadFile(fileName);
+            return Convert.ToBase64String(Arquivo);
+        }
+
+        public static MemoryStream Base64toMemoryStream(string file)
+        {
+            byte[] Arquivo = Convert.FromBase64String(file);
+            MemoryStream Ms = new MemoryStream(Arquivo);
+            return Ms;
+        }
+        public static FileStream Base64toFileStream(string file, string Path, string FileName )
+        {
+            byte[] Arquivo = Convert.FromBase64String(file);
+            FileStream Ms = new FileStream(Path + FileName, FileMode.OpenOrCreate);
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(Ms, Arquivo);
+            Ms.Flush();           
+            return Ms;
+        }
+
+
+       
     }
 }

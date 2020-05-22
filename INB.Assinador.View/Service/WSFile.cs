@@ -13,7 +13,7 @@ namespace INB.Assinador.View.Service
 {
     public class WSFile
     {
-        public static MemoryStream getFile(Comunicacao oCom)
+        public static MemoryStream getFileMS(Comunicacao oCom)
         {
             BasicHttpBinding binding = new BasicHttpBinding();
             binding.MaxReceivedMessageSize = 2147483647;
@@ -31,6 +31,22 @@ namespace INB.Assinador.View.Service
             return stream;
         }
 
+        public static byte[] getFile(Comunicacao oCom)
+        {
+            BasicHttpBinding binding = new BasicHttpBinding();
+            binding.MaxReceivedMessageSize = 2147483647;
+            binding.MaxBufferSize = 2147483647;
+            binding.MaxBufferPoolSize = 2147483647;
+            EndpointAddress epAddr = new EndpointAddress(oCom.URLWS);
+            var channelHelper = ChannelFactory<IRequestChannelFile>.CreateChannel(binding, epAddr);
+            var clientProxy = (System.ServiceModel.Channels.IRequestChannel)channelHelper;
+            clientProxy.Open();
+            var oService = (IWS)channelHelper;
+            byte[] file = oService.ReceberArquivo(oCom.Codigo, oCom.Versao);
+            clientProxy.Close();            
+            return file;
+        }
+
         public static void setFile(Comunicacao oCom , byte[] Arquivo)
         {
             BasicHttpBinding binding = new BasicHttpBinding();
@@ -42,7 +58,7 @@ namespace INB.Assinador.View.Service
             var clientProxy = (System.ServiceModel.Channels.IRequestChannel)channelHelper;
             clientProxy.Open();
             var oService = (IWS)channelHelper;          
-            oService.EnviarArquivo(Arquivo, oCom.Codigo, oCom.Versao);           
+            oService.EnviarArquivo(Arquivo, oCom.Codigo, oCom.Versao, oCom.UsuarioAutenticado);           
             clientProxy.Close();
             return;
         }

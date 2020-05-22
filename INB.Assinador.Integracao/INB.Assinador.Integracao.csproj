@@ -51,11 +51,15 @@
   <ItemGroup>
     <Compile Include="ConverterObjeto.cs" />
     <Compile Include="Comunicacao.cs" />
+    <Compile Include="FileTransfer.cs" />
     <Compile Include="Interfaces\IComunicacao.cs" />
+    <Compile Include="Interfaces\IFileTransfer.cs" />
     <Compile Include="Interfaces\IRequestChannelFile.cs" />
     <Compile Include="Interfaces\IWS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Cliente.cs" />
+    <Compile Include="Service\FileSocket.cs" />
+    <Compile Include="Service\SocketWS.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

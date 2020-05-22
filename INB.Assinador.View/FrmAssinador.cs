@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using INB.Assinador.Integracao;
 using System.IO;
 using System.Diagnostics;
+using INB.Assinador.Helper;
+using System.Security.Cryptography;
 
 namespace INB.Assinador.View
 {
@@ -24,6 +26,7 @@ namespace INB.Assinador.View
         int _Altura;
         double _Escala;
         bool fecha = false;
+
         private Thread t;
 
         public FrmAssinador()
@@ -43,17 +46,35 @@ namespace INB.Assinador.View
         private void CarregaCertificado()
         {
             CboCertificados.DataSource = null;
-            X509Certificate2Collection Certificados = INB.Assinador.Helper.Certificado.ListaCertificadosValidos();
             CboCertificados.ValueMember = "SerialNumber";
             CboCertificados.DisplayMember = "Subject";
-            CboCertificados.DataSource = Certificados;
+            CboCertificados.DataSource = CertSimples.ListaCertificado(INB.Assinador.Helper.Certificado.ListaCertificadosValidos());
         }
         private void FrmAssinador_Load(object sender, EventArgs e)
         {
-            try { 
-                INB.Assinador.Helper.Certificado.InstalaCertificadoTimeStamp();
+            if (ChkIgnora.Checked)
+            {
+                this.Height = 155;
+                ChkCargo.Checked = false;
+                ChkCREA.Checked = false;
+                ChkCRM.Checked = false;
+                ChkCargo.Visible = false;
+                ChkCREA.Visible = false;
+                ChkCRM.Visible = false;
+                TxtCargo.Visible = false;
+                TxtCRMCREA.Visible = false;
+                AtualizaSettings();
             }
-            catch(Exception ex)
+            else
+            {
+                this.Height = 180;
+            }
+            try
+            {
+               
+                //INB.Assinador.Helper.Certificado.InstalaCertificadoTimeStamp();
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Ocorreu um erro ao instalar o certificado do TimeStamp:" + ex.Message + ".", ProductName, MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
             }
@@ -67,7 +88,7 @@ namespace INB.Assinador.View
             { }
 
             CboDigestAlgorithm.SelectedIndex = 2;
-            
+
 
             CarregaCertificado();
             ReadSettings();
@@ -78,7 +99,7 @@ namespace INB.Assinador.View
 
         private void OpenServer(int Porta = 27525)
         {
-            TcpListener serverSocket = new TcpListener(Porta); 
+            TcpListener serverSocket = new TcpListener(Porta);
             serverSocket.Start();
             int counter = 0;
             while (true)
@@ -87,9 +108,9 @@ namespace INB.Assinador.View
                 TcpClient clientSocket = default(TcpClient);
                 clientSocket = serverSocket.AcceptTcpClient();
                 clientSocket.ReceiveBufferSize = 10000;
-                HandleCliNet client = new HandleCliNet();
+                INB.Assinador.Integracao.Service.SocketWS client = new INB.Assinador.Integracao.Service.SocketWS();
                 client.startClient(clientSocket, Convert.ToString(counter));
-            }            
+            }
             serverSocket.Stop();
         }
 
@@ -146,15 +167,12 @@ namespace INB.Assinador.View
             }
             else
             {
-                NewFileName += complemento + ".pdf";
+                NewFileName += ".pdf";
             }
-
             return NewFileName;
         }
-
-        public bool AssinarArquivo(string Arquivo, out string returnFileName, bool SemAbrir = false)
+        private PDF.FrmPreview.eTipoSelo SeloUtilizado()
         {
-            returnFileName = "";
             PDF.FrmPreview.eTipoSelo TipoSelo;
             if (ChkCargo.Checked == false && ChkCRM.Checked == false && ChkCREA.Checked == false)
             {
@@ -184,20 +202,67 @@ namespace INB.Assinador.View
             {
                 TipoSelo = PDF.FrmPreview.eTipoSelo.Selo;
             }
+            return TipoSelo;
+        }
+
+        public bool AssinarArquivo(byte[] Arquivo, out byte[] returnFile, bool SemAbrir = false)
+        {
+            PDF.FrmPreview.eTipoSelo TipoSelo;
+            TipoSelo = SeloUtilizado();
             oFrm = new PDF.FrmPreview(Arquivo, TipoSelo);
             oFrm.PosicaoSelo += new INB.PDF.FrmPreview.PosicaoSeloEventHandler(this.PosicaoSelo);
             oFrm.ShowDialog();
             if (oFrm.AssinaturaConfirmada)
             {
+                oFrm.Close();
                 int Pagina, largura, altura;
                 int X, Y;
-
                 Pagina = _Pagina;
                 X = _Position.X;
                 Y = _Position.Y;
                 largura = _Largura;
                 altura = _Altura;
+                if (Pagina == 0 || X < 0 || Y < 0)
+                {
+                    MessageBox.Show("Foi impossível determinar a localização do selo, por favor, repetir o procedimento de assinatura.", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    returnFile = null;
+                    return false;
+                }
+                else
+                {
+                    MemoryStream SendFile = new MemoryStream(Arquivo);
+                    byte[] ReceiveFile;
+                    INB.Assinador.Model.AssinaComTokenITextSharp.AssinaPDF(SendFile, out ReceiveFile, CboCertificados.SelectedValue.ToString(), Pagina, X, Y, _Escala, ChkCargo.Checked, ChkCREA.Checked, ChkCRM.Checked, TxtCargo.Text, TxtCRMCREA.Text, ChkCarimboTempo.Checked, TxtTimeStampServer.Text, TxtUsuarioTS.Text, TxtSenhaTS.Text, "Assinatura Digital de Documento", ChkAplicaPolitica.Checked, CboDigestAlgorithm.Text);
+                    //returnFile = new byte[ReceiveFile.Length];
+                    returnFile = ReceiveFile;
+                }
+                return true;
+            }
+            else
+            {
+                returnFile = null;
+                return false;
+            }
+        }
 
+        public bool AssinarArquivo(string Arquivo, out string returnFileName, bool SemAbrir = false)
+        {
+            returnFileName = "";
+            PDF.FrmPreview.eTipoSelo TipoSelo;
+            TipoSelo = SeloUtilizado();
+            oFrm = new PDF.FrmPreview(Arquivo, TipoSelo);
+            oFrm.PosicaoSelo += new INB.PDF.FrmPreview.PosicaoSeloEventHandler(this.PosicaoSelo);
+            oFrm.ShowDialog();
+            if (oFrm.AssinaturaConfirmada)
+            {
+                oFrm.Close();
+                int Pagina, largura, altura;
+                int X, Y;
+                Pagina = _Pagina;
+                X = _Position.X;
+                Y = _Position.Y;
+                largura = _Largura;
+                altura = _Altura;
                 if (Pagina == 0 || X < 0 || Y < 0)
                 {
                     MessageBox.Show("Foi impossível determinar a localização do selo, por favor, repetir o procedimento de assinatura.", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -209,15 +274,11 @@ namespace INB.Assinador.View
                     //******
                     //pensar quando já tiver o nome do arquivo
                     string FileName = Path.GetFileName(Arquivo);
-                    string PathFile = Path.GetFullPath(Arquivo);
-
+                    string PathFile = Path.GetDirectoryName(Arquivo) + "\\";
                     FileName = getFileName(PathFile, FileName.Substring(0, FileName.Length - 4));
-
                     SignedFileName = PathFile + FileName;
-
-                
-                    // returnFileName = SignedFileName;
-                    INB.Assinador.Model.AssinaComTokenITextSharp.AssinaPDF(Arquivo, SignedFileName, CboCertificados.SelectedValue.ToString(), Pagina, X, Y, _Escala, ChkCargo.Checked, ChkCREA.Checked, ChkCRM.Checked, TxtCargo.Text, TxtCRMCREA.Text, ChkCarimboTempo.Checked,TxtTimeStampServer.Text,TxtUsuarioTS.Text, TxtSenhaTS.Text, "", ChkAplicaPolitica.Checked, CboDigestAlgorithm.Text);
+                    returnFileName = SignedFileName;
+                    INB.Assinador.Model.AssinaComTokenITextSharp.AssinaPDF(Arquivo, SignedFileName, CboCertificados.SelectedValue.ToString(), Pagina, X, Y, _Escala, ChkCargo.Checked, ChkCREA.Checked, ChkCRM.Checked, TxtCargo.Text, TxtCRMCREA.Text, ChkCarimboTempo.Checked, TxtTimeStampServer.Text, TxtUsuarioTS.Text, TxtSenhaTS.Text, "Assinatura Digital de Documento", ChkAplicaPolitica.Checked, CboDigestAlgorithm.Text);
 
                     if (SemAbrir == false)
                     {
@@ -226,10 +287,14 @@ namespace INB.Assinador.View
                             System.Diagnostics.Process.Start(SignedFileName);
                         }
                     }
-
                 }
+                return true;
             }
-            return true;
+            else
+            {
+                return false;
+            }
+
         }
 
         private void BtnAssinarPDF_Click(object sender, EventArgs e)
@@ -246,7 +311,7 @@ namespace INB.Assinador.View
                 openFileDialog1.FileName = "";
                 if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
                 {
-                    string ArquivoAssinado;                    
+                    string ArquivoAssinado;
                     AssinarArquivo(openFileDialog1.FileName, out ArquivoAssinado);
                 }
                 AtualizaSettings();
@@ -335,7 +400,7 @@ namespace INB.Assinador.View
 
         private void notifyIcon1_Click(object sender, EventArgs e)
         {
-           // MnuBandeja.Visible = true;
+            // MnuBandeja.Visible = true;
         }
 
         private void MnuSobre_Click(object sender, EventArgs e)
@@ -346,7 +411,7 @@ namespace INB.Assinador.View
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (HandleCliNet.MensagemNova)
+            if (INB.Assinador.Integracao.Service.SocketWS.MensagemNova)
             {
                 this.Visible = true;
                 this.Focus();
@@ -359,43 +424,56 @@ namespace INB.Assinador.View
                 else
                 {
 
-                    string Mensagem = HandleCliNet.Mensagem;
+                    string Mensagem = INB.Assinador.Integracao.Service.SocketWS.Mensagem;
                     try
                     {
-                        MemoryStream Arquivo;
-                        Comunicacao oCom = (Comunicacao)ConverterObjeto.RetornaObjeto(Mensagem);
 
+                        byte[] Arquivo;
+                        Comunicacao oCom = (Comunicacao)ConverterObjeto.RetornaObjeto(Mensagem);
                         try
                         {
                             Arquivo = Service.WSFile.getFile(oCom);
                             try
                             {
-                                string path = System.AppDomain.CurrentDomain.BaseDirectory + "Temp\\";
-                                string pathArquivoRecebido = path + oCom.Codigo.ToString() + "_" + oCom.Versao.ToString() + ".pdf";
-                                using (FileStream fs = new FileStream(pathArquivoRecebido, FileMode.OpenOrCreate))
-                                {
-                                    Arquivo.CopyTo(fs);
-                                    fs.Flush();
-                                }
-                                Arquivo.Close();
-                                string FileNameAssinado;
-                                if (AssinarArquivo(pathArquivoRecebido, out FileNameAssinado, true))
-                                {
-                                    byte[] arquivo = File.ReadAllBytes(FileNameAssinado);
-                                  
-                                    Service.WSFile.setFile(oCom, arquivo);
 
+                                MemoryStream ArquivoMS;
+                                if (ChkSalvaArquivo.Checked)
+                                {
+                                    ArquivoMS = new MemoryStream(Arquivo);
+                                    string path = System.AppDomain.CurrentDomain.BaseDirectory + "Temp\\";
+                                    string pathArquivoRecebido = path + oCom.Codigo.ToString() + "_" + oCom.Versao.ToString() + ".pdf";
+                                    using (FileStream fs = new FileStream(pathArquivoRecebido, FileMode.OpenOrCreate))
+                                    {
+                                        ArquivoMS.CopyTo(fs);
+                                        fs.Flush();
+                                    }
+                                    ArquivoMS.Close();
+                                    string FileNameAssinado;
+                                    if (AssinarArquivo(pathArquivoRecebido, out FileNameAssinado, true))
+                                    {
+                                        byte[] ArquivoAssinado = INB.Assinador.Helper.FileHelper.ReadFile(FileNameAssinado);
+                                        Service.WSFile.setFile(oCom, ArquivoAssinado);
+                                        MessageBox.Show("Arquivo assinado com sucesso.", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
                                     try
                                     {
                                         System.IO.File.Delete(FileNameAssinado);
                                         System.IO.File.Delete(pathArquivoRecebido);
                                     }
                                     catch (Exception ex) { }
-                                    MessageBox.Show("Arquivo assinado com sucesso.", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Assinatura não realizada. Caso deseje assinar, repita o processo, por favor.", ProductName, MessageBoxButtons.OK);
+                                    byte[] ArquivoAssinado;
+                                    if (AssinarArquivo(Arquivo, out ArquivoAssinado, true))
+                                    {
+                                        Service.WSFile.setFile(oCom, ArquivoAssinado);                                       
+                                        MessageBox.Show("Arquivo assinado com sucesso.", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Assinatura não realizada. Caso deseje assinar, repita o processo, por favor.", ProductName, MessageBoxButtons.OK);
+                                    }
                                 }
                             }
                             catch (Exception ex)
@@ -413,7 +491,7 @@ namespace INB.Assinador.View
                     {
                         MessageBox.Show("Um erro ocorreu ao tentar buscar o arquivo no Servidor.Erro: " + ex.Message + ".", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    HandleCliNet.MensagemNova = false;
+                    INB.Assinador.Integracao.Service.SocketWS.MensagemNova = false;
                     timer1.Enabled = true;
                 }
 
@@ -425,6 +503,49 @@ namespace INB.Assinador.View
             fecha = true;
             this.Close();
             Environment.Exit(1);
+        }
+
+        private void ChkFileSocket_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CboCertificados_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //CertSimples oCertSimples = (CertSimples)(CboCertificados.SelectedItem);
+            //X509Certificate2 oCert = oCertSimples.Certificado;
+            //X509ExtensionCollection oCol = oCert.Extensions;
+            //string MSG="";
+            //foreach (X509Extension oExt in oCol)
+            //{
+            //    AsnEncodedData asndata = new AsnEncodedData(oExt.Oid, oExt.RawData);
+            //    MSG += "Tipo da Extensão: " + oExt.Oid.FriendlyName;
+            //    MSG += "|| Oid Value : " +  asndata.Oid.Value;
+            //    MSG += "|| Raw data length:  " +  asndata.RawData.Length.ToString();
+            //    MSG += Convert.ToChar(Keys.Enter);
+                
+
+            //}
+            
+           // MessageBox.Show(MSG);
+        }
+
+        private void MnuInfoAdicionais_Click(object sender, EventArgs e)
+        {
+            FrmInfo oFrm = new FrmInfo(MnuInfoAdicionais);            
+            oFrm.Show();
+        }
+
+        private void MnuApresentacao_Click(object sender, EventArgs e)
+        {
+            try { 
+            string path = System.AppDomain.CurrentDomain.BaseDirectory + "Temp\\";
+            System.Diagnostics.Process.Start(path + "Apresentacao.pdf");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

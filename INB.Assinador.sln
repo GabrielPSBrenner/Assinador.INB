@@ -9,11 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.Model", "INB.
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "INB.PDF", "INB.PDFVIEW\INB.PDF.vbproj", "{0A8C8A1F-418C-46DD-A7BA-A8063C9EEAE2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentação", "Documentação", "{066A8D57-8759-4954-99B3-66FABA535431}"
-	ProjectSection(SolutionItems) = preProject
-		FreeTimeStampServer.txt = FreeTimeStampServer.txt
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.Integracao", "INB.Assinador.Integracao\INB.Assinador.Integracao.csproj", "{AC13F565-70DF-4EAA-AB11-0D51DA2B93DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.TesteClientTCP", "INB.Assinador.TesteClientTCP\INB.Assinador.TesteClientTCP.csproj", "{53649AE3-194A-40DB-BC2D-5B59DBE424AE}"

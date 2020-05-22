@@ -59,3 +59,5 @@ C:\Projetos\INB.Assinador\INB.Assinador.View\obj\Debug\Assinador da INB.applicat
 C:\Projetos\INB.Assinador\INB.Assinador.View\obj\Debug\INB.Assinador.View.csproj.CopyComplete
 C:\Projetos\INB.Assinador\INB.Assinador.View\obj\Debug\Assinador da INB.exe
 C:\Projetos\INB.Assinador\INB.Assinador.View\obj\Debug\Assinador da INB.pdb
+C:\Projetos\INB.Assinador\INB.Assinador.View\obj\Debug\INB.Assinador.View.FrmInfo.resources
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\Temp\Apresentacao.pdf

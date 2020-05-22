@@ -26,6 +26,7 @@ namespace PortalTesteAssinador.Controllers
             oCom.UserID = "YYYY";
             oCom.Senha = "XXXX";
             oCom.URLWS = URL;
+            oCom.UsuarioAutenticado = "1495";
             string userIpAddress = GetIP();
             INB.Assinador.Integracao.Service.Cliente.EnviaDados(oCom, userIpAddress);
             var Lista = Models.Anexo.ListaAnexos();

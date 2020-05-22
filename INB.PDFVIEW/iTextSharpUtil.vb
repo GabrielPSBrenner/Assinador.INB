@@ -27,6 +27,20 @@ Public Class iTextSharpUtil
         Return page_count
     End Function
 
+    Public Shared Function GetPDFPageCount(File As Stream, Optional ByVal userPassword As String = "") As Integer
+
+        Dim oPdfReader As PdfReader
+        If userPassword <> "" Then
+            Dim encoding As New System.Text.ASCIIEncoding()
+            oPdfReader = New PdfReader(File, encoding.GetBytes(userPassword))
+        Else
+            oPdfReader = New PdfReader(File)
+        End If
+        Dim page_count As Integer = oPdfReader.NumberOfPages
+        oPdfReader.Close()
+        Return page_count
+    End Function
+
     Public Shared Function GetPDFPageSize(ByVal filepath As String, ByVal pageNumber As Integer, Optional ByVal userPassword As String = "") As Drawing.Size
         Dim oPdfReader As PdfReader
         If userPassword <> "" Then
@@ -42,6 +56,46 @@ Public Class iTextSharpUtil
             GetPDFPageSize.Width = rect.Width
         End If
         oPdfReader.Close()
+    End Function
+
+    Public Shared Function GetPDFPageSize(Arquivo As Byte(), ByVal pageNumber As Integer, Optional ByVal userPassword As String = "") As Drawing.Size
+        Dim oPdfReader As PdfReader
+        If userPassword <> "" Then
+            Dim encoding As New System.Text.ASCIIEncoding()
+            oPdfReader = New PdfReader(Arquivo, encoding.GetBytes(userPassword))
+        Else
+            oPdfReader = New PdfReader(Arquivo)
+        End If
+        Dim page_count As Integer = oPdfReader.NumberOfPages
+        If pageNumber >= 1 And pageNumber <= page_count Then
+            Dim rect As iTextSharp.text.Rectangle = oPdfReader.GetPageSize(pageNumber)
+            GetPDFPageSize.Height = rect.Height
+            GetPDFPageSize.Width = rect.Width
+        End If
+        oPdfReader.Close()
+    End Function
+
+    Public Shared Function GetOptimalDPI(ArquivoPDF As Byte(), ByVal pageNumber As Integer, ByRef oPictureBox As PictureBox, Optional ByVal userPassword As String = "") As Integer
+        GetOptimalDPI = 0
+        Dim pageSize As Drawing.Size = GetPDFPageSize(ArquivoPDF, pageNumber, userPassword)
+        If pageSize.Width > 0 And pageSize.Height > 0 Then
+            Dim picHeight As Integer = oPictureBox.Height
+            Dim picWidth As Integer = oPictureBox.Width
+            Dim dummyPicBox As New PictureBox
+            dummyPicBox.Size = oPictureBox.Size
+            If (picWidth > picHeight And pageSize.Width < pageSize.Height) Or (picWidth < picHeight And pageSize.Width > pageSize.Height) Then
+                dummyPicBox.Width = picHeight
+                dummyPicBox.Height = picWidth
+            End If
+            Dim HScale As Single = dummyPicBox.Width / pageSize.Width
+        Dim VScale As Single = dummyPicBox.Height / pageSize.Height
+        dummyPicBox.Dispose()
+        If HScale < VScale Then
+            GetOptimalDPI = Math.Floor(72 * HScale)
+        Else
+            GetOptimalDPI = Math.Floor(72 * VScale)
+        End If
+        End If
     End Function
 
     Public Shared Function GetOptimalDPI(ByVal filepath As String, ByVal pageNumber As Integer, ByRef oPictureBox As PictureBox, Optional ByVal userPassword As String = "") As Integer

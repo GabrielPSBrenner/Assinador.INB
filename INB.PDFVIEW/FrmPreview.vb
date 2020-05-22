@@ -13,6 +13,7 @@ Public Class FrmPreview
     'Private WithEvents m_GlobalHook As IKeyboardMouseEvents
 
     Private NomeArquivo As String
+    Private Arquivo As Byte()
     Private _PointClick As Point
     Private _Pagina As Integer
     Private _PDFHeigh As Integer
@@ -76,6 +77,16 @@ Public Class FrmPreview
         _TipoSelo = TipoSelo
     End Sub
 
+
+    Public Sub New(PDF As Byte(), TipoSelo As eTipoSelo)
+        InitializeComponent()
+        Arquivo = PDF
+        ' Add any initialization after the InitializeComponent() call.
+        objPictureBox.Name = "SinglePicBox"
+        AssinaturaConfirmada = False
+        _TipoSelo = TipoSelo
+    End Sub
+
     Public ReadOnly Property PDFHeigh As Integer
         Get
             Return _PDFHeigh
@@ -121,7 +132,11 @@ Public Class FrmPreview
     'End Sub
 
     Private Sub FrmPreview_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.FileName = NomeArquivo
+        If Trim$(NomeArquivo) <> "" Then
+            Me.FileName = NomeArquivo
+        Else
+            Me.File = Arquivo
+        End If
         'Visualizador.Visible = True
         'Visualizador.Dock = DockStyle.Fill
         'Visualizador.tscbZoom.Visible = False
@@ -157,6 +172,30 @@ Public Class FrmPreview
             Return m_PanEndPoint
         End Get
     End Property
+
+    Public Property File As Byte()
+        Get
+            Return Arquivo
+        End Get
+        Set(value As Byte())
+            Arquivo = value
+            Dim MS As New IO.MemoryStream(Arquivo)
+            MS.Flush()
+
+            mPDFDoc = New PDFWrapper("")
+
+            mPDFDoc.LoadPDF(MS)
+
+            InitPageRange()
+            InitViewModes()
+            InitRotation()
+            InitializePageView(ViewMode.ACTUAL_SIZE)
+            DisplayCurrentPage()
+            Me.Enabled = True
+            Cursor.Current = Cursors.Default
+        End Set
+    End Property
+
 
 
     Public Property FileName() As String
@@ -219,6 +258,7 @@ FileIsEncrypted:
                             mPDFDoc.UserPassword = mUserPassword
                             mPassword = mUserPassword
                         End If
+
                         mPDFDoc.LoadPDF(value)
                     Catch ex As System.Security.SecurityException
                         GoTo FileIsEncrypted
@@ -351,13 +391,20 @@ OCRCurrentImage:
 
     Private Sub PDFViewer_ControlRemoved(ByVal sender As Object, ByVal e As System.Windows.Forms.ControlEventArgs) Handles Me.ControlRemoved
         If Not Nothing Is mPDFDoc Then
-            mPDFDoc.Dispose()
+            Try
+                mPDFDoc.Dispose()
+            Catch ex As Exception
+            End Try
         End If
     End Sub
 
     Private Sub PDFViewer_Disposed(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Disposed
         If Not Nothing Is mPDFDoc Then
-            mPDFDoc.Dispose()
+            Try
+                mPDFDoc.Dispose()
+            Catch ex As Exception
+            End Try
+
         End If
     End Sub
 
@@ -525,8 +572,15 @@ OCRCurrentImage:
 #End Region
 
 #Region "Helper Functions"
+    Private Function GetImageFromFile(File As Byte(), ByVal iFrameNumber As Integer, Optional ByVal DPI As Integer = 72) As System.Drawing.Image
+        'Cursor.Current = Cursors.WaitCursor
+        Dim REtorno As Image = Nothing
+        REtorno = AFPDFLibUtil.GetImageFromPDF(mPDFDoc, iFrameNumber + 1, DPI)
+        ' ImageUtil.ApplyRotation(REtorno, mRotation(iFrameNumber))
+        Return REtorno
+    End Function
 
-    Private Function GetImageFromFile(ByVal sFileName As String, ByVal iFrameNumber As Integer, Optional ByVal DPI As Integer = 0) As System.Drawing.Image
+    Private Function GetImageFromFile(ByVal sFileName As String, ByVal iFrameNumber As Integer, Optional ByVal DPI As Integer = 72) As System.Drawing.Image
         'Cursor.Current = Cursors.WaitCursor
         GetImageFromFile = Nothing
         If mUseXPDF And ImageUtil.IsPDF(sFileName) Then 'Use AFPDFLib (XPDF)
@@ -544,11 +598,18 @@ GhostScriptFallBack:
                 GetImageFromFile = ImageUtil.GetFrameFromTiff(sFileName, iFrameNumber)
             End If
         End If
-        ImageUtil.ApplyRotation(GetImageFromFile, mRotation(iFrameNumber))
+        ' ImageUtil.ApplyRotation(GetImageFromFile, mRotation(iFrameNumber))
     End Function
 
+
+
     Private Sub InitPageRange()
-        mPDFPageCount = ImageUtil.GetImageFrameCount(mPDFFileName, mPassword)
+        If Trim$(mPDFFileName) = "" Then
+            mPDFPageCount = ImageUtil.GetImageFrameCount(Arquivo, mPassword)
+        Else
+            mPDFPageCount = ImageUtil.GetImageFrameCount(mPDFFileName, mPassword)
+        End If
+
         mCurrentPageNumber = 1
     End Sub
 
@@ -733,17 +794,16 @@ GhostScriptFallBack:
     End Sub
 
     Private Sub AutoRotatePicBox(ByRef oPictureBox As PictureBox, ByRef newImage As Drawing.Image)
-        ' Dim picHeight As Integer = oPictureBox.Height
-        'Dim picWidth As Integer = oPictureBox.Width
+        Dim picHeight As Integer = oPictureBox.Height
+        Dim picWidth As Integer = oPictureBox.Width
         Dim imgHeight As Integer = newImage.Height
         Dim imgWidth As Integer = newImage.Width
-        'Dim imgWidth As Integer = newImage.Width
-        'If (picWidth > picHeight And imgWidth < imgHeight) Or (picWidth < picHeight And imgWidth > imgHeight) Then
-        'oPictureBox.Width = picHeight
-        '    oPictureBox.Height = picWidth
-        oPictureBox.Width = imgWidth 'Alterado para redimensionar a picture com o tamnho da imagem
-        oPictureBox.Height = imgHeight
-        'End If
+        If (picWidth > picHeight And imgWidth < imgHeight) Or (picWidth < picHeight And imgWidth > imgHeight) Then
+            oPictureBox.Width = picHeight
+            oPictureBox.Height = picWidth
+            oPictureBox.Width = imgWidth 'Alterado para redimensionar a picture com o tamnho da imagem
+            oPictureBox.Height = imgHeight
+        End If
     End Sub
 
     Private Sub CenterPicBoxInPanel(ByRef oPictureBox As PictureBox)
@@ -802,19 +862,31 @@ GhostScriptFallBack:
             UpdatePageLabel()
             Dim newImage As Drawing.Image
             If mUseXPDF Then
-                newImage = GetImageFromFile(mPDFFileName, mCurrentPageNumber - 1, AFPDFLibUtil.GetOptimalDPI(mPDFDoc, oPict))
+                If Trim$(mPDFFileName) <> "" Then
+                    newImage = GetImageFromFile(mPDFFileName, mCurrentPageNumber - 1, mPDFDoc.RenderDPI)
+                Else
+                    newImage = GetImageFromFile(Arquivo, mCurrentPageNumber - 1, AFPDFLibUtil.GetOptimalDPI(mPDFDoc, oPict))
+                End If
             Else
                 Dim optimalDPI As Integer = 0
-                If ImageUtil.IsPDF(mPDFFileName) Then
-                    optimalDPI = iTextSharpUtil.GetOptimalDPI(mPDFFileName, mCurrentPageNumber, oPict, mPassword)
+                If Trim$(mPDFFileName) <> "" Then
+                    If ImageUtil.IsPDF(mPDFFileName) Then
+                        optimalDPI = mPDFDoc.RenderDPI ' iTextSharpUtil.GetOptimalDPI(mPDFFileName, mCurrentPageNumber, oPict, mPassword)
+                    End If
+                Else
+                    optimalDPI = iTextSharpUtil.GetOptimalDPI(Arquivo, mCurrentPageNumber, oPict, mPassword)
                 End If
-                newImage = GetImageFromFile(mPDFFileName, mCurrentPageNumber - 1, optimalDPI)
+
+                If Trim$(mPDFFileName) <> "" Then
+                    newImage = GetImageFromFile(mPDFFileName, mCurrentPageNumber - 1, mPDFDoc.RenderDPI)
+                Else
+                    newImage = GetImageFromFile(Arquivo, mCurrentPageNumber - 1, AFPDFLibUtil.GetOptimalDPI(mPDFDoc, oPict))
+                End If
             End If
+
             If Not Nothing Is newImage Then
                 AutoRotatePicBox(oPict, newImage)
-                If ImageUtil.IsPDF(mPDFFileName) Then
-                    MakePictureBox1To1WithImage(oPict, newImage)
-                End If
+                MakePictureBox1To1WithImage(oPict, newImage)
                 CenterPicBoxInPanel(oPict)
                 oPict.Image = newImage
             End If
@@ -825,10 +897,9 @@ GhostScriptFallBack:
             End If
             Exit Sub
         End If
+
         AutoRotatePicBox(oPict, oPict.Image)
-        If ImageUtil.IsPDF(mPDFFileName) Then
-            MakePictureBox1To1WithImage(oPict, oPict.Image)
-        End If
+        MakePictureBox1To1WithImage(oPict, oPict.Image)
         CenterPicBoxInPanel(oPict)
     End Sub
 
@@ -890,8 +961,12 @@ GhostScriptFallBack:
         End If
 
 
+        If Trim$(mPDFFileName) = "" Then
+            dummyPictureBox.Image = GetImageFromFile(Arquivo, mCurrentPageNumber - 1, optimalDPI)
+        Else
+            dummyPictureBox.Image = GetImageFromFile(mPDFFileName, mCurrentPageNumber - 1, optimalDPI)
+        End If
 
-        dummyPictureBox.Image = GetImageFromFile(mPDFFileName, mCurrentPageNumber - 1, optimalDPI)
         For Each childControl In oControl.Controls
             If TypeOf childControl Is PictureBox Then
                 If Mode = ViewMode.FIT_TO_SCREEN Then

@@ -10,35 +10,34 @@ Public Class AFPDFLibUtil
     '
     'I have ported over to VB.NET select functionality from the C# PDF viewer in the above project
 
-    Const RENDER_DPI As Integer = 200
+    Const RENDER_DPI As Integer = 72
     Const PRINT_DPI As Integer = 300
 
     Public Shared Function GetOptimalDPI(ByRef pdfDoc As PDFWrapper, ByRef oPictureBox As PictureBox) As Integer
-        ' GetOptimalDPI = 0
-        ' If pdfDoc IsNot Nothing Then
-        ' If pdfDoc.PageWidth > 0 And pdfDoc.PageHeight > 0 Then
-        'Dim DPIScalePercent As Single = pdfDoc.RenderDPI
-        '    Dim picHeight As Integer = oPictureBox.Height
-        '    Dim picWidth As Integer = oPictureBox.Width
-        '    Dim docHeight As Integer = pdfDoc.PageHeight
-        '    Dim docWidth As Integer = pdfDoc.PageWidth
-        '    Dim dummyPicBox As New PictureBox
-        '    dummyPicBox.Size = oPictureBox.Size
-        '    If (picWidth > picHeight And docWidth < docHeight) Or (picWidth < picHeight And docWidth > docHeight) Then
-        '        dummyPicBox.Width = picHeight
-        '        dummyPicBox.Height = picWidth
+        'If pdfDoc IsNot Nothing Then
+        '    If pdfDoc.PageWidth > 0 And pdfDoc.PageHeight > 0 Then
+        '        Dim DPIScalePercent As Single = pdfDoc.RenderDPI
+        '        Dim picHeight As Integer = oPictureBox.Height
+        '        Dim picWidth As Integer = oPictureBox.Width
+        '        Dim docHeight As Integer = pdfDoc.PageHeight
+        '        Dim docWidth As Integer = pdfDoc.PageWidth
+        '        Dim dummyPicBox As New PictureBox
+        '        dummyPicBox.Size = oPictureBox.Size
+        '        If (picWidth > picHeight And docWidth < docHeight) Or (picWidth < picHeight And docWidth > docHeight) Then
+        '            dummyPicBox.Width = picHeight
+        '            dummyPicBox.Height = picWidth
+        '        End If
+        '        Dim HScale As Single = dummyPicBox.Width / (pdfDoc.PageWidth * DPIScalePercent)
+        '        Dim VScale As Single = dummyPicBox.Height / (pdfDoc.PageHeight * DPIScalePercent)
+        '        dummyPicBox.Dispose()
+        '        If VScale > HScale Then
+        '            GetOptimalDPI = Math.Floor(72 * HScale)
+        '        Else
+        '            GetOptimalDPI = Math.Floor(72 * VScale)
+        '        End If
         '    End If
-        '    Dim HScale As Single = dummyPicBox.Width / (pdfDoc.PageWidth * DPIScalePercent)
-        '    Dim VScale As Single = dummyPicBox.Height / (pdfDoc.PageHeight * DPIScalePercent)
-        '    dummyPicBox.Dispose()
-        '    If VScale > HScale Then
-        '        GetOptimalDPI = Math.Floor(72 * HScale)
-        '    Else
-        '        GetOptimalDPI = Math.Floor(72 * VScale)
-        '    End If
-        '  End If
         'End If
-        Return pdfDoc.RenderDPI
+        Return 72
     End Function
 
     Public Shared Function GetImageFromPDF(ByRef pdfDoc As PDFWrapper, ByVal PageNumber As Integer, Optional ByVal DPI As Integer = RENDER_DPI) As System.Drawing.Image

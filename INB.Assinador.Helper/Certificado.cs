@@ -50,6 +50,23 @@ namespace INB.Assinador.Helper
             return retorno;
         }
 
+        public static X509Certificate2Collection ListaCertificadosValidosSimplificado()
+        {
+            X509Certificate2Collection certificados = ListaCertificados();
+            certificados = certificados.Find(X509FindType.FindByTimeValid, DateTime.Now, false);
+            X509Certificate2Collection retorno = new X509Certificate2Collection();
+
+            foreach (X509Certificate2 cert in certificados)
+            {
+                if ((cert.HasPrivateKey && cert.NotAfter > DateTime.Now && cert.NotBefore < DateTime.Now) && (cert.Issuer.Contains("ICP-Brasil")))
+                {
+                    retorno.Add(cert);
+                }
+            }
+
+            return retorno;
+        }
+
         public static X509Certificate2 RetornaCertificadoArquivo(string file, TipoCertificado Tipo, string senha = "")
         {
 

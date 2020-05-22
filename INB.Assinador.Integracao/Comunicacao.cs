@@ -14,5 +14,7 @@ namespace INB.Assinador.Integracao
         public string URLWS { get; set; }
         public string UserID { get; set; }
         public string Senha { get; set; }
+
+        public string UsuarioAutenticado { get; set; }
     }
 }

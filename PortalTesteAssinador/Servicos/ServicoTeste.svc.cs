@@ -15,7 +15,7 @@ namespace PortalTesteAssinador.Servicos
     // NOTE: In order to launch WCF Test Client for testing this service, please select ServicoTeste.svc or ServicoTeste.svc.cs at the Solution Explorer and start debugging.
     public class ServicoTeste : IServicoTeste
     {
-        public void EnviarArquivo(byte[] Arquivo, int Codigo, int Versao)
+        public void EnviarArquivo(byte[] Arquivo, int Codigo, int Versao, string UsuarioAutenticado )
         {
             string path = HttpContext.Current.Server.MapPath("~/Anexos/");
             string pathCompleto = path + Codigo.ToString() + "_" + Versao.ToString() + "_assinado.pdf";
