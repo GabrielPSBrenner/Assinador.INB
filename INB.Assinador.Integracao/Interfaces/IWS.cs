@@ -15,6 +15,6 @@ namespace INB.Assinador.Integracao.Interfaces
         byte[] ReceberArquivo(int Codigo, int Versao);
 
         [OperationContract]
-        void EnviarArquivo(byte[] Arquivo, int Codigo, int Versao, string UsuarioAutenticado);
+        void EnviarArquivo(byte[] Arquivo, int Codigo, int Versao, string UsuarioAutenticado, string HashDocumentoOriginal);
     }
 }

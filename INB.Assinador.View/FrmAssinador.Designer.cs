@@ -43,6 +43,9 @@
             this.MnuBandeja = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.assinarPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.MnuApresentacao = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuInfoAdicionais = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuVerificarAtualizacao = new System.Windows.Forms.ToolStripMenuItem();
             this.MnuSobre = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.MnuFechar = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,8 +70,9 @@
             this.BtnAtualizar = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label8 = new System.Windows.Forms.Label();
-            this.MnuInfoAdicionais = new System.Windows.Forms.ToolStripMenuItem();
-            this.MnuApresentacao = new System.Windows.Forms.ToolStripMenuItem();
+            this.MnuIO = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.MnuBandeja.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -189,14 +193,19 @@
             this.toolStripMenuItem1,
             this.MnuApresentacao,
             this.MnuInfoAdicionais,
+            this.toolStripSeparator2,
+            this.MnuIO,
+            this.toolStripSeparator1,
+            this.MnuVerificarAtualizacao,
             this.MnuSobre,
             this.toolStripMenuItem2,
             this.MnuFechar});
             this.MnuBandeja.Name = "MnuBandeja";
-            this.MnuBandeja.Size = new System.Drawing.Size(199, 148);
+            this.MnuBandeja.Size = new System.Drawing.Size(199, 182);
             // 
             // assinarPDFToolStripMenuItem
             // 
+            this.assinarPDFToolStripMenuItem.Image = global::INB.Assinador.View.Properties.Resources.assinatura;
             this.assinarPDFToolStripMenuItem.Name = "assinarPDFToolStripMenuItem";
             this.assinarPDFToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.assinarPDFToolStripMenuItem.Text = "&Assinar PDF";
@@ -206,6 +215,27 @@
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(195, 6);
+            // 
+            // MnuApresentacao
+            // 
+            this.MnuApresentacao.Name = "MnuApresentacao";
+            this.MnuApresentacao.Size = new System.Drawing.Size(198, 22);
+            this.MnuApresentacao.Text = "Apresentação";
+            this.MnuApresentacao.Click += new System.EventHandler(this.MnuApresentacao_Click);
+            // 
+            // MnuInfoAdicionais
+            // 
+            this.MnuInfoAdicionais.Name = "MnuInfoAdicionais";
+            this.MnuInfoAdicionais.Size = new System.Drawing.Size(198, 22);
+            this.MnuInfoAdicionais.Text = "&Informações Adicionais";
+            this.MnuInfoAdicionais.Click += new System.EventHandler(this.MnuInfoAdicionais_Click);
+            // 
+            // MnuVerificarAtualizacao
+            // 
+            this.MnuVerificarAtualizacao.Name = "MnuVerificarAtualizacao";
+            this.MnuVerificarAtualizacao.Size = new System.Drawing.Size(198, 22);
+            this.MnuVerificarAtualizacao.Text = "&Verificar Atualização";
+            this.MnuVerificarAtualizacao.Click += new System.EventHandler(this.MnuVerificarAtualizacao_Click);
             // 
             // MnuSobre
             // 
@@ -479,19 +509,22 @@
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label8.Visible = false;
             // 
-            // MnuInfoAdicionais
+            // MnuIO
             // 
-            this.MnuInfoAdicionais.Name = "MnuInfoAdicionais";
-            this.MnuInfoAdicionais.Size = new System.Drawing.Size(198, 22);
-            this.MnuInfoAdicionais.Text = "&Informações Adicionais";
-            this.MnuInfoAdicionais.Click += new System.EventHandler(this.MnuInfoAdicionais_Click);
+            this.MnuIO.Name = "MnuIO";
+            this.MnuIO.Size = new System.Drawing.Size(198, 22);
+            this.MnuIO.Text = "Instrução Operacional";
+            this.MnuIO.Click += new System.EventHandler(this.MnuIO_Click);
             // 
-            // MnuApresentacao
+            // toolStripSeparator1
             // 
-            this.MnuApresentacao.Name = "MnuApresentacao";
-            this.MnuApresentacao.Size = new System.Drawing.Size(198, 22);
-            this.MnuApresentacao.Text = "Apresentação";
-            this.MnuApresentacao.Click += new System.EventHandler(this.MnuApresentacao_Click);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(195, 6);
             // 
             // FrmAssinador
             // 
@@ -500,7 +533,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.CancelButton = this.BtnFechar;
-            this.ClientSize = new System.Drawing.Size(702, 111);
+            this.ClientSize = new System.Drawing.Size(702, 114);
             this.ContextMenuStrip = this.MnuBandeja;
             this.Controls.Add(this.ChkIgnora);
             this.Controls.Add(this.ChkSalvaArquivo);
@@ -537,7 +570,9 @@
             this.Name = "FrmAssinador";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Assinador Eletrônico da INB  (Assinatura Digital com Certificado ICP-Brasil)";
+            this.Activated += new System.EventHandler(this.FrmAssinador_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmAssinador_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmAssinador_FormClosed);
             this.Load += new System.EventHandler(this.FrmAssinador_Load);
             this.MnuBandeja.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -586,6 +621,10 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ToolStripMenuItem MnuInfoAdicionais;
         private System.Windows.Forms.ToolStripMenuItem MnuApresentacao;
+        private System.Windows.Forms.ToolStripMenuItem MnuVerificarAtualizacao;
+        private System.Windows.Forms.ToolStripMenuItem MnuIO;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

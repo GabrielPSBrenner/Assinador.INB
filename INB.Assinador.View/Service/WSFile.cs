@@ -58,7 +58,7 @@ namespace INB.Assinador.View.Service
             var clientProxy = (System.ServiceModel.Channels.IRequestChannel)channelHelper;
             clientProxy.Open();
             var oService = (IWS)channelHelper;          
-            oService.EnviarArquivo(Arquivo, oCom.Codigo, oCom.Versao, oCom.UsuarioAutenticado);           
+            oService.EnviarArquivo(Arquivo, oCom.Codigo, oCom.Versao, oCom.UsuarioAutenticado, oCom.HashArquivoOriginal);           
             clientProxy.Close();
             return;
         }

@@ -33,15 +33,12 @@ C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\INB.PDF.dll.config
 C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\INB.PDF.dll
 C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\INB.PDF.pdb
 C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\INB.PDF.xml
-C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\Gma.System.MouseKeyHook.dll
 C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\itextsharp.dll
 C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\itextsharp.xmlworker.dll
 C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\itextsharp.xtra.dll
 C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\PDFLibNet32.dll
-C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\Tesseract.dll
 C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\tessnet2_32.dll
 C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\itextsharp.xml
-C:\Projetos\INB.Assinador\INB.PDFVIEW\obj\Debug\INB.PDF.vbprojAssemblyReference.cache
 C:\Projetos\INB.Assinador\INB.PDFVIEW\obj\Debug\INB.PDF.ExportImageOptions.resources
 C:\Projetos\INB.Assinador\INB.PDFVIEW\obj\Debug\INB.PDF.ExportOptions.resources
 C:\Projetos\INB.Assinador\INB.PDFVIEW\obj\Debug\INB.PDF.FrmPreview.resources
@@ -54,3 +51,4 @@ C:\Projetos\INB.Assinador\INB.PDFVIEW\obj\Debug\INB.PDF.vbproj.CopyComplete
 C:\Projetos\INB.Assinador\INB.PDFVIEW\obj\Debug\INB.PDF.dll
 C:\Projetos\INB.Assinador\INB.PDFVIEW\obj\Debug\INB.PDF.xml
 C:\Projetos\INB.Assinador\INB.PDFVIEW\obj\Debug\INB.PDF.pdb
+C:\Projetos\INB.Assinador\INB.PDFVIEW\obj\Debug\INB.PDF.vbprojAssemblyReference.cache

@@ -204,129 +204,129 @@ Public Class iTextSharpUtil
         strHtml &= "</ul>"
     End Sub
 
-    Public Shared Function GraphicListToPDF(ByVal psFilenames As String() _
-                                            , ByVal outputFileName As String _
-                                            , ByVal psPageSize As iTextSharp.text.Rectangle _
-                                            , Optional ByVal language As String = "" _
-                                            , Optional ByVal StartPage As Integer = 0 _
-                                            , Optional ByVal EndPage As Integer = 0 _
-                                            , Optional ByVal UserPassword As String = "" _
-                                            , Optional ByVal OwnerPassword As String = "")
+    'Public Shared Function GraphicListToPDF(ByVal psFilenames As String() _
+    '                                        , ByVal outputFileName As String _
+    '                                        , ByVal psPageSize As iTextSharp.text.Rectangle _
+    '                                        , Optional ByVal language As String = "" _
+    '                                        , Optional ByVal StartPage As Integer = 0 _
+    '                                        , Optional ByVal EndPage As Integer = 0 _
+    '                                        , Optional ByVal UserPassword As String = "" _
+    '                                        , Optional ByVal OwnerPassword As String = "")
 
-        Dim StatusDialog As New ImportProgress
-        StatusDialog.TopMost = True
-        StatusDialog.Show()
-        Dim document As iTextSharp.text.Document
-        document = New Document(psPageSize, 0, 0, 0, 0)
+    '    Dim StatusDialog As New ImportProgress
+    '    StatusDialog.TopMost = True
+    '    StatusDialog.Show()
+    '    Dim document As iTextSharp.text.Document
+    '    document = New Document(psPageSize, 0, 0, 0, 0)
 
-        Try
-            Dim writer As PdfWriter = PdfWriter.GetInstance(document, New FileStream(outputFileName, FileMode.Create))
-            If UserPassword <> "" Or OwnerPassword <> "" Then
-                writer.SetEncryption(PdfWriter.STRENGTH128BITS, UserPassword, OwnerPassword, PdfWriter.AllowCopy Or PdfWriter.AllowPrinting)
-            End If
-            document.Open()
-            Dim cb As PdfContentByte = writer.DirectContent
-            Dim fileNumber As Integer = 0
-            For Each psFileName As String In psFilenames
-                Dim ProgressIncrement As Integer = 100 / psFilenames.Length
-                fileNumber += 1
-                StatusDialog.UpdateProgress("Processing file " & fileNumber & "/" & psFilenames.Length, 0)
-                Application.DoEvents()
-                Dim bm As New System.Drawing.Bitmap(psFileName)
-                Dim total As Integer = bm.GetFrameCount(FrameDimension.Page)
+    '    Try
+    '        Dim writer As PdfWriter = PdfWriter.GetInstance(document, New FileStream(outputFileName, FileMode.Create))
+    '        If UserPassword <> "" Or OwnerPassword <> "" Then
+    '            writer.SetEncryption(PdfWriter.STRENGTH128BITS, UserPassword, OwnerPassword, PdfWriter.AllowCopy Or PdfWriter.AllowPrinting)
+    '        End If
+    '        document.Open()
+    '        Dim cb As PdfContentByte = writer.DirectContent
+    '        Dim fileNumber As Integer = 0
+    '        For Each psFileName As String In psFilenames
+    '            Dim ProgressIncrement As Integer = 100 / psFilenames.Length
+    '            fileNumber += 1
+    '            StatusDialog.UpdateProgress("Processing file " & fileNumber & "/" & psFilenames.Length, 0)
+    '            Application.DoEvents()
+    '            Dim bm As New System.Drawing.Bitmap(psFileName)
+    '            Dim total As Integer = bm.GetFrameCount(FrameDimension.Page)
 
-                If StartPage = 0 And EndPage = 0 Then
-                    StartPage = 1
-                    EndPage = total
-                End If
+    '            If StartPage = 0 And EndPage = 0 Then
+    '                StartPage = 1
+    '                EndPage = total
+    '            End If
 
-                For k As Integer = StartPage To EndPage
-                    StatusDialog.UpdateProgress("Processing page " & k & "/" & EndPage & " for file " & fileNumber & "/" & psFilenames.Length, ProgressIncrement / EndPage)
-                    Application.DoEvents()
-                    bm.SelectActiveFrame(FrameDimension.Page, k - 1)
-                    'Auto Rotate the page if needed
-                    If (psPageSize.Height > psPageSize.Width And bm.Width > bm.Height) _
-                    Or (psPageSize.Width > psPageSize.Height And bm.Height > bm.Width) Then
-                        document.SetPageSize(psPageSize.Rotate)
-                    Else
-                        document.SetPageSize(psPageSize)
-                    End If
-                    document.NewPage()
-                    Dim img As iTextSharp.text.Image
-                    img = iTextSharp.text.Image.GetInstance(bm, bm.RawFormat)
-                    Dim Xpercent As Single = document.PageSize.Width / img.Width
-                    Dim Ypercent As Single = document.PageSize.Height / img.Height
-                    Dim ScalePercentage As Single
-                    If Xpercent < Ypercent Then
-                        ScalePercentage = Xpercent
-                    Else
-                        ScalePercentage = Ypercent
-                    End If
-                    img.ScalePercent(ScalePercentage * 100)
-                    Dim xPos As Integer = (document.PageSize.Width - (img.Width * ScalePercentage)) / 2
-                    Dim yPos As Integer = (document.PageSize.Height - (img.Height * ScalePercentage)) / 2
-                    img.SetAbsolutePosition(xPos, yPos)
-                    Try
-                        If language <> "" Then
-                            StatusDialog.UpdateProgress("OCR reading page " & k & "/" & EndPage & " for file " & fileNumber & "/" & psFilenames.Length, 0)
-                            Application.DoEvents()
-                            Dim bf As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.WINANSI, BaseFont.NOT_EMBEDDED)
-                            cb.BeginText()
-                            Dim indexList As List(Of PDFWordIndex)
-                            indexList = TesseractOCR.GetPDFIndex(bm, language)
+    '            For k As Integer = StartPage To EndPage
+    '                StatusDialog.UpdateProgress("Processing page " & k & "/" & EndPage & " for file " & fileNumber & "/" & psFilenames.Length, ProgressIncrement / EndPage)
+    '                Application.DoEvents()
+    '                bm.SelectActiveFrame(FrameDimension.Page, k - 1)
+    '                'Auto Rotate the page if needed
+    '                If (psPageSize.Height > psPageSize.Width And bm.Width > bm.Height) _
+    '                Or (psPageSize.Width > psPageSize.Height And bm.Height > bm.Width) Then
+    '                    document.SetPageSize(psPageSize.Rotate)
+    '                Else
+    '                    document.SetPageSize(psPageSize)
+    '                End If
+    '                document.NewPage()
+    '                Dim img As iTextSharp.text.Image
+    '                img = iTextSharp.text.Image.GetInstance(bm, bm.RawFormat)
+    '                Dim Xpercent As Single = document.PageSize.Width / img.Width
+    '                Dim Ypercent As Single = document.PageSize.Height / img.Height
+    '                Dim ScalePercentage As Single
+    '                If Xpercent < Ypercent Then
+    '                    ScalePercentage = Xpercent
+    '                Else
+    '                    ScalePercentage = Ypercent
+    '                End If
+    '                img.ScalePercent(ScalePercentage * 100)
+    '                Dim xPos As Integer = (document.PageSize.Width - (img.Width * ScalePercentage)) / 2
+    '                Dim yPos As Integer = (document.PageSize.Height - (img.Height * ScalePercentage)) / 2
+    '                img.SetAbsolutePosition(xPos, yPos)
+    '                Try
+    '                    If language <> "" Then
+    '                        StatusDialog.UpdateProgress("OCR reading page " & k & "/" & EndPage & " for file " & fileNumber & "/" & psFilenames.Length, 0)
+    '                        Application.DoEvents()
+    '                        Dim bf As BaseFont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.WINANSI, BaseFont.NOT_EMBEDDED)
+    '                        cb.BeginText()
+    '                        Dim indexList As List(Of PDFWordIndex)
+    '                        indexList = TesseractOCR.GetPDFIndex(bm, language)
 
-                            StatusDialog.UpdateProgress("Adding search text to page " & k & "/" & EndPage & " for file " & fileNumber & "/" & psFilenames.Length, 0)
-                            Application.DoEvents()
-                            For Each item As PDFWordIndex In indexList
-                                Dim fontSize As Single = item.FontSize
-                                Dim text As String = item.Text
-                                Dim cor = New iTextSharp.text.BaseColor(Color.White)
+    '                        StatusDialog.UpdateProgress("Adding search text to page " & k & "/" & EndPage & " for file " & fileNumber & "/" & psFilenames.Length, 0)
+    '                        Application.DoEvents()
+    '                        For Each item As PDFWordIndex In indexList
+    '                            Dim fontSize As Single = item.FontSize
+    '                            Dim text As String = item.Text
+    '                            Dim cor = New iTextSharp.text.BaseColor(Color.White)
 
-                                cb.SetColorFill(cor) 'make text invisible in background
-                                'Must convert image x,y (x units per inch) to PDF x,y (72 units per inch)
-                                'Must know PDF page size to calculate the scale factor
-                                'Must invert Y coordinate so we go top -> bottom
-                                Dim x As Integer = (item.X * ScalePercentage) + xPos
-                                Dim y As Integer = (item.Y * ScalePercentage) + yPos
-                                y = (document.PageSize.Height - y) - fontSize
-                                'Keep adjusting the font size until the text is the same width as the word rectangle 
-                                Dim desiredWidth As Integer = Math.Ceiling(item.Width * ScalePercentage)
-                                Dim desiredHeight As Integer = Math.Ceiling(item.Height * ScalePercentage)
-                                Dim renderFontWidth As Integer = bf.GetWidthPoint(text, fontSize)
-                                While renderFontWidth < desiredWidth
-                                    fontSize += 0.5F
-                                    renderFontWidth = bf.GetWidthPoint(text, fontSize)
-                                End While
-                                cb.SetFontAndSize(bf, fontSize)
-                                y = y - (fontSize - item.FontSize) / 2
-                                cb.ShowTextAlignedKerned(Element.ALIGN_JUSTIFIED_ALL, text, x, y, 0)
-                            Next
-                            cb.EndText()
-                        End If
-                    Catch ex As Exception
-                        MsgBox(ex.ToString)
-                    End Try
-                    Try
-                        StatusDialog.UpdateProgress("Adding image to PDF of page " & k & "/" & EndPage & " for file " & fileNumber & "/" & psFilenames.Length, 0)
-                        Application.DoEvents()
-                        cb.AddImage(img)
-                    Catch ex As Exception
-                        MsgBox(ex.ToString)
-                    End Try
-                Next
-                bm.Dispose()
-            Next
-            document.Close()
-            StatusDialog.Close()
-            GraphicListToPDF = outputFileName
-        Catch de As Exception
-            StatusDialog.Close()
-            MsgBox(de.Message)
-            'Console.[Error].WriteLine(de.Message)
-            'Console.[Error].WriteLine(de.StackTrace)
-            GraphicListToPDF = ""
-        End Try
-    End Function
+    '                            cb.SetColorFill(cor) 'make text invisible in background
+    '                            'Must convert image x,y (x units per inch) to PDF x,y (72 units per inch)
+    '                            'Must know PDF page size to calculate the scale factor
+    '                            'Must invert Y coordinate so we go top -> bottom
+    '                            Dim x As Integer = (item.X * ScalePercentage) + xPos
+    '                            Dim y As Integer = (item.Y * ScalePercentage) + yPos
+    '                            y = (document.PageSize.Height - y) - fontSize
+    '                            'Keep adjusting the font size until the text is the same width as the word rectangle 
+    '                            Dim desiredWidth As Integer = Math.Ceiling(item.Width * ScalePercentage)
+    '                            Dim desiredHeight As Integer = Math.Ceiling(item.Height * ScalePercentage)
+    '                            Dim renderFontWidth As Integer = bf.GetWidthPoint(text, fontSize)
+    '                            While renderFontWidth < desiredWidth
+    '                                fontSize += 0.5F
+    '                                renderFontWidth = bf.GetWidthPoint(text, fontSize)
+    '                            End While
+    '                            cb.SetFontAndSize(bf, fontSize)
+    '                            y = y - (fontSize - item.FontSize) / 2
+    '                            cb.ShowTextAlignedKerned(Element.ALIGN_JUSTIFIED_ALL, text, x, y, 0)
+    '                        Next
+    '                        cb.EndText()
+    '                    End If
+    '                Catch ex As Exception
+    '                    MsgBox(ex.ToString)
+    '                End Try
+    '                Try
+    '                    StatusDialog.UpdateProgress("Adding image to PDF of page " & k & "/" & EndPage & " for file " & fileNumber & "/" & psFilenames.Length, 0)
+    '                    Application.DoEvents()
+    '                    cb.AddImage(img)
+    '                Catch ex As Exception
+    '                    MsgBox(ex.ToString)
+    '                End Try
+    '            Next
+    '            bm.Dispose()
+    '        Next
+    '        document.Close()
+    '        StatusDialog.Close()
+    '        GraphicListToPDF = outputFileName
+    '    Catch de As Exception
+    '        StatusDialog.Close()
+    '        MsgBox(de.Message)
+    '        'Console.[Error].WriteLine(de.Message)
+    '        'Console.[Error].WriteLine(de.StackTrace)
+    '        GraphicListToPDF = ""
+    '    End Try
+    'End Function
 
     Public Shared Function IsEncrypted(ByVal pdfFileName As String) As Boolean
         IsEncrypted = False

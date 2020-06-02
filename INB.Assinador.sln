@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.Model_IT", "I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.Helper", "INB.Assinador.Helper\INB.Assinador.Helper.csproj", "{1B590121-4822-444E-BD52-DAD0505A7ECC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.Alfresco", "INB.Assinador.Alfresco\INB.Assinador.Alfresco.csproj", "{BCAB1C11-6F6E-4FFD-BC38-EA2B4E26918D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{1B590121-4822-444E-BD52-DAD0505A7ECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B590121-4822-444E-BD52-DAD0505A7ECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B590121-4822-444E-BD52-DAD0505A7ECC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCAB1C11-6F6E-4FFD-BC38-EA2B4E26918D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCAB1C11-6F6E-4FFD-BC38-EA2B4E26918D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCAB1C11-6F6E-4FFD-BC38-EA2B4E26918D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCAB1C11-6F6E-4FFD-BC38-EA2B4E26918D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,7 +71,7 @@ Global
 		SolutionGuid = {1D03AB13-A689-4C19-8604-92390DFC4B0A}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 9
+		SccNumberOfProjects = 10
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.inbnet2.inb.gov.br:8080/tfs/inbcollection
 		SccLocalPath0 = .
@@ -93,5 +99,8 @@ Global
 		SccProjectUniqueName8 = INB.Assinador.Helper\\INB.Assinador.Helper.csproj
 		SccProjectName8 = INB.Assinador.Helper
 		SccLocalPath8 = INB.Assinador.Helper
+		SccProjectUniqueName9 = INB.Assinador.Alfresco\\INB.Assinador.Alfresco.csproj
+		SccProjectName9 = INB.Assinador.Alfresco
+		SccLocalPath9 = INB.Assinador.Alfresco
 	EndGlobalSection
 EndGlobal

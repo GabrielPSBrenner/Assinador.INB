@@ -205,6 +205,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\INB.Assinador.Helper\INB.Assinador.Helper.csproj">
+      <Project>{1b590121-4822-444e-bd52-dad0505a7ecc}</Project>
+      <Name>INB.Assinador.Helper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\INB.Assinador.Integracao\INB.Assinador.Integracao.csproj">
       <Project>{ac13f565-70df-4eaa-ab11-0d51da2b93de}</Project>
       <Name>INB.Assinador.Integracao</Name>

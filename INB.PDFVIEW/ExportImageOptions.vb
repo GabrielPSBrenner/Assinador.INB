@@ -58,19 +58,19 @@ Public Class ExportImageOptions
   Private Sub LoadLanguages()
     'Make sure all of the language files are in the \tessdata directory
     Dim hash As New List(Of DictionaryEntry)
-        hash.Add(New DictionaryEntry("Inglês", TesseractOCR.Language.English))
-        hash.Add(New DictionaryEntry("Português", TesseractOCR.Language.Portuguese))
-        hash.Add(New DictionaryEntry("Alemão", TesseractOCR.Language.German))
-    'hash.Add(New DictionaryEntry("Basque", TesseractOCR.Language.Basque))
-    'hash.Add(New DictionaryEntry("Dutch", TesseractOCR.Language.Dutch))
-    'hash.Add(New DictionaryEntry("Fraktur", TesseractOCR.Language.Fraktur))
-    'hash.Add(New DictionaryEntry("French", TesseractOCR.Language.French))
+        'hash.Add(New DictionaryEntry("Inglês", TesseractOCR.Language.English))
+        'hash.Add(New DictionaryEntry("Português", TesseractOCR.Language.Portuguese))
+        'hash.Add(New DictionaryEntry("Alemão", TesseractOCR.Language.German))
+        'hash.Add(New DictionaryEntry("Basque", TesseractOCR.Language.Basque))
+        'hash.Add(New DictionaryEntry("Dutch", TesseractOCR.Language.Dutch))
+        'hash.Add(New DictionaryEntry("Fraktur", TesseractOCR.Language.Fraktur))
+        'hash.Add(New DictionaryEntry("French", TesseractOCR.Language.French))
         '
-    'hash.Add(New DictionaryEntry("Italian", TesseractOCR.Language.Italian))
-    'hash.Add(New DictionaryEntry("Portuguese", TesseractOCR.Language.Portuguese))
-    'hash.Add(New DictionaryEntry("Spanish", TesseractOCR.Language.Spanish))
-    'hash.Add(New DictionaryEntry("Vietnamese", TesseractOCR.Language.Vietnamese))
-    cbLanguage.DataSource = hash
+        'hash.Add(New DictionaryEntry("Italian", TesseractOCR.Language.Italian))
+        'hash.Add(New DictionaryEntry("Portuguese", TesseractOCR.Language.Portuguese))
+        'hash.Add(New DictionaryEntry("Spanish", TesseractOCR.Language.Spanish))
+        'hash.Add(New DictionaryEntry("Vietnamese", TesseractOCR.Language.Vietnamese))
+        cbLanguage.DataSource = hash
     cbLanguage.DisplayMember = "Key"
   End Sub
 

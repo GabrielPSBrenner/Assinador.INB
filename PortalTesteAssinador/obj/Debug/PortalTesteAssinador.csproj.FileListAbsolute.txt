@@ -48,6 +48,7 @@ C:\Projetos\INB.Assinador\PortalTesteAssinador\bin\roslyn\vbc.rsp
 C:\Projetos\INB.Assinador\PortalTesteAssinador\bin\roslyn\VBCSCompiler.exe
 C:\Projetos\INB.Assinador\PortalTesteAssinador\bin\roslyn\VBCSCompiler.exe.config
 C:\Projetos\INB.Assinador\PortalTesteAssinador\bin\Antlr3.Runtime.dll
+C:\Projetos\INB.Assinador\PortalTesteAssinador\bin\INB.Assinador.Helper.dll
 C:\Projetos\INB.Assinador\PortalTesteAssinador\bin\INB.Assinador.Integracao.dll
 C:\Projetos\INB.Assinador\PortalTesteAssinador\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Projetos\INB.Assinador\PortalTesteAssinador\bin\Microsoft.Web.Infrastructure.dll
@@ -60,6 +61,7 @@ C:\Projetos\INB.Assinador\PortalTesteAssinador\bin\System.Web.WebPages.Deploymen
 C:\Projetos\INB.Assinador\PortalTesteAssinador\bin\System.Web.WebPages.dll
 C:\Projetos\INB.Assinador\PortalTesteAssinador\bin\System.Web.WebPages.Razor.dll
 C:\Projetos\INB.Assinador\PortalTesteAssinador\bin\WebGrease.dll
+C:\Projetos\INB.Assinador\PortalTesteAssinador\bin\INB.Assinador.Helper.pdb
 C:\Projetos\INB.Assinador\PortalTesteAssinador\bin\INB.Assinador.Integracao.pdb
 C:\Projetos\INB.Assinador\PortalTesteAssinador\bin\System.Web.Helpers.xml
 C:\Projetos\INB.Assinador\PortalTesteAssinador\bin\System.Web.Mvc.xml

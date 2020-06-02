@@ -15,5 +15,7 @@ namespace INB.Assinador.Integracao.Interfaces
         string Senha { get; set; }
 
         string UsuarioAutenticado { get; set; }
+        
+        string HashArquivoOriginal { get; set; }
     }
 }

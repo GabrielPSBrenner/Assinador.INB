@@ -18,7 +18,12 @@ namespace INB.Assinador.View
 {
     public partial class FrmAssinador : Form
     {
+
         private INB.PDF.FrmPreview oFrm;
+        private static TcpListener serverSocket;
+        private static bool ContinuaServico = true;
+
+        private WebSocketServer oWS;
 
         Point _Position;
         int _Pagina;
@@ -28,6 +33,12 @@ namespace INB.Assinador.View
         bool fecha = false;
 
         private Thread t;
+
+        private enum eTipoMensagem
+        {
+            Socket = 1,
+            WebSocket = 2
+        }
 
         public FrmAssinador()
         {
@@ -69,40 +80,49 @@ namespace INB.Assinador.View
             {
                 this.Height = 180;
             }
-            try
-            {
-               
-                //INB.Assinador.Helper.Certificado.InstalaCertificadoTimeStamp();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ocorreu um erro ao instalar o certificado do TimeStamp:" + ex.Message + ".", ProductName, MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-            }
 
-            try
-            {
-
-                INB.Assinador.Helper.Registro.SetStartup(true, Process.GetCurrentProcess().ProcessName);
-            }
-            catch (Exception ex)
-            { }
 
             CboDigestAlgorithm.SelectedIndex = 2;
-
-
             CarregaCertificado();
             ReadSettings();
 
-            t = new Thread(() => OpenServer());
-            t.Start();
+            try
+            {
+                INB.Assinador.Helper.Registro.SetStartup(true, ProductName);
+            }
+            catch { }
+
+
+            try
+            {
+                //SERVIDOR Web-Socket, que permite a conexão por script.
+                oWS = new WebSocketServer();
+                oWS.Start("http://+:27524/Assinador/");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Não foi possível abrir o servidor WebSocket. A Integração com o Alfresco não funcionará, acione o Help-Desk.: " + ex.Message + ".", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            try
+            {
+                //SERVIDOR QUE RECEBE O JSON COM OS DADOS DO SERVIDOR.
+                t = new Thread(() => OpenServer());
+                t.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Não foi possível abrir o servidor 27525. A Integração com os Sistemas Internos não funcionará, acione o Help-Desk.: " + ex.Message + ".", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void OpenServer(int Porta = 27525)
         {
-            TcpListener serverSocket = new TcpListener(Porta);
+            serverSocket = new TcpListener(Porta);
             serverSocket.Start();
             int counter = 0;
-            while (true)
+
+            while (ContinuaServico)
             {
                 counter += 1;
                 TcpClient clientSocket = default(TcpClient);
@@ -299,22 +319,36 @@ namespace INB.Assinador.View
 
         private void BtnAssinarPDF_Click(object sender, EventArgs e)
         {
-            if (CboCertificados.Items.Count == 0 || CboCertificados.SelectedIndex == -1)
+            try
             {
-                MessageBox.Show("Por favor, selecione um certificado válido.", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                BtnAtualizar_Click(sender, e);
-                CboCertificados.Focus();
-            }
-            else
-            {
-                openFileDialog1.Filter = "Arquivos pdf (*.pdf)|*.pdf";
-                openFileDialog1.FileName = "";
-                if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
+                if (CboCertificados.Items.Count == 0 || CboCertificados.SelectedIndex == -1)
                 {
-                    string ArquivoAssinado;
-                    AssinarArquivo(openFileDialog1.FileName, out ArquivoAssinado);
+                    MessageBox.Show("Por favor, selecione um certificado válido.", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    BtnAtualizar_Click(sender, e);
+                    CboCertificados.Focus();
                 }
-                AtualizaSettings();
+                else
+                {
+                    openFileDialog1.Filter = "Arquivos pdf (*.pdf)|*.pdf";
+                    openFileDialog1.FileName = "";
+                    if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
+                    {
+                        string ArquivoAssinado;
+                        try
+                        {
+                            AssinarArquivo(openFileDialog1.FileName, out ArquivoAssinado);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Um erro aconteceu ao executar o processo de assinatura verifique se o certificado está corretamente instalado e, em caso de Token, na porta USB. Erro: " + ex.Message, ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    AtualizaSettings();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Um erro aconteceu ao executar o processo de assinatura. Erro: " + ex.Message, ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -379,6 +413,8 @@ namespace INB.Assinador.View
         private void assinarPDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Visible = true;
+            this.Activate();
+            this.Focus();
 
         }
 
@@ -411,98 +447,154 @@ namespace INB.Assinador.View
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            eTipoMensagem TipoMensagem;
+
+            bool RecebeuMensagem = false;
+
+            timer1.Enabled = false;
+           
+
+            string Mensagem = "";
+
+            //MENSAGEM VIA WEBSOCKET
+            if (oWS.MensagemNova)
+            {
+                Mensagem = oWS.Mensagem;
+                oWS.MensagemNova = false;
+                oWS.Mensagem = "";
+                TipoMensagem = eTipoMensagem.WebSocket;
+                RecebeuMensagem = true;
+            }
+
+            //MENSAGEM VIA SOCKET
             if (INB.Assinador.Integracao.Service.SocketWS.MensagemNova)
+            {
+                Mensagem = INB.Assinador.Integracao.Service.SocketWS.Mensagem;
+                INB.Assinador.Integracao.Service.SocketWS.MensagemNova = false;
+                INB.Assinador.Integracao.Service.SocketWS.Mensagem = "";
+                TipoMensagem = eTipoMensagem.WebSocket;
+                RecebeuMensagem = true;
+            }
+
+            if (RecebeuMensagem)
             {
                 this.Visible = true;
                 this.Focus();
-                timer1.Enabled = false;
+
+                Comunicacao oCom = null;
+
+                //CONVERTE O TEXTO RECEBIDO EM OBJETO
+                try
+                {
+                    oCom = (Comunicacao)ConverterObjeto.RetornaObjeto(Mensagem);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Um erro ocorreu ao converter o objeto para o tipo Comunicacao. O processo precisa ser repetido e se o erro persistir, notifique o Help-Desk | Mensagem REcebida: " + Mensagem + " | Erro: " + ex.Message, ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    timer1.Enabled = true;
+                    return;
+                }
+
                 if (CboCertificados.Items.Count == 0 || CboCertificados.SelectedIndex == -1)
                 {
-                    MessageBox.Show("Para a integração funcionar é necessário ter um certificado válido selecionado. Insira o certificado, atualize e clique novamente na opção de assinar, no Sistema desejado.", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Para a integração funcionar é necessário ter um certificado válido selecionado. Insira e selecione o certificado e repita o processo.", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    timer1.Enabled = true;
                     CboCertificados.Focus();
+                    return;
                 }
-                else
-                {
 
-                    string Mensagem = INB.Assinador.Integracao.Service.SocketWS.Mensagem;
+                try
+                {
+                    byte[] Arquivo;
                     try
                     {
-
-                        byte[] Arquivo;
-                        Comunicacao oCom = (Comunicacao)ConverterObjeto.RetornaObjeto(Mensagem);
+                        Arquivo = Service.WSFile.getFile(oCom);
                         try
                         {
-                            Arquivo = Service.WSFile.getFile(oCom);
-                            try
+                            MemoryStream ArquivoMS;
+                            if (ChkSalvaArquivo.Checked)
                             {
-
-                                MemoryStream ArquivoMS;
-                                if (ChkSalvaArquivo.Checked)
+                                ArquivoMS = new MemoryStream(Arquivo);
+                                string path = System.AppDomain.CurrentDomain.BaseDirectory + "Temp\\";
+                                string pathArquivoRecebido = path + oCom.Codigo.ToString() + "_" + oCom.Versao.ToString() + ".pdf";
+                                using (FileStream fs = new FileStream(pathArquivoRecebido, FileMode.OpenOrCreate))
                                 {
-                                    ArquivoMS = new MemoryStream(Arquivo);
-                                    string path = System.AppDomain.CurrentDomain.BaseDirectory + "Temp\\";
-                                    string pathArquivoRecebido = path + oCom.Codigo.ToString() + "_" + oCom.Versao.ToString() + ".pdf";
-                                    using (FileStream fs = new FileStream(pathArquivoRecebido, FileMode.OpenOrCreate))
+                                    ArquivoMS.CopyTo(fs);
+                                    fs.Flush();
+                                }
+                                ArquivoMS.Close();
+                                string FileNameAssinado;
+
+                                if (AssinarArquivo(pathArquivoRecebido, out FileNameAssinado, true))
+                                {
+                                    byte[] ArquivoAssinado = INB.Assinador.Helper.FileHelper.ReadFile(FileNameAssinado);
+                                    try
                                     {
-                                        ArquivoMS.CopyTo(fs);
-                                        fs.Flush();
+                                        Service.WSFile.setFile(oCom, ArquivoAssinado);
+                                        MessageBox.Show("Arquivo assinado com sucesso.", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                                     }
-                                    ArquivoMS.Close();
-                                    string FileNameAssinado;
-                                    if (AssinarArquivo(pathArquivoRecebido, out FileNameAssinado, true))
+                                    catch (Exception ex)
                                     {
-                                        byte[] ArquivoAssinado = INB.Assinador.Helper.FileHelper.ReadFile(FileNameAssinado);
+                                        MessageBox.Show("Ocorreu um erro na assinatura e o processo inteiro precisa ser refeito. Erro: " + ex.Message, ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                }
+                                try
+                                {
+                                    System.IO.File.Delete(FileNameAssinado);
+                                    System.IO.File.Delete(pathArquivoRecebido);
+                                }
+                                catch (Exception ex) { }
+                            }
+                            else
+                            {
+                                byte[] ArquivoAssinado;
+                                if (AssinarArquivo(Arquivo, out ArquivoAssinado, true))
+                                {
+                                    try
+                                    {
+
                                         Service.WSFile.setFile(oCom, ArquivoAssinado);
                                         MessageBox.Show("Arquivo assinado com sucesso.", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     }
-                                    try
+                                    catch (Exception ex)
                                     {
-                                        System.IO.File.Delete(FileNameAssinado);
-                                        System.IO.File.Delete(pathArquivoRecebido);
+                                        MessageBox.Show("Ocorreu um erro na assinatura e o processo inteiro precisa ser refeito. Erro: " + ex.Message, ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
-                                    catch (Exception ex) { }
                                 }
                                 else
                                 {
-                                    byte[] ArquivoAssinado;
-                                    if (AssinarArquivo(Arquivo, out ArquivoAssinado, true))
-                                    {
-                                        Service.WSFile.setFile(oCom, ArquivoAssinado);                                       
-                                        MessageBox.Show("Arquivo assinado com sucesso.", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Assinatura não realizada. Caso deseje assinar, repita o processo, por favor.", ProductName, MessageBoxButtons.OK);
-                                    }
+                                    MessageBox.Show("Um problema ocorreu no envio do arquivo assinado para o servidor. Assinatura não realizada. Repita todo o processo, por favor.", ProductName, MessageBoxButtons.OK);
                                 }
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("Ocorreu um erro ao acessar o WebService de gravação do arquivo assinado, no Sistema. Erro:" + ex.Message + ".", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                             }
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Ocorreu um erro ao acessar o WebService de leitura de arquivo do Sistema. Erro:" + ex.Message + ".", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Ocorreu um erro no Sistema. Erro:" + ex.Message + ".", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                         }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Um erro ocorreu ao tentar buscar o arquivo no Servidor.Erro: " + ex.Message + ".", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Ocorreu um erro ao acessar o WebService de leitura de arquivo do Sistema. Erro:" + ex.Message + ".", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    INB.Assinador.Integracao.Service.SocketWS.MensagemNova = false;
-                    timer1.Enabled = true;
                 }
-
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Um erro ocorreu ao tentar buscar o arquivo no Servidor.Erro: " + ex.Message + ".", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }               
             }
+            timer1.Enabled = true;
         }
 
         private void MnuFechar_Click(object sender, EventArgs e)
         {
-            fecha = true;
-            this.Close();
-            Environment.Exit(1);
+            if (MessageBox.Show("O assinador será encerrado e não poderá ser utilizado até ser reiniciado novamente. Deseja realmente encerrar?", ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                fecha = true;
+                this.Close();
+                Environment.Exit(1);
+            }
         }
 
         private void ChkFileSocket_CheckedChanged(object sender, EventArgs e)
@@ -523,26 +615,82 @@ namespace INB.Assinador.View
             //    MSG += "|| Oid Value : " +  asndata.Oid.Value;
             //    MSG += "|| Raw data length:  " +  asndata.RawData.Length.ToString();
             //    MSG += Convert.ToChar(Keys.Enter);
-                
+
 
             //}
-            
-           // MessageBox.Show(MSG);
+
+            // MessageBox.Show(MSG);
         }
 
         private void MnuInfoAdicionais_Click(object sender, EventArgs e)
         {
-            FrmInfo oFrm = new FrmInfo(MnuInfoAdicionais);            
+            FrmInfo oFrm = new FrmInfo(MnuInfoAdicionais);
             oFrm.Show();
         }
 
         private void MnuApresentacao_Click(object sender, EventArgs e)
         {
-            try { 
-            string path = System.AppDomain.CurrentDomain.BaseDirectory + "Temp\\";
-            System.Diagnostics.Process.Start(path + "Apresentacao.pdf");
+            try
+            {
+                string path = System.AppDomain.CurrentDomain.BaseDirectory + "Temp\\";
+                System.Diagnostics.Process.Start(path + "Apresentacao.pdf");
             }
-            catch(Exception ex)
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void FrmAssinador_Activated(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MnuVerificarAtualizacao_Click(object sender, EventArgs e)
+        {
+            FrmUpdate oFrm = new FrmUpdate(this, MnuVerificarAtualizacao);
+            oFrm.Show();
+        }
+
+        private void FrmAssinador_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                //serverSocket.EndAcceptSocket(null );
+                // serverSocket.EndAcceptTcpClient(null);
+                ContinuaServico = false;
+                serverSocket.Stop();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro: " + ex.Message, ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            try
+            {
+                t.Abort();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro: " + ex.Message, ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            try
+            {
+                oWS.Close();
+            }
+            catch { }
+
+            Application.Exit();
+        }
+
+        private void MnuIO_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string path = System.AppDomain.CurrentDomain.BaseDirectory + "Temp\\";
+                System.Diagnostics.Process.Start(path + "AssinaturaINB.pdf");
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

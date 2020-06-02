@@ -5,6 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using INB.Assinador.Integracao;
+using System.IO;
 
 namespace PortalTesteAssinador.Controllers
 {
@@ -20,7 +21,15 @@ namespace PortalTesteAssinador.Controllers
         public ActionResult Assinar(int Codigo, int Versao)
         {
             Comunicacao oCom = new Comunicacao();            
-            string URL = "http://localhost/PortalTesteAssinador/Servicos/ServicoTeste.svc";        
+            string URL = "http://localhost/PortalTesteAssinador/Servicos/ServicoTeste.svc";
+
+            string path = Server.MapPath("~/Anexos/");
+            path += Codigo.ToString() + "_" + Versao.ToString() + ".pdf";
+
+            //ENVIA O HASH DO ARQUIVO ORIGINAL PARA O ASSINADOR.
+            byte[] Arquivo = INB.Assinador.Helper.FileHelper.ReadFile(path);
+            oCom.HashArquivoOriginal = INB.Assinador.Integracao.DocumentHash.GetHashToString(Arquivo);
+
             oCom.Codigo = Codigo;
             oCom.Versao = Versao;
             oCom.UserID = "YYYY";
@@ -37,8 +46,7 @@ namespace PortalTesteAssinador.Controllers
         {
             string Result = "";
             try
-            {
-               
+            {               
                     Result = System.Web.HttpContext.Current.Request.UserHostAddress;
                     if (Result == "::1")
                     {

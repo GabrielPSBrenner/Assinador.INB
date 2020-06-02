@@ -37,6 +37,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.WebSockets, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.WebSockets.4.3.0\lib\net46\System.Net.WebSockets.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Extensions" />
@@ -51,6 +55,7 @@
   <ItemGroup>
     <Compile Include="ConverterObjeto.cs" />
     <Compile Include="Comunicacao.cs" />
+    <Compile Include="DocumentHash.cs" />
     <Compile Include="FileTransfer.cs" />
     <Compile Include="Interfaces\IComunicacao.cs" />
     <Compile Include="Interfaces\IFileTransfer.cs" />
@@ -60,7 +65,14 @@
     <Compile Include="Service\Cliente.cs" />
     <Compile Include="Service\FileSocket.cs" />
     <Compile Include="Service\SocketWS.cs" />
+    <Compile Include="WebSocketServer.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SampleJS\Samplews.js" />
+    <Content Include="SampleJS\TESTE.HTML" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
