@@ -18,7 +18,7 @@ namespace PortalTesteAssinador.Controllers
             return View(Lista);
         }
 
-        public ActionResult Assinar(int Codigo, int Versao)
+        public ActionResult Assinar(string Codigo, string Versao)
         {
             Comunicacao oCom = new Comunicacao();            
             string URL = "http://localhost/PortalTesteAssinador/Servicos/ServicoTeste.svc";

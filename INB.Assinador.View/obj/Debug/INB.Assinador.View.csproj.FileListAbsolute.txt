@@ -24,6 +24,7 @@ C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\x86\libtesseract3052.dll
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\x64\liblept1753.dll
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\x64\libtesseract3052.dll
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\Temp\Apresentacao.pdf
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\Temp\AssinaturaINB.pdf
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\Temp\XMLFile.xml
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\Assinador da INB.exe.config
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\Assinador da INB.exe.manifest
@@ -34,14 +35,34 @@ C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\INB.Assinador.Helper.dll
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\INB.Assinador.Integracao.dll
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\INB.Assinador.Model.dll
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\INB.PDF.dll
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Buffers.dll
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Memory.dll
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Net.WebSockets.dll
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Numerics.Vectors.dll
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Text.Encodings.Web.dll
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Text.Json.dll
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.ValueTuple.dll
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\itextsharp.dll
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\PdfLibNet32.dll
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\PdfLibNetLibrary.dll
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\INB.Assinador.Helper.pdb
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\INB.Assinador.Integracao.pdb
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\INB.Assinador.Model.pdb
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\INB.PDF.pdb
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\INB.PDF.xml
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\INB.PDF.dll.config
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Buffers.xml
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Memory.xml
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Numerics.Vectors.xml
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Text.Encodings.Web.xml
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Text.Json.xml
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.ValueTuple.xml
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\itextsharp.xml
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\Interop.AcroPDFLib.dll
 C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\AxInterop.AcroPDFLib.dll
@@ -56,28 +77,9 @@ C:\Projetos\INB.Assinador\INB.Assinador.View\obj\Debug\INB.Assinador.View.FrmUpd
 C:\Projetos\INB.Assinador\INB.Assinador.View\obj\Debug\INB.Assinador.View.Properties.Resources.resources
 C:\Projetos\INB.Assinador\INB.Assinador.View\obj\Debug\INB.Assinador.View.csproj.GenerateResource.cache
 C:\Projetos\INB.Assinador\INB.Assinador.View\obj\Debug\INB.Assinador.View.csproj.CoreCompileInputs.cache
+C:\Projetos\INB.Assinador\INB.Assinador.View\obj\Debug\Assinador da INB.TrustInfo.xml
 C:\Projetos\INB.Assinador\INB.Assinador.View\obj\Debug\Assinador da INB.exe.manifest
 C:\Projetos\INB.Assinador\INB.Assinador.View\obj\Debug\Assinador da INB.application
 C:\Projetos\INB.Assinador\INB.Assinador.View\obj\Debug\INB.Assinador.View.csproj.CopyComplete
 C:\Projetos\INB.Assinador\INB.Assinador.View\obj\Debug\Assinador da INB.exe
 C:\Projetos\INB.Assinador\INB.Assinador.View\obj\Debug\Assinador da INB.pdb
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Buffers.dll
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Memory.dll
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Numerics.Vectors.dll
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Text.Encodings.Web.dll
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Text.Json.dll
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Threading.Tasks.Extensions.dll
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.ValueTuple.dll
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Buffers.xml
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Memory.xml
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Numerics.Vectors.xml
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Text.Encodings.Web.xml
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Text.Json.xml
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Threading.Tasks.Extensions.xml
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.ValueTuple.xml
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\Temp\AssinaturaINB.pdf
-C:\Projetos\INB.Assinador\INB.Assinador.View\bin\Debug\System.Net.WebSockets.dll

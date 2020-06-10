@@ -144,6 +144,11 @@ namespace INB.Assinador.Model
             }
             catch(Exception ex) {}
             pdfReader.Close();
+            try
+            {
+                pdfReader.Dispose();
+            }
+            catch { }
         }
 
 
@@ -211,6 +216,10 @@ namespace INB.Assinador.Model
             catch { }
             try { signedPdf.Close(); } catch { };
             pdfReader.Close();
+            try { 
+            pdfReader.Dispose();
+            }
+            catch { }
         }
 
 

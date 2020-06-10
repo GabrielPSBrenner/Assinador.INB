@@ -13,16 +13,19 @@ using System.IO;
 using System.Diagnostics;
 using INB.Assinador.Helper;
 using System.Security.Cryptography;
+using System.Security.Principal;
 
 namespace INB.Assinador.View
 {
     public partial class FrmAssinador : Form
     {
 
+
         private INB.PDF.FrmPreview oFrm;
-        private static TcpListener serverSocket;
+
         private static bool ContinuaServico = true;
 
+        private static TcpListener serverSocket;
         private WebSocketServer oWS;
 
         Point _Position;
@@ -33,6 +36,15 @@ namespace INB.Assinador.View
         bool fecha = false;
 
         private Thread t;
+
+        //public const string Login = "";
+        //public const string Dominio = "INB";
+        //public const string Senha = "";
+        //const int LOGON32_PROVIDER_DEFAULT = 0;
+        //const int LOGON32_LOGON_INTERACTIVE = 2;
+        //IntPtr tokenHandle = new IntPtr(0);
+        //IntPtr dupeTokenHandle = new IntPtr(0);
+
 
         private enum eTipoMensagem
         {
@@ -93,18 +105,9 @@ namespace INB.Assinador.View
             catch { }
 
 
-            try
-            {
-                //SERVIDOR Web-Socket, que permite a conexão por script.
-                oWS = new WebSocketServer();
-                oWS.Start("http://+:27524/Assinador/");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Não foi possível abrir o servidor WebSocket. A Integração com o Alfresco não funcionará, acione o Help-Desk.: " + ex.Message + ".", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            try
+            //tokenHandle = IntPtr.Zero;
+            //bool returnValue = Impersonate.LogonUser(Login, Dominio, Senha, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, ref tokenHandle);
+             try
             {
                 //SERVIDOR QUE RECEBE O JSON COM OS DADOS DO SERVIDOR.
                 t = new Thread(() => OpenServer());
@@ -114,10 +117,24 @@ namespace INB.Assinador.View
             {
                 MessageBox.Show("Não foi possível abrir o servidor 27525. A Integração com os Sistemas Internos não funcionará, acione o Help-Desk.: " + ex.Message + ".", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            try
+            {
+                //SERVIDOR Web-Socket, que permite a conexão por script.
+                oWS = new WebSocketServer();
+                oWS.Start("http://localhost:27524/Assinador/");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Não foi possível abrir o servidor WebSocket. A Integração com o Alfresco não funcionará, acione o Help-Desk.: " + ex.Message + ".", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }           
         }
 
         private void OpenServer(int Porta = 27525)
         {
+            //tokenHandle = IntPtr.Zero;
+            //bool returnValue = Impersonate.LogonUser(Login, Dominio, Senha, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, ref tokenHandle);
+
             serverSocket = new TcpListener(Porta);
             serverSocket.Start();
             int counter = 0;
@@ -132,6 +149,7 @@ namespace INB.Assinador.View
                 client.startClient(clientSocket, Convert.ToString(counter));
             }
             serverSocket.Stop();
+
         }
 
         private void AtualizaSettings()
@@ -275,7 +293,7 @@ namespace INB.Assinador.View
             oFrm.ShowDialog();
             if (oFrm.AssinaturaConfirmada)
             {
-                oFrm.Close();
+
                 int Pagina, largura, altura;
                 int X, Y;
                 Pagina = _Pagina;
@@ -308,10 +326,20 @@ namespace INB.Assinador.View
                         }
                     }
                 }
+                try
+                {
+                    oFrm.Close();
+                }
+                catch (Exception ex) { }
                 return true;
             }
             else
             {
+                try
+                {
+                    oFrm.Dispose();
+                }
+                catch (Exception ex) { }
                 return false;
             }
 
@@ -452,9 +480,10 @@ namespace INB.Assinador.View
             bool RecebeuMensagem = false;
 
             timer1.Enabled = false;
-           
+
 
             string Mensagem = "";
+
 
             //MENSAGEM VIA WEBSOCKET
             if (oWS.MensagemNova)
@@ -480,6 +509,7 @@ namespace INB.Assinador.View
             {
                 this.Visible = true;
                 this.Focus();
+                this.BringToFront();
 
                 Comunicacao oCom = null;
 
@@ -502,6 +532,7 @@ namespace INB.Assinador.View
                     CboCertificados.Focus();
                     return;
                 }
+
 
                 try
                 {
@@ -582,7 +613,7 @@ namespace INB.Assinador.View
                 catch (Exception ex)
                 {
                     MessageBox.Show("Um erro ocorreu ao tentar buscar o arquivo no Servidor.Erro: " + ex.Message + ".", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }               
+                }
             }
             timer1.Enabled = true;
         }
@@ -643,7 +674,10 @@ namespace INB.Assinador.View
 
         private void FrmAssinador_Activated(object sender, EventArgs e)
         {
-
+            this.Visible = true;
+            this.Activate();
+            this.BringToFront();
+            this.Focus();
         }
 
         private void MnuVerificarAtualizacao_Click(object sender, EventArgs e)

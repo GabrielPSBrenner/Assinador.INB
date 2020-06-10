@@ -15,12 +15,12 @@ namespace PortalTesteAssinador.Servicos
     // NOTE: In order to launch WCF Test Client for testing this service, please select ServicoTeste.svc or ServicoTeste.svc.cs at the Solution Explorer and start debugging.
     public class ServicoTeste : IServicoTeste
     {
-        public void EnviarArquivo(byte[] Arquivo, int Codigo, int Versao, string UsuarioAutenticado, string HashArquivoOriginal)
+        public void EnviarArquivo(byte[] Arquivo, string Codigo, string Versao, string UsuarioAutenticado, string HashArquivoOriginal)
         {
             string path = HttpContext.Current.Server.MapPath("~/Anexos/");
-            string pathCompleto = path + Codigo.ToString() + "_" + Versao.ToString() + "_assinado.pdf";
+            string pathCompleto = path + Codigo + "_" + Versao + "_assinado.pdf";
 
-            string pathArquivoOriginal = path + Codigo.ToString() + "_" + Versao.ToString() + ".pdf";
+            string pathArquivoOriginal = path + Codigo + "_" + Versao + ".pdf";
             
             
             //Compara o hash do arquivo enviado com o do arquivo armazenado, os dois tem que bater, senão houve mudanças.
@@ -45,10 +45,10 @@ namespace PortalTesteAssinador.Servicos
             }
         }
 
-        public byte[] ReceberArquivo(int Codigo, int Versao)
+        public byte[] ReceberArquivo(string Codigo, string Versao)
         {
             string path = HttpContext.Current.Server.MapPath("~/Anexos/");
-            string pathCompleto = path + Codigo.ToString() + "_" + Versao.ToString() + ".pdf";
+            string pathCompleto = path + Codigo + "_" + Versao + ".pdf";
             return File.ReadAllBytes(pathCompleto);
         }
     }

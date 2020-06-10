@@ -21,6 +21,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.Helper", "INB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.Alfresco", "INB.Assinador.Alfresco\INB.Assinador.Alfresco.csproj", "{BCAB1C11-6F6E-4FFD-BC38-EA2B4E26918D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.Servico", "INB.Assinador.Servico\INB.Assinador.Servico.csproj", "{94894AA8-258C-49DF-AF9D-5507958A6680}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.Servico.Base", "INB.Assinador.Servico.Base\INB.Assinador.Servico.Base.csproj", "{73F22FD4-8EB3-48A4-9017-D6926C30073B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "INB.Assinador.AddGranthPort", "INB.Assinador.AddGranthPort\INB.Assinador.AddGranthPort.csproj", "{5ED74257-B864-4AF7-B795-BD2E75B06B81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +69,18 @@ Global
 		{BCAB1C11-6F6E-4FFD-BC38-EA2B4E26918D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCAB1C11-6F6E-4FFD-BC38-EA2B4E26918D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCAB1C11-6F6E-4FFD-BC38-EA2B4E26918D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94894AA8-258C-49DF-AF9D-5507958A6680}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94894AA8-258C-49DF-AF9D-5507958A6680}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94894AA8-258C-49DF-AF9D-5507958A6680}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94894AA8-258C-49DF-AF9D-5507958A6680}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73F22FD4-8EB3-48A4-9017-D6926C30073B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73F22FD4-8EB3-48A4-9017-D6926C30073B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73F22FD4-8EB3-48A4-9017-D6926C30073B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73F22FD4-8EB3-48A4-9017-D6926C30073B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ED74257-B864-4AF7-B795-BD2E75B06B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ED74257-B864-4AF7-B795-BD2E75B06B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ED74257-B864-4AF7-B795-BD2E75B06B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ED74257-B864-4AF7-B795-BD2E75B06B81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,7 +89,7 @@ Global
 		SolutionGuid = {1D03AB13-A689-4C19-8604-92390DFC4B0A}
 	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
+		SccNumberOfProjects = 13
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://tfs.inbnet2.inb.gov.br:8080/tfs/inbcollection
 		SccLocalPath0 = .
@@ -102,5 +120,14 @@ Global
 		SccProjectUniqueName9 = INB.Assinador.Alfresco\\INB.Assinador.Alfresco.csproj
 		SccProjectName9 = INB.Assinador.Alfresco
 		SccLocalPath9 = INB.Assinador.Alfresco
+		SccProjectUniqueName10 = INB.Assinador.Servico\\INB.Assinador.Servico.csproj
+		SccProjectName10 = INB.Assinador.Servico
+		SccLocalPath10 = INB.Assinador.Servico
+		SccProjectUniqueName11 = INB.Assinador.Servico.Base\\INB.Assinador.Servico.Base.csproj
+		SccProjectName11 = INB.Assinador.Servico.Base
+		SccLocalPath11 = INB.Assinador.Servico.Base
+		SccProjectUniqueName12 = INB.Assinador.AddGranthPort\\INB.Assinador.AddGranthPort.csproj
+		SccProjectName12 = INB.Assinador.AddGranthPort
+		SccLocalPath12 = INB.Assinador.AddGranthPort
 	EndGlobalSection
 EndGlobal

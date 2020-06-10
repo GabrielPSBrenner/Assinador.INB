@@ -12,9 +12,9 @@ namespace INB.Assinador.Integracao.Interfaces
     public interface IWS
     {
         [OperationContract]
-        byte[] ReceberArquivo(int Codigo, int Versao);
+        byte[] ReceberArquivo(string Codigo, string Versao);
 
         [OperationContract]
-        void EnviarArquivo(byte[] Arquivo, int Codigo, int Versao, string UsuarioAutenticado, string HashDocumentoOriginal);
+        void EnviarArquivo(byte[] Arquivo, string Codigo, string Versao, string UsuarioAutenticado, string HashDocumentoOriginal);
     }
 }

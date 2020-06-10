@@ -1,0 +1,6 @@
+C:\Projetos\INB.Assinador\INB.Assinador.Start\bin\Debug\INB.Assinador.Start.exe.config
+C:\Projetos\INB.Assinador\INB.Assinador.Start\bin\Debug\INB.Assinador.Start.exe
+C:\Projetos\INB.Assinador\INB.Assinador.Start\bin\Debug\INB.Assinador.Start.pdb
+C:\Projetos\INB.Assinador\INB.Assinador.Start\obj\Debug\INB.Assinador.Start.csproj.CoreCompileInputs.cache
+C:\Projetos\INB.Assinador\INB.Assinador.Start\obj\Debug\INB.Assinador.Start.exe
+C:\Projetos\INB.Assinador\INB.Assinador.Start\obj\Debug\INB.Assinador.Start.pdb

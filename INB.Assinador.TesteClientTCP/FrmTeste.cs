@@ -31,8 +31,8 @@ namespace INB.Assinador.TesteClientTCP
         private void BtnEnviaMSG_Click(object sender, EventArgs e)
         {
             Comunicacao oCom = new Comunicacao();
-            oCom.Codigo = 1;
-            oCom.Versao = 1;
+            oCom.Codigo = "1";
+            oCom.Versao = "1";
             oCom.UserID = "admcomp";
             oCom.Senha = "TESTE";
             oCom.URLWS = "http://RES700850/WSTESTE/WS.xxx";

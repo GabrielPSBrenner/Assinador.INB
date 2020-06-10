@@ -20,12 +20,14 @@ namespace INB.Assinador.Integracao.Service
         public static string ServerMsg;
         public static FileTransfer oFT;
         public static bool ParaServidor = false;
-
+        
         public FileSocket(int Porta)
         {
             t = new Thread(() => IniciarServidor(Porta));
             t.Start();
         }
+
+
 
         private void IniciarServidor(int Porta)
         {
@@ -41,7 +43,8 @@ namespace INB.Assinador.Integracao.Service
             TcpListener serverSocket = new TcpListener(IPAddress.Parse(MeuIP), Porta);
             serverSocket.Start();
             int counter = 0;
-            while (true)
+            
+            while (!ParaServidor)
             {
                 counter += 1;
                 TcpClient clientSocket = default(TcpClient);
@@ -60,12 +63,14 @@ namespace INB.Assinador.Integracao.Service
                         }
                         str = Encoding.ASCII.GetString(ms.ToArray(), 0, (int)ms.Length);
                     }
+                    oFT = (FileTransfer)ConverterObjeto.RetornaObjetoFT(str);
 
                     //FileStream FS = new FileStream("C:\\Lixo.txt", FileMode.OpenOrCreate);
                     //Byte[] info = ASCIIEncoding.ASCII.GetBytes(str);
                     //FS.Write(info, 0, info.Length);
                     //FS.Close();
-                    oFT = (FileTransfer)ConverterObjeto.RetornaObjetoFT(str);
+
+
                     ServerMsg = "Arquivo recebido";
                     ArquivoNovo = true;
                 }

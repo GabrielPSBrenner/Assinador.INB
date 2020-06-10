@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Net.WebSockets;
 using System.IO;
+using System.Security.Principal;
 
 //http://marcoluglio.github.io/tutorialwebsockets/
 
@@ -15,6 +16,15 @@ namespace INB.Assinador.Integracao
 {
     public class WebSocketServer
     {
+        public const string Login = "8888";
+        public const string Dominio = "INB";
+        public const string Senha = "H*@p47!Bs#";
+        const int LOGON32_PROVIDER_DEFAULT = 0;
+        const int LOGON32_LOGON_INTERACTIVE = 2;
+        IntPtr tokenHandle = new IntPtr(0);
+        IntPtr dupeTokenHandle = new IntPtr(0);
+
+
         private enum eTipoMenssagem
         {
             Texto = 0,
@@ -36,10 +46,11 @@ namespace INB.Assinador.Integracao
         // If the request is for a WebSocket connection then pass it on to `ProcessRequest` - otherwise set the status code to 400 (bad request). 
         public async void Start(string listenerPrefix)
         {
+            tokenHandle = IntPtr.Zero;
+
             listener = new HttpListener();
             listener.Prefixes.Add(listenerPrefix);
             listener.Start();
-            //Console.WriteLine("Listening...");
 
             while (Ligado)
             {
@@ -54,6 +65,7 @@ namespace INB.Assinador.Integracao
                     listenerContext.Response.Close();
                 }
             }
+
         }
 
         public async void Close()

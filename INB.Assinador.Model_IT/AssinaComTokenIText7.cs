@@ -207,7 +207,7 @@ namespace INB.Assinador.Model_IT
                 signedPdf.Close();
             }
             catch (Exception ex) { }
-            pdfReader.Close();
+            pdfReader.Close();                       
         }
 
         public static void AssinaComCertificado(List<ICrlClient> crlList, string FileName, string SignFileName, X509Certificate2 cert, int X, int Y, int Pagina, double Escala, bool SeloCargo = false, bool SeloCREA = false, bool SeloCRM = false, string Cargo = "", string CREACRM = "", bool AddTimeStamper = true, string urlTimeStamper = "https://freetsa.org/tsr", string timeStampUser = "", string timeStampPass = "", string Reason = "Assinatura Digital", bool AplicaPolitica = false, string MyDigestAlgorithm = "SHA-256", string Contact = "", string Location = "Indústrias Nucleares do Brasil S/A - INB", string Creator = "Assinador da INB")
@@ -306,7 +306,7 @@ namespace INB.Assinador.Model_IT
             try { signedPdf.Flush(); }
             catch { }
             try { signedPdf.Close(); } catch { };
-            pdfReader.Close();
+            pdfReader.Close();            
         }
 
         private void addVerificationInfo(IOcspClient ocspClient, LtvVerification verification, CrlClientOnline crl, String name)

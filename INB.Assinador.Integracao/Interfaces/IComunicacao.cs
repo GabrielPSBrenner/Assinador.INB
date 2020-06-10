@@ -8,8 +8,8 @@ namespace INB.Assinador.Integracao.Interfaces
 {
     public interface IComunicacao
     {
-        int Codigo { get; set; }
-        int Versao { get; set; }
+        string Codigo { get; set; }
+        string Versao { get; set; }
         string URLWS { get; set; }
         string UserID { get; set; }
         string Senha { get; set; }

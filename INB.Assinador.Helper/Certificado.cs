@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,29 @@ namespace INB.Assinador.Helper
             {
                 stores.Close();
             }
+        }
+
+        public static X509Certificate2Collection ListaCertificados_todos()
+        {
+            X509Certificate2Collection certificados = new X509Certificate2Collection();
+            foreach (StoreLocation storeLocation in (StoreLocation[])Enum.GetValues(typeof(StoreLocation)))
+            {
+                foreach (StoreName storeName in (StoreName[])Enum.GetValues(typeof(StoreName)))
+                {
+                    X509Store store = new X509Store(storeName, storeLocation);
+
+                    try
+                    {
+                        store.Open(OpenFlags.OpenExistingOnly);
+                        certificados.AddRange(store.Certificates);
+                    }
+                    catch (CryptographicException Ex)
+                    {
+                        throw Ex;
+                    }
+                }                
+            }
+            return certificados;
         }
 
         public static X509Certificate2Collection ListaCertificadosValidos()

@@ -67,7 +67,7 @@ Partial Class FrmPreview
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsPageLabel, Me.ToolStripSeparator1, Me.BtnMoveFirst, Me.tsPrevious, Me.tsNext, Me.BtnMoveLast, Me.ToolStripSeparator2, Me.ToolStripLabel2, Me.tsPageNum, Me.ToolStripSeparator3, Me.ToolStripLabel3})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(827, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(866, 25)
         Me.ToolStrip1.TabIndex = 8
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -150,7 +150,7 @@ Partial Class FrmPreview
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 25)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(827, 463)
+        Me.Panel1.Size = New System.Drawing.Size(866, 626)
         Me.Panel1.TabIndex = 11
         '
         'PctSelo
@@ -212,10 +212,10 @@ Partial Class FrmPreview
         '
         Me.tsBottom.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.tsBottom.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tbSearchText, Me.btSearch, Me.btNext, Me.ToolStripSeparator5, Me.CmdCancelar, Me.CmdConfirmar})
-        Me.tsBottom.Location = New System.Drawing.Point(0, 488)
+        Me.tsBottom.Location = New System.Drawing.Point(0, 651)
         Me.tsBottom.Name = "tsBottom"
         Me.tsBottom.ShowItemToolTips = False
-        Me.tsBottom.Size = New System.Drawing.Size(827, 25)
+        Me.tsBottom.Size = New System.Drawing.Size(866, 25)
         Me.tsBottom.TabIndex = 9
         Me.tsBottom.Text = "Export PDF to another file format"
         '
@@ -223,7 +223,7 @@ Partial Class FrmPreview
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(827, 513)
+        Me.ClientSize = New System.Drawing.Size(866, 676)
         Me.ControlBox = False
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.ToolStrip1)

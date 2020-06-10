@@ -1,5 +1,6 @@
 ﻿Imports System.Text.RegularExpressions
 Imports PDFLibNet32
+Imports PdfLibNetLibrary
 
 Public Class ExportOptions
 

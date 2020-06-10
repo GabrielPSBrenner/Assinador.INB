@@ -6,6 +6,7 @@ Imports System.Windows.Forms
 Imports PDFLibNet32
 Imports System.ComponentModel
 Imports System.util
+Imports PdfLibNetLibrary
 
 Public Class FrmPreview
 
@@ -819,7 +820,7 @@ GhostScriptFallBack:
             Dim pageNumber As Integer = (System.Math.Floor(ScrollBarPosition / ScrollUnitsPerPage) + 1) + i
             If pageNumber >= 1 And pageNumber <= mPDFPageCount Then
                 If Nothing Is FindPictureBox(pageNumber).Image Then
-                    FindPictureBox(pageNumber).Image = GetImageFromFile(mPDFFileName, pageNumber - 1, 72)
+                    FindPictureBox(pageNumber).Image = GetImageFromFile(mPDFFileName, pageNumber - 1, 100)
                     ImagesWereLoaded = True
                     FindPictureBox(pageNumber).Refresh()
                 End If
@@ -1103,7 +1104,7 @@ GhostScriptFallBack:
         Cursor.Current = Cursors.Default
     End Function
 
-    Private Sub FocusSearchResult(ByVal res As PDFSearchResult)
+    Private Sub FocusSearchResult(ByVal res As PdfSearchResult)
         Dim objPanel As Panel = Panel1
         Dim objPictureBox As PictureBox = FindPictureBox("SinglePicBox")
         Dim dr As Point = objPanel.AutoScrollPosition
@@ -1258,5 +1259,15 @@ GhostScriptFallBack:
         Me.Close()
     End Sub
 
+    Private Sub FrmPreview_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        Try
 
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub FrmPreview_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+        Me.BringToFront()
+    End Sub
 End Class

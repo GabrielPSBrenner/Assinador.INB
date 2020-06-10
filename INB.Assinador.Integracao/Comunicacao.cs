@@ -9,8 +9,8 @@ namespace INB.Assinador.Integracao
 {
     public class Comunicacao : IComunicacao
     {
-        public int Codigo { get; set; }
-        public int Versao { get; set; }
+        public string Codigo { get; set; }
+        public string Versao { get; set; }
         public string URLWS { get; set; }
         public string UserID { get; set; }
         public string Senha { get; set; }

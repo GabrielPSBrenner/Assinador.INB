@@ -37,7 +37,8 @@ C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\itextsharp.dll
 C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\itextsharp.xmlworker.dll
 C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\itextsharp.xtra.dll
 C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\PDFLibNet32.dll
-C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\tessnet2_32.dll
+C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\PDFLibNet64.dll
+C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\PdfLibNetLibrary.dll
 C:\Projetos\INB.Assinador\INB.PDFVIEW\bin\Debug\itextsharp.xml
 C:\Projetos\INB.Assinador\INB.PDFVIEW\obj\Debug\INB.PDF.ExportImageOptions.resources
 C:\Projetos\INB.Assinador\INB.PDFVIEW\obj\Debug\INB.PDF.ExportOptions.resources
@@ -51,4 +52,3 @@ C:\Projetos\INB.Assinador\INB.PDFVIEW\obj\Debug\INB.PDF.vbproj.CopyComplete
 C:\Projetos\INB.Assinador\INB.PDFVIEW\obj\Debug\INB.PDF.dll
 C:\Projetos\INB.Assinador\INB.PDFVIEW\obj\Debug\INB.PDF.xml
 C:\Projetos\INB.Assinador\INB.PDFVIEW\obj\Debug\INB.PDF.pdb
-C:\Projetos\INB.Assinador\INB.PDFVIEW\obj\Debug\INB.PDF.vbprojAssemblyReference.cache
