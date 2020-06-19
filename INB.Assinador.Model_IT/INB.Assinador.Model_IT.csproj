@@ -130,5 +130,8 @@
   <ItemGroup>
     <None Include="Resources\seloCRM.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\seloCertifico.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

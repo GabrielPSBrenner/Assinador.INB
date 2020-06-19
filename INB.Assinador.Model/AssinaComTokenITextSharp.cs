@@ -74,7 +74,7 @@ namespace INB.Assinador.Model
             return spi;
         }
 
-        public static void AssinaComToken(Stream File, out byte[] SignFile, X509Certificate2 cert, float X, float Y, int Pagina, double Escala, bool SeloCargo = false, bool SeloCREA = false, bool SeloCRM = false, string Cargo = "", string CREACRM = "", bool AddTimeStamper = true, string urlTimeStamper = "https://freetsa.org/tsr", string timeStampUser = "", string timeStampPass = "", string Reason = "Assinatura Digital", bool AplicaPolitica = false, string MyDigestAlgorithm = "SHA-1", string Contact = "", string Location = "Indústrias Nucleares do Brasil S/A - INB", string Creator = "Assinador da INB")
+        public static void AssinaComToken(Stream File, out byte[] SignFile, X509Certificate2 cert, float X, float Y, int Pagina, double Escala, bool SeloCargo = false, bool SeloCREA = false, bool SeloCRM = false, string Cargo = "", string CREACRM = "", bool AddTimeStamper = true, string urlTimeStamper = "https://freetsa.org/tsr", string timeStampUser = "", string timeStampPass = "", string Reason = "Assinatura Digital", bool AplicaPolitica = false, string MyDigestAlgorithm = "SHA-1", string Contact = "", string Location = "Indústrias Nucleares do Brasil S/A - INB", string Creator = "Assinador da INB", bool SeloCertifico = false)
         {
             int Largura = 155;
             int Altura = 63;
@@ -85,7 +85,7 @@ namespace INB.Assinador.Model
             MemoryStream signedPdf = new MemoryStream();
             //cria a assinatura
             PdfStamper pdfStamper = PdfStamper.CreateSignature(pdfReader, signedPdf, '\0', "temp" + signedPdf, true);
-            Bitmap bmp = INB.Assinador.Helper.Graphic.ConfiguraBMP(cert, SeloCargo, SeloCREA, SeloCRM, Cargo, CREACRM, out Altura);
+            Bitmap bmp = INB.Assinador.Helper.Graphic.ConfiguraBMP(cert, SeloCargo, SeloCREA, SeloCRM, Cargo, CREACRM, out Altura, SeloCertifico);
             PdfSignatureAppearance signatureAppearance = pdfStamper.SignatureAppearance;
 
             ConfiguraAparenciaAssinatura(signatureAppearance, Reason, Contact, Location, Creator, bmp, Altura, Largura, X, Y, Escala, Pagina, pdfReader);   
@@ -152,7 +152,7 @@ namespace INB.Assinador.Model
         }
 
 
-        public static void AssinaComToken(string FileName, string SignFileName, X509Certificate2 cert, float X, float Y, int Pagina, double Escala, bool SeloCargo = false, bool SeloCREA = false, bool SeloCRM = false, string Cargo = "", string CREACRM = "", bool AddTimeStamper = true, string urlTimeStamper = "https://freetsa.org/tsr", string timeStampUser = "", string timeStampPass = "", string Reason = "Assinatura Digital", bool AplicaPolitica = false, string MyDigestAlgorithm = "SHA-1", string Contact = "", string Location = "Indústrias Nucleares do Brasil S/A - INB", string Creator = "Assinador da INB")
+        public static void AssinaComToken(string FileName, string SignFileName, X509Certificate2 cert, float X, float Y, int Pagina, double Escala, bool SeloCargo = false, bool SeloCREA = false, bool SeloCRM = false, string Cargo = "", string CREACRM = "", bool AddTimeStamper = true, string urlTimeStamper = "https://freetsa.org/tsr", string timeStampUser = "", string timeStampPass = "", string Reason = "Assinatura Digital", bool AplicaPolitica = false, string MyDigestAlgorithm = "SHA-1", string Contact = "", string Location = "Indústrias Nucleares do Brasil S/A - INB", string Creator = "Assinador da INB", bool SeloCertifico = false)
         {
             string SourcePdfFileName = FileName;
             string DestPdfFileName = SignFileName;
@@ -166,7 +166,7 @@ namespace INB.Assinador.Model
                                                                                                             //cria a assinatura
             PdfStamper pdfStamper = PdfStamper.CreateSignature(pdfReader, signedPdf, '\0', "temp" + signedPdf, true);
             PdfSignatureAppearance signatureAppearance = pdfStamper.SignatureAppearance;
-            Bitmap bmp = INB.Assinador.Helper.Graphic.ConfiguraBMP(cert, SeloCargo, SeloCREA, SeloCRM, Cargo, CREACRM, out Altura);
+            Bitmap bmp = INB.Assinador.Helper.Graphic.ConfiguraBMP(cert, SeloCargo, SeloCREA, SeloCRM, Cargo, CREACRM, out Altura, SeloCertifico);
 
             //CONFIGURA A APARÊNCIA DO SELO DA ASSINATURA.
             ConfiguraAparenciaAssinatura(signatureAppearance, Reason, Contact, Location, Creator, bmp, Altura, Largura, X, Y, Escala, Pagina, pdfReader);            

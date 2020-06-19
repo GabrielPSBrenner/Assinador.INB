@@ -57,6 +57,11 @@ INB.PDF
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:INB.PDF.My.Resources.Resources.seloCertifico">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:INB.PDF.My.Resources.Resources.seloCREA">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.

@@ -1,0 +1,4 @@
+C:\Projetos\INB.Assinador\INB.Assinador.Model_IT\obj\Debug\INB.Assinador.Model_IT.csprojAssemblyReference.cache
+C:\Projetos\INB.Assinador\INB.Assinador.Model_IT\obj\Debug\INB.Assinador.Model_IT.Properties.Resources.resources
+C:\Projetos\INB.Assinador\INB.Assinador.Model_IT\obj\Debug\INB.Assinador.Model_IT.csproj.GenerateResource.cache
+C:\Projetos\INB.Assinador\INB.Assinador.Model_IT\obj\Debug\INB.Assinador.Model_IT.csproj.CoreCompileInputs.cache

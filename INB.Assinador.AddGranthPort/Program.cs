@@ -11,7 +11,7 @@ namespace INB.Assinador.AddGranthPort
     class Program
     {
         public const string Login = ""; //usuário com poder de admin local para dar a permissão
-        public const string Dominio = "";
+        public const string Dominio = "INB";
         public const string Senha = "";
         const int LOGON32_PROVIDER_DEFAULT = 0;
         const int LOGON32_LOGON_INTERACTIVE = 2;

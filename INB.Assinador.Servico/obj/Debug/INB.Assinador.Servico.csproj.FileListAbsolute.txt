@@ -1,0 +1,17 @@
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\bin\Debug\INB.Assinador.Servico.exe.config
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\bin\Debug\INB.Assinador.Servico.exe
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\bin\Debug\INB.Assinador.Servico.pdb
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\bin\Debug\INB.Assinador.Helper.dll
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\bin\Debug\INB.Assinador.Integracao.dll
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\bin\Debug\INB.Assinador.Servico.Base.dll
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\bin\Debug\INB.Assinador.Helper.pdb
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\bin\Debug\INB.Assinador.Integracao.pdb
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\bin\Debug\INB.Assinador.Servico.Base.pdb
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\obj\Debug\INB.Assinador.Servico.csprojAssemblyReference.cache
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\obj\Debug\INB.Assinador.Servico.Assinador.resources
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\obj\Debug\INB.Assinador.Servico.ProjectInstaller.resources
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\obj\Debug\INB.Assinador.Servico.csproj.GenerateResource.cache
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\obj\Debug\INB.Assinador.Servico.csproj.CoreCompileInputs.cache
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\obj\Debug\INB.Assinador.Servico.csproj.CopyComplete
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\obj\Debug\INB.Assinador.Servico.exe
+C:\Projetos\INB.Assinador\INB.Assinador.Servico\obj\Debug\INB.Assinador.Servico.pdb

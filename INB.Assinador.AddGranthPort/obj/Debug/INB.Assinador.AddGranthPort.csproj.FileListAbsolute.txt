@@ -1,0 +1,7 @@
+C:\Projetos\INB.Assinador\INB.Assinador.AddGranthPort\bin\Debug\AddGranthPort.exe.config
+C:\Projetos\INB.Assinador\INB.Assinador.AddGranthPort\bin\Debug\AddGranthPort.exe
+C:\Projetos\INB.Assinador\INB.Assinador.AddGranthPort\bin\Debug\AddGranthPort.pdb
+C:\Projetos\INB.Assinador\INB.Assinador.AddGranthPort\obj\Debug\INB.Assinador.AddGranthPort.csprojAssemblyReference.cache
+C:\Projetos\INB.Assinador\INB.Assinador.AddGranthPort\obj\Debug\INB.Assinador.AddGranthPort.csproj.CoreCompileInputs.cache
+C:\Projetos\INB.Assinador\INB.Assinador.AddGranthPort\obj\Debug\AddGranthPort.exe
+C:\Projetos\INB.Assinador\INB.Assinador.AddGranthPort\obj\Debug\AddGranthPort.pdb

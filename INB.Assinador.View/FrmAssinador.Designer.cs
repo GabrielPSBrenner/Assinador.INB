@@ -45,6 +45,9 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.MnuApresentacao = new System.Windows.Forms.ToolStripMenuItem();
             this.MnuInfoAdicionais = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.MnuIO = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.MnuVerificarAtualizacao = new System.Windows.Forms.ToolStripMenuItem();
             this.MnuSobre = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
@@ -70,9 +73,8 @@
             this.BtnAtualizar = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.label8 = new System.Windows.Forms.Label();
-            this.MnuIO = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.OptAsPadrao = new System.Windows.Forms.RadioButton();
+            this.OptAsCertifico = new System.Windows.Forms.RadioButton();
             this.MnuBandeja.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -229,6 +231,23 @@
             this.MnuInfoAdicionais.Size = new System.Drawing.Size(198, 22);
             this.MnuInfoAdicionais.Text = "&Informações Adicionais";
             this.MnuInfoAdicionais.Click += new System.EventHandler(this.MnuInfoAdicionais_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(195, 6);
+            // 
+            // MnuIO
+            // 
+            this.MnuIO.Name = "MnuIO";
+            this.MnuIO.Size = new System.Drawing.Size(198, 22);
+            this.MnuIO.Text = "Instrução Operacional";
+            this.MnuIO.Click += new System.EventHandler(this.MnuIO_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
             // 
             // MnuVerificarAtualizacao
             // 
@@ -509,22 +528,28 @@
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label8.Visible = false;
             // 
-            // MnuIO
+            // OptAsPadrao
             // 
-            this.MnuIO.Name = "MnuIO";
-            this.MnuIO.Size = new System.Drawing.Size(198, 22);
-            this.MnuIO.Text = "Instrução Operacional";
-            this.MnuIO.Click += new System.EventHandler(this.MnuIO_Click);
+            this.OptAsPadrao.AutoSize = true;
+            this.OptAsPadrao.Checked = true;
+            this.OptAsPadrao.Location = new System.Drawing.Point(105, 51);
+            this.OptAsPadrao.Name = "OptAsPadrao";
+            this.OptAsPadrao.Size = new System.Drawing.Size(158, 24);
+            this.OptAsPadrao.TabIndex = 25;
+            this.OptAsPadrao.Text = "Assinatura Padrão";
+            this.toolTip1.SetToolTip(this.OptAsPadrao, "Selo padrão de assinatura");
+            this.OptAsPadrao.UseVisualStyleBackColor = true;
             // 
-            // toolStripSeparator1
+            // OptAsCertifico
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(195, 6);
+            this.OptAsCertifico.AutoSize = true;
+            this.OptAsCertifico.Location = new System.Drawing.Point(105, 78);
+            this.OptAsCertifico.Name = "OptAsCertifico";
+            this.OptAsCertifico.Size = new System.Drawing.Size(227, 24);
+            this.OptAsCertifico.TabIndex = 25;
+            this.OptAsCertifico.Text = "Certifico de Material/Produto";
+            this.toolTip1.SetToolTip(this.OptAsCertifico, "Selo de certifico de Material/Produto entregue e verificado");
+            this.OptAsCertifico.UseVisualStyleBackColor = true;
             // 
             // FrmAssinador
             // 
@@ -535,6 +560,8 @@
             this.CancelButton = this.BtnFechar;
             this.ClientSize = new System.Drawing.Size(702, 114);
             this.ContextMenuStrip = this.MnuBandeja;
+            this.Controls.Add(this.OptAsCertifico);
+            this.Controls.Add(this.OptAsPadrao);
             this.Controls.Add(this.ChkIgnora);
             this.Controls.Add(this.ChkSalvaArquivo);
             this.Controls.Add(this.BtnAtualizar);
@@ -625,6 +652,8 @@
         private System.Windows.Forms.ToolStripMenuItem MnuIO;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.RadioButton OptAsPadrao;
+        private System.Windows.Forms.RadioButton OptAsCertifico;
     }
 }
 

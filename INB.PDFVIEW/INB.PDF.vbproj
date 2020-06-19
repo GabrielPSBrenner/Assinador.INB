@@ -186,6 +186,7 @@
     <Content Include="Content\tessdata\eng.unicharset" />
     <Content Include="Content\tessdata\eng.user-words" />
     <Content Include="Content\tessdata\eng.word-dawg" />
+    <None Include="Resources\seloCertifico.png" />
     <None Include="Resources\seloCRM.png" />
     <None Include="Resources\seloCREA.png" />
     <None Include="Resources\seloCargoCRM.png" />

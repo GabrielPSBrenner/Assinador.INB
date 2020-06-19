@@ -103,6 +103,16 @@ namespace INB.Assinador.Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap seloCertifico {
+            get {
+                object obj = ResourceManager.GetObject("seloCertifico", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap seloCREA {
             get {
                 object obj = ResourceManager.GetObject("seloCREA", resourceCulture);

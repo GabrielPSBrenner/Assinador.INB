@@ -14,9 +14,14 @@ using System.Diagnostics;
 using INB.Assinador.Helper;
 using System.Security.Cryptography;
 using System.Security.Principal;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace INB.Assinador.View
 {
+
+
+
     public partial class FrmAssinador : Form
     {
 
@@ -50,6 +55,28 @@ namespace INB.Assinador.View
         {
             Socket = 1,
             WebSocket = 2
+        }
+
+
+        private bool Ignorar(string Mensagem)
+        {
+            List<string> Msg = new List<string>();
+            Msg.Add("OPTIONS / HTTP/1.0");
+            Msg.Add("OPTIONS / RTSP/1.0");
+            Msg.Add("GET / HTTP/1.0");
+            Msg.Add("?");
+            Msg.Add("GIOP");
+            Msg.Add("HELP");
+            Msg.Add("default");
+            Msg.Add("DmdT");          
+            foreach (string obj in Msg)
+            {
+                if (obj.Trim() == Mensagem.Trim())
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public FrmAssinador()
@@ -107,7 +134,7 @@ namespace INB.Assinador.View
 
             //tokenHandle = IntPtr.Zero;
             //bool returnValue = Impersonate.LogonUser(Login, Dominio, Senha, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, ref tokenHandle);
-             try
+            try
             {
                 //SERVIDOR QUE RECEBE O JSON COM OS DADOS DO SERVIDOR.
                 t = new Thread(() => OpenServer());
@@ -127,7 +154,7 @@ namespace INB.Assinador.View
             catch (Exception ex)
             {
                 MessageBox.Show("Não foi possível abrir o servidor WebSocket. A Integração com o Alfresco não funcionará, acione o Help-Desk.: " + ex.Message + ".", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }           
+            }
         }
 
         private void OpenServer(int Porta = 27525)
@@ -212,33 +239,40 @@ namespace INB.Assinador.View
         private PDF.FrmPreview.eTipoSelo SeloUtilizado()
         {
             PDF.FrmPreview.eTipoSelo TipoSelo;
-            if (ChkCargo.Checked == false && ChkCRM.Checked == false && ChkCREA.Checked == false)
+            if (OptAsPadrao.Checked)
             {
-                TipoSelo = PDF.FrmPreview.eTipoSelo.Selo;
-            }
-            else if (ChkCargo.Checked == true && ChkCRM.Checked == false && ChkCREA.Checked == false)
-            {
-                TipoSelo = PDF.FrmPreview.eTipoSelo.SeloCargo;
-            }
-            else if (ChkCargo.Checked == true && ChkCRM.Checked == true && ChkCREA.Checked == false)
-            {
-                TipoSelo = PDF.FrmPreview.eTipoSelo.SeloCargoCRM;
-            }
-            else if (ChkCargo.Checked == true && ChkCRM.Checked == false && ChkCREA.Checked == true)
-            {
-                TipoSelo = PDF.FrmPreview.eTipoSelo.SEloCargoCREA;
-            }
-            else if (ChkCargo.Checked == false && ChkCRM.Checked == false && ChkCREA.Checked == true)
-            {
-                TipoSelo = PDF.FrmPreview.eTipoSelo.SeloCREA;
-            }
-            else if (ChkCargo.Checked == false && ChkCRM.Checked == true && ChkCREA.Checked == false)
-            {
-                TipoSelo = PDF.FrmPreview.eTipoSelo.SeloCRM;
+                if (ChkCargo.Checked == false && ChkCRM.Checked == false && ChkCREA.Checked == false)
+                {
+                    TipoSelo = PDF.FrmPreview.eTipoSelo.Selo;
+                }
+                else if (ChkCargo.Checked == true && ChkCRM.Checked == false && ChkCREA.Checked == false)
+                {
+                    TipoSelo = PDF.FrmPreview.eTipoSelo.SeloCargo;
+                }
+                else if (ChkCargo.Checked == true && ChkCRM.Checked == true && ChkCREA.Checked == false)
+                {
+                    TipoSelo = PDF.FrmPreview.eTipoSelo.SeloCargoCRM;
+                }
+                else if (ChkCargo.Checked == true && ChkCRM.Checked == false && ChkCREA.Checked == true)
+                {
+                    TipoSelo = PDF.FrmPreview.eTipoSelo.SeloCargoCREA;
+                }
+                else if (ChkCargo.Checked == false && ChkCRM.Checked == false && ChkCREA.Checked == true)
+                {
+                    TipoSelo = PDF.FrmPreview.eTipoSelo.SeloCREA;
+                }
+                else if (ChkCargo.Checked == false && ChkCRM.Checked == true && ChkCREA.Checked == false)
+                {
+                    TipoSelo = PDF.FrmPreview.eTipoSelo.SeloCRM;
+                }
+                else
+                {
+                    TipoSelo = PDF.FrmPreview.eTipoSelo.Selo;
+                }
             }
             else
             {
-                TipoSelo = PDF.FrmPreview.eTipoSelo.Selo;
+                TipoSelo = PDF.FrmPreview.eTipoSelo.SeloCertifico;
             }
             return TipoSelo;
         }
@@ -507,16 +541,24 @@ namespace INB.Assinador.View
 
             if (RecebeuMensagem)
             {
-                this.Visible = true;
-                this.Focus();
-                this.BringToFront();
-
                 Comunicacao oCom = null;
 
                 //CONVERTE O TEXTO RECEBIDO EM OBJETO
                 try
                 {
-                    oCom = (Comunicacao)ConverterObjeto.RetornaObjeto(Mensagem);
+                    if (Ignorar(Mensagem))
+                    {
+                        timer1.Enabled = true;
+                        return; 
+                    }
+                    else
+                    {
+                        this.Visible = true;
+                        this.Focus();
+                        this.WindowState = FormWindowState.Normal;
+                        this.BringToFront();
+                        oCom = (Comunicacao)ConverterObjeto.RetornaObjeto(Mensagem);
+                    }                    
                 }
                 catch (Exception ex)
                 {

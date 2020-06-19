@@ -68,54 +68,59 @@ namespace INB.Assinador.Helper
             g.DrawString(dadosbase[0], new System.Drawing.Font("Tahoma", fontSize, FontStyle.Bold), Brushes.Black, qNome);
             g.DrawString(System.DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"), new System.Drawing.Font("Tahoma", 7, FontStyle.Bold), Brushes.Black, qData);
             g.Flush();
-
-           
-
+                       
             return Selo;
         }
 
-        public static Bitmap ConfiguraBMP(X509Certificate2 cert, bool SeloCargo, bool SeloCREA, bool SeloCRM, string Cargo, string CREACRM,  out int Altura)
+        public static Bitmap ConfiguraBMP(X509Certificate2 cert, bool SeloCargo, bool SeloCREA, bool SeloCRM, string Cargo, string CREACRM, out int Altura, bool SeloCertifico)
         {
             Bitmap bmp;
-            if (SeloCargo == true && (SeloCREA == false && SeloCRM == false))
+            if (SeloCertifico)
             {
-                //SOMENTE SELO DE CARGO
-                bmp = new Bitmap(Properties.Resources.seloCargo);
-                Altura = 75;
-            }
-            else if (SeloCargo == false && (SeloCREA == true || SeloCRM == true))
-            {
-                //SOMENTE SELO DO CREA OU DO CRM.
-                if (SeloCREA)
-                {
-                    bmp = new Bitmap(Properties.Resources.seloCREA);
-                }
-                else
-                {
-                    bmp = new Bitmap(Properties.Resources.seloCRM);
-                }
-                Altura = 75;
-            }
-            else if (SeloCargo == true && (SeloCREA == true || SeloCRM == true))
-            {
-                //SELO COM CARGO CREA OU CRM
-                if (SeloCREA)
-                {
-                    bmp = new Bitmap(Properties.Resources.seloCargoCREA);
-                }
-                else
-                {
-                    bmp = new Bitmap(Properties.Resources.seloCargoCRM);
-                }
-                Altura = 90;
+                bmp = new Bitmap(Properties.Resources.seloCertifico);
+                Altura = 63;
             }
             else
             {
-                bmp = new Bitmap(Properties.Resources.selo);
-                Altura = 63;
-                //SELO NORMAL
+                if (SeloCargo == true && (SeloCREA == false && SeloCRM == false))
+                {
+                    //SOMENTE SELO DE CARGO
+                    bmp = new Bitmap(Properties.Resources.seloCargo);
+                    Altura = 75;
+                }
+                else if (SeloCargo == false && (SeloCREA == true || SeloCRM == true))
+                {
+                    //SOMENTE SELO DO CREA OU DO CRM.
+                    if (SeloCREA)
+                    {
+                        bmp = new Bitmap(Properties.Resources.seloCREA);
+                    }
+                    else
+                    {
+                        bmp = new Bitmap(Properties.Resources.seloCRM);
+                    }
+                    Altura = 75;
+                }
+                else if (SeloCargo == true && (SeloCREA == true || SeloCRM == true))
+                {
+                    //SELO COM CARGO CREA OU CRM
+                    if (SeloCREA)
+                    {
+                        bmp = new Bitmap(Properties.Resources.seloCargoCREA);
+                    }
+                    else
+                    {
+                        bmp = new Bitmap(Properties.Resources.seloCargoCRM);
+                    }
+                    Altura = 90;
+                }
+                else
+                {
+                    bmp = new Bitmap(Properties.Resources.selo);
+                    Altura = 63;
+                    //SELO NORMAL
+                }
             }
-
             bmp = GeraSelo(cert, bmp, Cargo, CREACRM);
             return bmp;
         }
@@ -145,6 +150,6 @@ namespace INB.Assinador.Helper
         }
 
 
-       
+
     }
 }

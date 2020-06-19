@@ -1,0 +1,12 @@
+C:\Projetos\INB.Assinador\INB.Assinador.Servico.Base\bin\Debug\INB.Assinador.Servico.Base.dll
+C:\Projetos\INB.Assinador\INB.Assinador.Servico.Base\bin\Debug\INB.Assinador.Servico.Base.pdb
+C:\Projetos\INB.Assinador\INB.Assinador.Servico.Base\bin\Debug\INB.Assinador.Helper.dll
+C:\Projetos\INB.Assinador\INB.Assinador.Servico.Base\bin\Debug\INB.Assinador.Integracao.dll
+C:\Projetos\INB.Assinador\INB.Assinador.Servico.Base\bin\Debug\System.Net.WebSockets.dll
+C:\Projetos\INB.Assinador\INB.Assinador.Servico.Base\bin\Debug\INB.Assinador.Helper.pdb
+C:\Projetos\INB.Assinador\INB.Assinador.Servico.Base\bin\Debug\INB.Assinador.Integracao.pdb
+C:\Projetos\INB.Assinador\INB.Assinador.Servico.Base\obj\Debug\INB.Assinador.Servico.Base.csprojAssemblyReference.cache
+C:\Projetos\INB.Assinador\INB.Assinador.Servico.Base\obj\Debug\INB.Assinador.Servico.Base.csproj.CoreCompileInputs.cache
+C:\Projetos\INB.Assinador\INB.Assinador.Servico.Base\obj\Debug\INB.Assinador.Servico.Base.csproj.CopyComplete
+C:\Projetos\INB.Assinador\INB.Assinador.Servico.Base\obj\Debug\INB.Assinador.Servico.Base.dll
+C:\Projetos\INB.Assinador\INB.Assinador.Servico.Base\obj\Debug\INB.Assinador.Servico.Base.pdb

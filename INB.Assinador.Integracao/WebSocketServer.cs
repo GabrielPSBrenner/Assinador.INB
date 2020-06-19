@@ -16,9 +16,9 @@ namespace INB.Assinador.Integracao
 {
     public class WebSocketServer
     {
-        public const string Login = "8888";
+        public const string Login = "";
         public const string Dominio = "INB";
-        public const string Senha = "H*@p47!Bs#";
+        public const string Senha = "";
         const int LOGON32_PROVIDER_DEFAULT = 0;
         const int LOGON32_LOGON_INTERACTIVE = 2;
         IntPtr tokenHandle = new IntPtr(0);
@@ -39,11 +39,6 @@ namespace INB.Assinador.Integracao
         public byte[] ByteMensagem;
 
         private HttpListener listener;
-
-        //### Starting the server        
-        // Using HttpListener is reasonably straightforward. Start the listener and run a loop that receives and processes incoming WebSocket connections.
-        // Each iteration of the loop "asynchronously waits" for the next incoming request using the `GetContextAsync` extension method (defined below).             
-        // If the request is for a WebSocket connection then pass it on to `ProcessRequest` - otherwise set the status code to 400 (bad request). 
         public async void Start(string listenerPrefix)
         {
             tokenHandle = IntPtr.Zero;
@@ -83,12 +78,6 @@ namespace INB.Assinador.Integracao
             catch { }
 
         }
-
-        //### Accepting WebSocket connections
-        // Calling `AcceptWebSocketAsync` on the `HttpListenerContext` will accept the WebSocket connection, sending the required 101 response to the client
-        // and return an instance of `WebSocketContext`. This class captures relevant information available at the time of the request and is a read-only 
-        // type - you cannot perform any actual IO operations such as sending or receiving using the `WebSocketContext`. These operations can be 
-        // performed by accessing the `System.Net.WebSocket` instance via the `WebSocketContext.WebSocket` property.        
         private async void ProcessRequest(HttpListenerContext listenerContext)
         {
 
@@ -115,9 +104,6 @@ namespace INB.Assinador.Integracao
             MemoryStream oMS = new MemoryStream();
             try
             {
-                //### Receiving
-                // Define a receive buffer to hold data received on the WebSocket connection. The buffer will be reused as we only need to hold on to the data
-                // long enough to send it back to the sender.
                 byte[] receiveBuffer = new byte[1024];
                 // While the WebSocket connection remains open run a simple loop that receives data and sends it back.
                 while (webSocket.State == WebSocketState.Open)
@@ -165,18 +151,14 @@ namespace INB.Assinador.Integracao
                         oMS.Write(receiveBuffer, 0, receiveResult.Count);
                     }
 
-                    // The echo operation is complete. The loop will resume and `ReceiveAsync` is called again to wait for the next data frame.
                 }
             }
             catch (Exception e)
             {
                 throw e;
-                // Just log any exceptions to the console. Pretty much any exception that occurs when calling `SendAsync`/`ReceiveAsync`/`CloseAsync` is unrecoverable in that it will abort the connection and leave the `WebSocket` instance in an unusable state.
-                //Console.WriteLine("Exception: {0}", e);
             }
             finally
             {
-                // Clean up by disposing the WebSocket once it is closed/aborted.
                 if (webSocket != null)
                     webSocket.Dispose();
             }
@@ -199,8 +181,6 @@ namespace INB.Assinador.Integracao
         }
     }
 
-    // This extension method wraps the BeginGetContext / EndGetContext methods on HttpListener as a Task, using a helper function from the Task Parallel Library (TPL).
-    // This makes it easy to use HttpListener with the C# 5 asynchrony features.
     public static class HelperExtensions
     {
         public static Task GetContextAsync(this HttpListener listener)

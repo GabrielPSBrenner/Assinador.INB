@@ -66,13 +66,13 @@ Public Class FrmPreview
         SeloCREA = 3
         SeloCargo = 4
         SeloCargoCRM = 5
-        SEloCargoCREA = 6
+        SeloCargoCREA = 6
+        SeloCertifico = 7
     End Enum
 
     Public Sub New(PDF As String, TipoSelo As eTipoSelo)
         InitializeComponent()
         NomeArquivo = PDF
-        ' Add any initialization after the InitializeComponent() call.
         objPictureBox.Name = "SinglePicBox"
         AssinaturaConfirmada = False
         _TipoSelo = TipoSelo
@@ -82,7 +82,6 @@ Public Class FrmPreview
     Public Sub New(PDF As Byte(), TipoSelo As eTipoSelo)
         InitializeComponent()
         Arquivo = PDF
-        ' Add any initialization after the InitializeComponent() call.
         objPictureBox.Name = "SinglePicBox"
         AssinaturaConfirmada = False
         _TipoSelo = TipoSelo
@@ -1240,6 +1239,9 @@ GhostScriptFallBack:
             Case eTipoSelo.SeloCargoCRM
                 PctSelo.BackgroundImage = My.Resources.seloCargoCRM
                 PctSelo.Height = 85
+            Case eTipoSelo.SeloCertifico
+                PctSelo.BackgroundImage = My.Resources.seloCertifico
+                PctSelo.Height = 55
         End Select
 
         PctSelo.Visible = True
