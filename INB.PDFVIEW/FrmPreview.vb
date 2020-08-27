@@ -54,7 +54,7 @@ Public Class FrmPreview
 
     Private WithEvents objPictureBox As New PictureBox
 
-    Public Event PosicaoSelo(Position As Point, Pagina As Integer, X As Integer, Y As Integer, Escala As Double)
+    Public Event PosicaoSelo(Position As Point, Pagina As Integer, X As Integer, Y As Integer, Escala As Double, Rotation As Integer)
 
     Public Property AssinaturaConfirmada As Boolean
 
@@ -68,6 +68,15 @@ Public Class FrmPreview
         SeloCargoCRM = 5
         SeloCargoCREA = 6
         SeloCertifico = 7
+        Resende = 8
+        RioDeJaneiro = 9
+        Buena = 10
+        Caldas = 11
+        SaoPaulo = 12
+        Caetite = 13
+        Fortaleza = 14
+        ConferidoOriginal = 15
+        ChancelaJuridica = 16
     End Enum
 
     Public Sub New(PDF As String, TipoSelo As eTipoSelo)
@@ -260,6 +269,7 @@ FileIsEncrypted:
                         End If
 
                         mPDFDoc.LoadPDF(value)
+
                     Catch ex As System.Security.SecurityException
                         GoTo FileIsEncrypted
                     Catch ex As Exception
@@ -960,6 +970,18 @@ GhostScriptFallBack:
             End If
         End If
 
+        'Dim oPage As PDFPage = mPDFDoc.Pages(mCurrentPageNumber)
+        ''MsgBox(oPage.Rotation)
+        'Dim backbuffer As System.Drawing.Bitmap
+        'Dim Rotation As Integer = oPage.Rotation
+        'If Rotation = 270 Or Rotation = 90 Then
+        '    dummyPictureBox.Width = oPage.Height
+        '    dummyPictureBox.Height = oPage.Width
+        'Else
+        '    dummyPictureBox.Width = oPage.Width
+        '    dummyPictureBox.Height = oPage.Height
+        'End If
+
 
         If Trim$(mPDFFileName) = "" Then
             dummyPictureBox.Image = GetImageFromFile(Arquivo, mCurrentPageNumber - 1, optimalDPI)
@@ -1241,6 +1263,36 @@ GhostScriptFallBack:
                 PctSelo.Height = 85
             Case eTipoSelo.SeloCertifico
                 PctSelo.BackgroundImage = My.Resources.seloCertifico
+                PctSelo.Height = 85
+            Case eTipoSelo.Buena
+                PctSelo.BackgroundImage = My.Resources.CarimboBuena
+                PctSelo.Height = 85
+            Case eTipoSelo.Caetite
+                PctSelo.BackgroundImage = My.Resources.CarimboCaetite
+                PctSelo.Height = 85
+            Case eTipoSelo.Caldas
+                PctSelo.BackgroundImage = My.Resources.CarimboCaldas
+                PctSelo.Height = 85
+            Case eTipoSelo.Fortaleza
+                PctSelo.BackgroundImage = My.Resources.CarimboFortaleza
+                PctSelo.Height = 85
+            Case eTipoSelo.Resende
+                PctSelo.BackgroundImage = My.Resources.CarimboResende
+                PctSelo.Height = 85
+            Case eTipoSelo.RioDeJaneiro
+                PctSelo.BackgroundImage = My.Resources.CarimboRJ
+                PctSelo.Height = 85
+            Case eTipoSelo.SaoPaulo
+                PctSelo.BackgroundImage = My.Resources.CarimboSP
+                PctSelo.Height = 85
+            Case eTipoSelo.ConferidoOriginal
+                PctSelo.BackgroundImage = My.Resources.ConferidoOriginal
+                PctSelo.Height = 85
+            Case eTipoSelo.ChancelaJuridica
+                PctSelo.BackgroundImage = My.Resources.SeloChancela
+                PctSelo.Height = 85
+            Case Else
+                PctSelo.BackgroundImage = My.Resources.selo
                 PctSelo.Height = 55
         End Select
 
@@ -1248,7 +1300,11 @@ GhostScriptFallBack:
         PctSelo.Parent = objPictureBox
         PctSelo.Location = e.Location
         Dim escala As Double = GetCurrentScalePercentage() / 100
-        RaiseEvent PosicaoSelo(e.Location, tsPageNum.Text, objPictureBox.Width, objPictureBox.Height, escala)
+
+        Dim oPage As PDFPage = mPDFDoc.Pages(tsPageNum.Text)
+        Dim Rotation As Integer = oPage.Rotation
+        RaiseEvent PosicaoSelo(e.Location, tsPageNum.Text, objPictureBox.Width, objPictureBox.Height, escala, Rotation)
+
     End Sub
 
     Private Sub CmdCancelar_Click(sender As Object, e As EventArgs) Handles CmdCancelar.Click
@@ -1271,5 +1327,6 @@ GhostScriptFallBack:
 
     Private Sub FrmPreview_Activated(sender As Object, e As EventArgs) Handles Me.Activated
         Me.BringToFront()
+        Me.TopMost = True
     End Sub
 End Class

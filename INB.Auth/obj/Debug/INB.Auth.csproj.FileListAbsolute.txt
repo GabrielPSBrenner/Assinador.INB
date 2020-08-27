@@ -1,0 +1,12 @@
+C:\Projetos\INB.Assinador\INB.Auth\bin\Debug\INB.Auth.exe.config
+C:\Projetos\INB.Assinador\INB.Auth\bin\Debug\INB.Auth.exe
+C:\Projetos\INB.Assinador\INB.Auth\bin\Debug\INB.Auth.pdb
+C:\Projetos\INB.Assinador\INB.Auth\bin\Debug\BouncyCastle.Crypto.dll
+C:\Projetos\INB.Assinador\INB.Auth\obj\Debug\INB.Auth.csprojAssemblyReference.cache
+C:\Projetos\INB.Assinador\INB.Auth\obj\Debug\INB.Auth.FrmAuth.resources
+C:\Projetos\INB.Assinador\INB.Auth\obj\Debug\INB.Auth.Properties.Resources.resources
+C:\Projetos\INB.Assinador\INB.Auth\obj\Debug\INB.Auth.csproj.GenerateResource.cache
+C:\Projetos\INB.Assinador\INB.Auth\obj\Debug\INB.Auth.csproj.CoreCompileInputs.cache
+C:\Projetos\INB.Assinador\INB.Auth\obj\Debug\INB.Auth.csproj.CopyComplete
+C:\Projetos\INB.Assinador\INB.Auth\obj\Debug\INB.Auth.exe
+C:\Projetos\INB.Assinador\INB.Auth\obj\Debug\INB.Auth.pdb

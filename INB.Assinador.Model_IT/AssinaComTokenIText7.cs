@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,17 +22,7 @@ namespace INB.Assinador.Model_IT
     {
         private static readonly object data;
 
-        public enum TipoAssinatura
-        {
-            Normal = 1,
-            Cargo = 2,
-            CRM = 3,
-            CREA = 4,
-            CargoCrea = 5,
-            CargoCRM = 6
-        }
-
-        public static X509Certificate2 getDadosCadeiaCertificadao(string SerialNumber, out List<ICrlClient> crlList)
+        public static X509Certificate2 getDadosCadeiaCertificadao(CertSimples oCert, out List<ICrlClient> crlList)
         {
             X509Store KeyStore = new X509Store(StoreName.My, StoreLocation.CurrentUser);
 
@@ -42,14 +31,7 @@ namespace INB.Assinador.Model_IT
             // Obtém a coleção dos certificados da Store
             X509Certificate2Collection Certificados = KeyStore.Certificates;
             X509Certificate2Collection certificates = new X509Certificate2Collection();
-
-            foreach (X509Certificate2 iCert in Certificados)
-            {
-                if (iCert.SerialNumber == SerialNumber)
-                {
-                    certificates.Add(iCert);
-                }
-            }
+            certificates.Add(oCert.Certificado);
 
             List<X509Certificate> chain = new List<X509Certificate>();
             X509Certificate2 cert = null;
@@ -67,28 +49,28 @@ namespace INB.Assinador.Model_IT
                 }
             }
 
-           crlList = new List<ICrlClient>();
+            crlList = new List<ICrlClient>();
             crlList.Add(new CrlClientOnline(chain.ToArray()));
             return cert;
         }
 
-        public static void AssinaPDF(string FileName, string SignFileName, string SerialNumber, int Pagina, int X, int Y, double Escala, bool SeloCargo = false, bool SeloCREA = false, bool SeloCRM = false, string Cargo = "", string CREACRM = "", bool AddTimeStamper = true, string urlTimeStamper = "https://freetsa.org/tsr", string timeStampUser = "", string timeStampPass = "", string Reason = "Assinatura Digital", bool AplicaPolitica = false, string Contact = "")
+        public static void AssinaPDF(string FileName, string SignFileName, CertSimples oCert, int Pagina, int X, int Y, int Rotation, bool AddTimeStamper = true, string urlTimeStamper = "https://freetsa.org/tsr", string timeStampUser = "", string timeStampPass = "", string Reason = "Assinatura Digital", bool AplicaPolitica = false, string Contact = "", TipoAssinatura Tipo = TipoAssinatura.Normal, string Cargo = "", string CREACRM = "")
+        {
+            X509Certificate2 cert;
+            List<ICrlClient>  crlList;
+            cert = getDadosCadeiaCertificadao(oCert, out crlList);
+            AssinaComCertificado(crlList, FileName, SignFileName, oCert, X, Y, Pagina, Rotation, AddTimeStamper, urlTimeStamper, timeStampUser, timeStampPass, Reason, AplicaPolitica, "SHA-256", Contact, null, null, Tipo, Cargo, CREACRM);
+        }
+
+        public static void AssinaPDF(byte[] File, out byte[] SignFile, CertSimples oCert, int Pagina, int X, int Y, int Rotation, bool AddTimeStamper = true, string urlTimeStamper = "https://freetsa.org/tsr", string timeStampUser = "", string timeStampPass = "", string Reason = "Assinatura Digital", bool AplicaPolitica = false, string Contact = "", TipoAssinatura Tipo = TipoAssinatura.Normal, string Cargo = "", string CREACRM = "")
         {
             List<ICrlClient> crlList;
             X509Certificate2 cert;
-            cert = getDadosCadeiaCertificadao(SerialNumber, out crlList);
-            AssinaComCertificado(crlList, FileName, SignFileName, cert, X, Y, Pagina, Escala, SeloCargo, SeloCREA, SeloCRM, Cargo, CREACRM, AddTimeStamper, urlTimeStamper, timeStampUser, timeStampPass, Reason, AplicaPolitica);
+            cert = getDadosCadeiaCertificadao(oCert, out crlList);
+            AssinaComCertificado(crlList, File, out SignFile, oCert, X, Y, Pagina, Rotation, AddTimeStamper, urlTimeStamper, timeStampUser, timeStampPass, Reason, AplicaPolitica, null, null, null, null, Tipo, Cargo, CREACRM);
         }
 
-        public static void AssinaPDF(byte[] File, out byte[] SignFile, string SerialNumber, int Pagina, int X, int Y, double Escala, bool SeloCargo = false, bool SeloCREA = false, bool SeloCRM = false, string Cargo = "", string CREACRM = "", bool AddTimeStamper = true, string urlTimeStamper = "https://freetsa.org/tsr", string timeStampUser = "", string timeStampPass = "", string Reason = "Assinatura Digital", bool AplicaPolitica = false, string Contact = "")
-        {
-            List<ICrlClient> crlList;
-            X509Certificate2 cert;
-            cert = getDadosCadeiaCertificadao(SerialNumber, out crlList);
-            AssinaComCertificado(crlList, File, out SignFile, cert, X, Y, Pagina, Escala, SeloCargo, SeloCREA, SeloCRM, Cargo, CREACRM, AddTimeStamper, urlTimeStamper, timeStampUser, timeStampPass, Reason, AplicaPolitica);
-        }
-
-        private static void ConfiguraAparencia(PdfSigner objStamper, X509Certificate2 cert, int X, int Y, int Largura, int Altura, int Pagina, double Escala, bool SeloCargo = false, bool SeloCREA = false, bool SeloCRM = false, string Cargo = "", string CREACRM = "", string Contact = "", string Reason = "Assinatura Digital", string Location = "Indústrias Nucleares do Brasil S/A - INB", string Creator = "Assinador da INB")
+        private static void ConfiguraAparencia(PdfSigner objStamper, CertSimples cert, int X, int Y, int Largura, int Altura, int Pagina, int Rotation, string Contact = "", string Reason = "Assinatura Digital", string Location = "Indústrias Nucleares do Brasil S/A - INB", string Creator = "Assinador da INB", TipoAssinatura Tipo = TipoAssinatura.Normal, string Cargo = "", string CREACRM = "")
         {
             PdfDocument pdfDoc = objStamper.GetDocument();
             PdfPage oPage = pdfDoc.GetPage(Pagina);
@@ -99,9 +81,23 @@ namespace INB.Assinador.Model_IT
             Y_Ajustado = Y;
             var crop = oPage.GetCropBox();
             float Left, Top, Width, Height;
-            Bitmap bmp = INB.Assinador.Helper.Graphic.ConfiguraBMP(cert, SeloCargo, SeloCREA, SeloCRM, Cargo, CREACRM, out Altura);
-            Left = (int)crop.GetLeft() + X_Ajustado;
-            Top = (int)crop.GetTop() - (Y_Ajustado + AlturaAssinatura + 5);
+            Bitmap bmp = Graphic.ConfiguraBMP(cert, out Altura, Tipo);
+
+            if (Rotation == 270)
+            {
+                Left = (int)crop.GetLeft() + X_Ajustado;
+                Top = (int)crop.GetRight() - (Y_Ajustado + AlturaAssinatura + 5);
+            }
+            else if (Rotation == 90)
+            {
+                Left = (int)crop.GetRight() + X_Ajustado;
+                Top = (int)crop.GetLeft() - (Y_Ajustado + AlturaAssinatura + 5);
+            }
+            else
+            {
+                Left = (int)crop.GetLeft() + X_Ajustado;
+                Top = (int)crop.GetTop() - (Y_Ajustado + AlturaAssinatura + 5);
+            }
             Width = LarguraAssinatura;
             Height = AlturaAssinatura;
             iText.Kernel.Geom.Rectangle oRetangulo = new iText.Kernel.Geom.Rectangle(Left, Top, Width, Height);
@@ -136,9 +132,9 @@ namespace INB.Assinador.Model_IT
             return spi;
         }
 
-        public static void AssinaComCertificado(List<ICrlClient> crlList, byte[] File, out byte[] SignFile, X509Certificate2 cert, int X, int Y, int Pagina, double Escala, bool SeloCargo = false, bool SeloCREA = false, bool SeloCRM = false, string Cargo = "", string CREACRM = "", bool AddTimeStamper = true, string urlTimeStamper = "https://freetsa.org/tsr", string timeStampUser = "", string timeStampPass = "", string Reason = "Assinatura Digital", bool AplicaPolitica = false, string MyDigestAlgorithm = "SHA-256", string Contact = "", string Location = "Indústrias Nucleares do Brasil S/A - INB", string Creator = "Assinador da INB")
+        public static void AssinaComCertificado(List<ICrlClient> crlList, byte[] File, out byte[] SignFile, CertSimples cert, int X, int Y, int Pagina, int Rotation, bool AddTimeStamper = true, string urlTimeStamper = "https://freetsa.org/tsr", string timeStampUser = "", string timeStampPass = "", string Reason = "Assinatura Digital", bool AplicaPolitica = false, string MyDigestAlgorithm = "SHA-256", string Contact = "", string Location = "Indústrias Nucleares do Brasil S/A - INB", string Creator = "Assinador da INB", TipoAssinatura Tipo = TipoAssinatura.Normal, string Cargo = "", string CREACRM = "")
         {
-          
+
             int Largura = 140;
             int Altura = 63;
             MemoryStream ArquivoOrigem = new MemoryStream(File);
@@ -149,28 +145,31 @@ namespace INB.Assinador.Model_IT
             PdfSigner objStamper = new PdfSigner(pdfReader, signedPdf, osp);
             ITSAClient tsaClient = null;
             IOcspClient ocspClient = null;
-            ConfiguraAparencia(objStamper, cert, X, Y, Largura, Altura, Pagina, Escala, SeloCargo, SeloCREA, SeloCRM, Cargo, CREACRM, Contact, Reason, Location, Creator);
- 
-            Org.BouncyCastle.X509.X509Certificate vert = Org.BouncyCastle.Security.DotNetUtilities.FromX509Certificate(cert);
+            ConfiguraAparencia(objStamper, cert, X, Y, Largura, Altura, Pagina, Rotation, Contact, Reason, Location, Creator, Tipo, Cargo, CREACRM);
+
+            Org.BouncyCastle.X509.X509Certificate vert = Org.BouncyCastle.Security.DotNetUtilities.FromX509Certificate(cert.Certificado);
             Org.BouncyCastle.X509.X509CertificateParser cp = new Org.BouncyCastle.X509.X509CertificateParser();
-            Org.BouncyCastle.X509.X509Certificate[] Arraychain = new Org.BouncyCastle.X509.X509Certificate[] { cp.ReadCertificate(cert.RawData) };
+            Org.BouncyCastle.X509.X509Certificate[] Arraychain = new Org.BouncyCastle.X509.X509Certificate[] { cp.ReadCertificate(cert.Certificado.RawData) };
             X509CertificateParser objCP = new X509CertificateParser();
 
             RSACryptoServiceProvider rsa;
             RSACryptoServiceProvider Provider;
             IExternalSignature externalSignature;
-            if (cert.PrivateKey is RSACryptoServiceProvider)
+            if (cert.Certificado.PrivateKey is RSACryptoServiceProvider)
             {
-                rsa = (RSACryptoServiceProvider)cert.PrivateKey;
-                Provider = (RSACryptoServiceProvider)cert.PrivateKey;
+                rsa = (RSACryptoServiceProvider)cert.Certificado.PrivateKey;
+                Provider = (RSACryptoServiceProvider)cert.Certificado.PrivateKey;
                 externalSignature = new AsymmetricAlgorithmSignature(Provider, MyDigestAlgorithm);
             }
             else
             {
-                rsa = (RSACryptoServiceProvider)cert.PrivateKey;
-                Provider = (RSACryptoServiceProvider)cert.PrivateKey;
+                RSA rsaTeste = cert.Certificado.GetRSAPrivateKey();
+
+                rsa = (RSACryptoServiceProvider)cert.Certificado.PrivateKey;
+                Provider = (RSACryptoServiceProvider)cert.Certificado.PrivateKey;
                 externalSignature = new AsymmetricAlgorithmSignature(Provider, MyDigestAlgorithm);
             }
+
             if (AddTimeStamper)
             {
                 tsaClient = new TSAClientBouncyCastle(urlTimeStamper, timeStampUser, timeStampPass);
@@ -179,7 +178,7 @@ namespace INB.Assinador.Model_IT
             ocspClient = new OcspClientBouncyCastle(ocspVerifier);
             if (AplicaPolitica)
             {
-                   SignaturePolicyInfo spi = getPolitica();
+                SignaturePolicyInfo spi = getPolitica();
                 objStamper.SignDetached(externalSignature, Arraychain, crlList, ocspClient, tsaClient, 0, PdfSigner.CryptoStandard.CADES, spi);
             }
             else
@@ -189,7 +188,7 @@ namespace INB.Assinador.Model_IT
 
             try
             {
-                SignFile = signedPdf.ToArray();                
+                SignFile = signedPdf.ToArray();
                 try
                 {
                     signedPdf.Close();
@@ -207,10 +206,10 @@ namespace INB.Assinador.Model_IT
                 signedPdf.Close();
             }
             catch (Exception ex) { }
-            pdfReader.Close();                       
+            pdfReader.Close();
         }
 
-        public static void AssinaComCertificado(List<ICrlClient> crlList, string FileName, string SignFileName, X509Certificate2 cert, int X, int Y, int Pagina, double Escala, bool SeloCargo = false, bool SeloCREA = false, bool SeloCRM = false, string Cargo = "", string CREACRM = "", bool AddTimeStamper = true, string urlTimeStamper = "https://freetsa.org/tsr", string timeStampUser = "", string timeStampPass = "", string Reason = "Assinatura Digital", bool AplicaPolitica = false, string MyDigestAlgorithm = "SHA-256", string Contact = "", string Location = "Indústrias Nucleares do Brasil S/A - INB", string Creator = "Assinador da INB")
+        public static void AssinaComCertificado(List<ICrlClient> crlList, string FileName, string SignFileName, CertSimples cert, int X, int Y, int Pagina, int Rotation, bool AddTimeStamper = true, string urlTimeStamper = "https://freetsa.org/tsr", string timeStampUser = "", string timeStampPass = "", string Reason = "Assinatura Digital", bool AplicaPolitica = false, string MyDigestAlgorithm = "SHA-256", string Contact = "", string Location = "Indústrias Nucleares do Brasil S/A - INB", string Creator = "Assinador da INB", TipoAssinatura Tipo = TipoAssinatura.Normal, string Cargo = "", string CREACRM = "")
         {
             string SourcePdfFileName = FileName;
             string DestPdfFileName = SignFileName;
@@ -221,81 +220,40 @@ namespace INB.Assinador.Model_IT
             StampingProperties osp = new StampingProperties();
             osp.UseAppendMode();
             PdfSigner objStamper = new PdfSigner(pdfReader, signedPdf, osp);
-
             ITSAClient tsaClient = null;
             IOcspClient ocspClient = null;
 
-            ConfiguraAparencia(objStamper, cert, X, Y, Largura, Altura, Pagina, Escala, SeloCargo, SeloCREA, SeloCRM, Cargo, CREACRM, Contact, Reason, Location, Creator);
-            //PdfDocument pdfDoc = objStamper.GetDocument();
-            //PdfPage oPage = pdfDoc.GetPage(Pagina);
-            //int LarguraAssinatura = Largura;
-            //int AlturaAssinatura = Altura;
-            //int X_Ajustado, Y_Ajustado;
-            //X_Ajustado = X;
-            //Y_Ajustado = Y;
-            //var crop = oPage.GetCropBox();
-            //float Left, Top, Width, Height;
-            //Bitmap bmp = INB.Assinador.Helper.Graphic.ConfiguraBMP(cert, SeloCargo, SeloCREA, SeloCRM, Cargo, CREACRM, out Altura);
-            //Left = (int)crop.GetLeft() + X_Ajustado;
-            //Top = (int)crop.GetTop() - (Y_Ajustado + AlturaAssinatura + 5);
-            //Width = LarguraAssinatura;
-            //Height = AlturaAssinatura;
-            //iText.Kernel.Geom.Rectangle oRetangulo = new iText.Kernel.Geom.Rectangle(Left, Top, Width, Height);
-            //var pageSize = pdfDoc.GetPage(Pagina).GetMediaBox();
-            //var signaturePosition = new iText.Kernel.Geom.Rectangle(pageSize.GetLeft(), pageSize.GetBottom(), pageSize.GetWidth(), pageSize.GetHeight());
-            //PdfSignatureAppearance signatureAppearance = objStamper.GetSignatureAppearance();
-            //var memoryStream = new MemoryStream();
-            //bmp.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
-            //iText.IO.Image.ImageData pic = iText.IO.Image.ImageDataFactory.Create(memoryStream.ToArray());
-            //signatureAppearance.SetReason(Reason);
-            //signatureAppearance.SetLocation(Location);
-            //signatureAppearance.SetSignatureCreator(Creator);
-            //signatureAppearance.SetSignatureGraphic(pic);
-            //signatureAppearance.SetRenderingMode(PdfSignatureAppearance.RenderingMode.GRAPHIC);
-            //signatureAppearance.SetPageRect(oRetangulo);
-            //signatureAppearance.SetPageNumber(Pagina);
+            ConfiguraAparencia(objStamper, cert, X, Y, Largura, Altura, Pagina, Rotation, Contact, Reason, Location, Creator, Tipo);
 
-            Org.BouncyCastle.X509.X509Certificate vert = Org.BouncyCastle.Security.DotNetUtilities.FromX509Certificate(cert);
+            Org.BouncyCastle.X509.X509Certificate vert = Org.BouncyCastle.Security.DotNetUtilities.FromX509Certificate(cert.Certificado);
             Org.BouncyCastle.X509.X509CertificateParser cp = new Org.BouncyCastle.X509.X509CertificateParser();
-            Org.BouncyCastle.X509.X509Certificate[] Arraychain = new Org.BouncyCastle.X509.X509Certificate[] { cp.ReadCertificate(cert.RawData) };
+            Org.BouncyCastle.X509.X509Certificate[] Arraychain = new Org.BouncyCastle.X509.X509Certificate[] { cp.ReadCertificate(cert.Certificado.RawData) };
             X509CertificateParser objCP = new X509CertificateParser();
 
             RSACryptoServiceProvider rsa;
             RSACryptoServiceProvider Provider;
             IExternalSignature externalSignature;
-            if (cert.PrivateKey is RSACryptoServiceProvider)
-            {                
-                rsa = (RSACryptoServiceProvider)cert.PrivateKey;
-                Provider = (RSACryptoServiceProvider)cert.PrivateKey;
+            if (cert.Certificado.PrivateKey is RSACryptoServiceProvider)
+            {
+                rsa = (RSACryptoServiceProvider)cert.Certificado.PrivateKey;
+                Provider = (RSACryptoServiceProvider)cert.Certificado.PrivateKey;
                 externalSignature = new AsymmetricAlgorithmSignature(Provider, MyDigestAlgorithm);
             }
             else
             {
                 //RETIRAR ESSA PARTE PARA IMPLEMENTAR OS DEMAIS MÉTODOS, OLHANDO OUTROS TIPOS DE CERTIFICADO
-                rsa = (RSACryptoServiceProvider)cert.PrivateKey;
-                Provider = (RSACryptoServiceProvider)cert.PrivateKey;
+                rsa = (RSACryptoServiceProvider)cert.Certificado.PrivateKey;
+                Provider = (RSACryptoServiceProvider)cert.Certificado.PrivateKey;
                 externalSignature = new AsymmetricAlgorithmSignature(Provider, MyDigestAlgorithm);
             }
             if (AddTimeStamper)
-            {               
-                tsaClient = new TSAClientBouncyCastle(urlTimeStamper, timeStampUser, timeStampPass);              
-            }      
+            {
+                tsaClient = new TSAClientBouncyCastle(urlTimeStamper, timeStampUser, timeStampPass);
+            }
             OCSPVerifier ocspVerifier = new OCSPVerifier(null, null);
             ocspClient = new OcspClientBouncyCastle(ocspVerifier);
             if (AplicaPolitica)
             {
-                //string PolicyIdentifier = "2.16.76.1.7.1.2.2.3";
-                //string PolicyDigestAlgorithm = "SHA-256";
-                //string PolicyUriSource = "http://politicas.icpbrasil.gov.br/LPA_CAdES.der";
-                //string PolicyUri = "";
-                //byte[] PolicyHash = null;
-                //Helper.MyPolicy MyPolicyBase = MontaPolitica.getHashPolitica(PolicyUriSource, PolicyIdentifier, PolicyDigestAlgorithm, "LPA_CAdES.der");
-                //List<string> MyPolicyAuth = MontaPolitica.getHashPoliticaEspecifica(MyPolicyBase.SubURLPolicy, PolicyIdentifier, PolicyDigestAlgorithm, "PA_AD_RT_v2_3.der");
-                //string Hash = MyPolicyAuth[2].Replace("#", "");
-                //PolicyHash = INB.Assinador.Helper.Funcoes.StringToByteArray(Hash);
-                //string strBase64 = Convert.ToBase64String(PolicyHash);
-                //SignaturePolicyInfo spi = new SignaturePolicyInfo(PolicyIdentifier, strBase64, PolicyDigestAlgorithm, MyPolicyBase.SubURLPolicy);
-
                 SignaturePolicyInfo spi = getPolitica();
                 objStamper.SignDetached(externalSignature, Arraychain, crlList, ocspClient, tsaClient, 0, PdfSigner.CryptoStandard.CADES, spi);
             }
@@ -306,7 +264,7 @@ namespace INB.Assinador.Model_IT
             try { signedPdf.Flush(); }
             catch { }
             try { signedPdf.Close(); } catch { };
-            pdfReader.Close();            
+            pdfReader.Close();
         }
 
         private void addVerificationInfo(IOcspClient ocspClient, LtvVerification verification, CrlClientOnline crl, String name)

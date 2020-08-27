@@ -63,6 +63,86 @@ namespace INB.Assinador.Helper.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CarimboBuena {
+            get {
+                object obj = ResourceManager.GetObject("CarimboBuena", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CarimboCaetite {
+            get {
+                object obj = ResourceManager.GetObject("CarimboCaetite", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CarimboCaldas {
+            get {
+                object obj = ResourceManager.GetObject("CarimboCaldas", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CarimboFortaleza {
+            get {
+                object obj = ResourceManager.GetObject("CarimboFortaleza", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CarimboResende {
+            get {
+                object obj = ResourceManager.GetObject("CarimboResende", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CarimboRJ {
+            get {
+                object obj = ResourceManager.GetObject("CarimboRJ", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CarimboSP {
+            get {
+                object obj = ResourceManager.GetObject("CarimboSP", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ConferidoOriginal {
+            get {
+                object obj = ResourceManager.GetObject("ConferidoOriginal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap selo {
             get {
                 object obj = ResourceManager.GetObject("selo", resourceCulture);
@@ -106,6 +186,16 @@ namespace INB.Assinador.Helper.Properties {
         internal static System.Drawing.Bitmap seloCertifico {
             get {
                 object obj = ResourceManager.GetObject("seloCertifico", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SeloChancela {
+            get {
+                object obj = ResourceManager.GetObject("SeloChancela", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

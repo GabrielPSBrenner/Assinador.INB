@@ -148,4 +148,31 @@
   <data name="seloCertifico" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\seloCertifico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CarimboBuena" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarimboBuena.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CarimboCaetite" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarimboCaetite.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CarimboCaldas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarimboCaldas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CarimboFortaleza" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarimboFortaleza.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CarimboResende" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarimboResende.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CarimboRJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarimboRJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CarimboSP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarimboSP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ConferidoOriginal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ConferidoOriginal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SeloChancela" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SeloChancela.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

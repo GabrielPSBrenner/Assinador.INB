@@ -12,31 +12,32 @@ Public Class AFPDFLibUtil
 
     Const RENDER_DPI As Integer = 72
     Const PRINT_DPI As Integer = 300
+    Public Shared ROTATION As Integer
 
     Public Shared Function GetOptimalDPI(ByRef pdfDoc As PDFWrapper, ByRef oPictureBox As PictureBox) As Integer
-        'If pdfDoc IsNot Nothing Then
-        '    If pdfDoc.PageWidth > 0 And pdfDoc.PageHeight > 0 Then
-        '        Dim DPIScalePercent As Single = pdfDoc.RenderDPI
-        '        Dim picHeight As Integer = oPictureBox.Height
-        '        Dim picWidth As Integer = oPictureBox.Width
-        '        Dim docHeight As Integer = pdfDoc.PageHeight
-        '        Dim docWidth As Integer = pdfDoc.PageWidth
-        '        Dim dummyPicBox As New PictureBox
-        '        dummyPicBox.Size = oPictureBox.Size
-        '        If (picWidth > picHeight And docWidth < docHeight) Or (picWidth < picHeight And docWidth > docHeight) Then
-        '            dummyPicBox.Width = picHeight
-        '            dummyPicBox.Height = picWidth
-        '        End If
-        '        Dim HScale As Single = dummyPicBox.Width / (pdfDoc.PageWidth * DPIScalePercent)
-        '        Dim VScale As Single = dummyPicBox.Height / (pdfDoc.PageHeight * DPIScalePercent)
-        '        dummyPicBox.Dispose()
-        '        If VScale > HScale Then
-        '            GetOptimalDPI = Math.Floor(72 * HScale)
-        '        Else
-        '            GetOptimalDPI = Math.Floor(72 * VScale)
-        '        End If
-        '    End If
-        'End If
+        ''If pdfDoc IsNot Nothing Then
+        ''    If pdfDoc.PageWidth > 0 And pdfDoc.PageHeight > 0 Then
+        ''        Dim DPIScalePercent As Single = pdfDoc.RenderDPI
+        ''        Dim picHeight As Integer = oPictureBox.Height
+        ''        Dim picWidth As Integer = oPictureBox.Width
+        ''        Dim docHeight As Integer = pdfDoc.PageHeight
+        ''        Dim docWidth As Integer = pdfDoc.PageWidth
+        ''        Dim dummyPicBox As New PictureBox
+        ''        dummyPicBox.Size = oPictureBox.Size
+        ''        If (picWidth > picHeight And docWidth < docHeight) Or (picWidth < picHeight And docWidth > docHeight) Then
+        ''            dummyPicBox.Width = picHeight
+        ''            dummyPicBox.Height = picWidth
+        ''        End If
+        ''        Dim HScale As Single = dummyPicBox.Width / (pdfDoc.PageWidth * DPIScalePercent)
+        ''        Dim VScale As Single = dummyPicBox.Height / (pdfDoc.PageHeight * DPIScalePercent)
+        ''        dummyPicBox.Dispose()
+        ''        If VScale > HScale Then
+        ''            GetOptimalDPI = Math.Floor(72 * HScale)
+        ''        Else
+        ''            GetOptimalDPI = Math.Floor(72 * VScale)
+        ''        End If
+        ''    End If
+        ''End If
         Return 72
     End Function
 
@@ -62,8 +63,19 @@ Public Class AFPDFLibUtil
     Public Shared Function Render(ByRef pdfDoc As PDFWrapper) As System.Drawing.Bitmap
         Try
             If pdfDoc IsNot Nothing Then
-                Dim backbuffer As System.Drawing.Bitmap = New Bitmap(pdfDoc.PageWidth, pdfDoc.PageHeight)
-                pdfDoc.ClientBounds = New Rectangle(0, 0, pdfDoc.PageWidth, pdfDoc.PageHeight)
+                Dim oPage As PDFPage = pdfDoc.Pages(pdfDoc.CurrentPage)
+                'MsgBox(oPage.Rotation)
+                Dim backbuffer As System.Drawing.Bitmap
+                ROTATION = oPage.Rotation
+                If oPage.Rotation = 270 Or oPage.Rotation = 90 Then
+                    backbuffer = New Bitmap(pdfDoc.PageHeight, pdfDoc.PageWidth)
+                    pdfDoc.ClientBounds = New Rectangle(0, 0, pdfDoc.PageHeight, pdfDoc.PageWidth)
+                Else
+                    backbuffer = New Bitmap(pdfDoc.PageWidth, pdfDoc.PageHeight)
+                    pdfDoc.ClientBounds = New Rectangle(0, 0, pdfDoc.PageWidth, pdfDoc.PageHeight)
+                End If
+
+
                 Dim g As Graphics = Graphics.FromImage(backbuffer)
                 Using g
                     Dim hdc As IntPtr = g.GetHdc()

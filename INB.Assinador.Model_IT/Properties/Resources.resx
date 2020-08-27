@@ -118,6 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="LPA_CAdES" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LPA_CAdES.der;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PA_AD_RT_v2_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PA_AD_RT_v2_3.der;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tsa.crt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CarimboBuena" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarimboBuena.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CarimboCaetite" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarimboCaetite.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CarimboCaldas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarimboCaldas.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CarimboFortaleza" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarimboFortaleza.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CarimboResende" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarimboResende.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CarimboRJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarimboRJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CarimboSP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CarimboSP.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ConferidoOriginal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ConferidoOriginal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="selo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\selo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -130,22 +163,19 @@
   <data name="seloCargoCRM" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\seloCargoCRM.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="seloCertifico" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\seloCertifico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SeloChancela" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SeloChancela.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="seloCREA" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\seloCREA.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="seloCRM" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\seloCRM.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LPA_CAdES" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LPA_CAdES.der;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PA_AD_RT_v2_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PA_AD_RT_v2_3.der;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tsa" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\tsa.crt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="seloCertifico" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\seloCertifico.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="stamp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stamp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

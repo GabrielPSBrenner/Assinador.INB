@@ -233,6 +233,7 @@ Partial Class FrmPreview
         Me.Name = "FrmPreview"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Assinar PDF"
+        Me.TopMost = True
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.Panel1.ResumeLayout(False)

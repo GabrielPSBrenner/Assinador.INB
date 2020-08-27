@@ -57,6 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdobeLtvEnabling.cs" />
+    <Compile Include="CertSimples.cs" />
+    <Compile Include="Enumeradores.cs" />
+    <Compile Include="Graphics.cs" />
     <Compile Include="MontaPolitica.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -68,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="References\PC_S3_AC_PRODEMGE_v5.1.pdf" />
     <None Include="Resources\LPA_CAdES.der" />
     <None Include="Resources\tsa.crt" />
   </ItemGroup>
@@ -100,6 +104,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\seloCertifico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CarimboBuena.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CarimboCaetite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CarimboFortaleza.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CarimboResende.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CarimboRJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CarimboCaldas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CarimboSP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ConferidoOriginal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SeloChancela.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stamp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

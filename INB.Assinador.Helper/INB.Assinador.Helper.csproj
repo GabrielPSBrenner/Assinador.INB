@@ -47,10 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Certificado.cs" />
-    <Compile Include="CertSimples.cs" />
     <Compile Include="FileHelper.cs" />
     <Compile Include="Funcoes.cs" />
-    <Compile Include="Graphics.cs" />
     <Compile Include="MyPolice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -59,6 +57,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Registro.cs" />
+    <Compile Include="ValidaUsuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -93,6 +92,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\seloCertifico.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CarimboBuena.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CarimboCaetite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CarimboCaldas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CarimboFortaleza.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CarimboResende.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CarimboRJ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CarimboSP.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ConferidoOriginal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SeloChancela.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

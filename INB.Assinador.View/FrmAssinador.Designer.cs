@@ -41,7 +41,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.TxtCRMCREA = new System.Windows.Forms.TextBox();
             this.MnuBandeja = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.assinarPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.MnuApresentacao = new System.Windows.Forms.ToolStripMenuItem();
             this.MnuInfoAdicionais = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,13 +67,18 @@
             this.ChkFileSocket = new System.Windows.Forms.CheckBox();
             this.ChkSalvaArquivo = new System.Windows.Forms.CheckBox();
             this.ChkIgnora = new System.Windows.Forms.CheckBox();
-            this.BtnAssinarPDF = new System.Windows.Forms.Button();
-            this.BtnFechar = new System.Windows.Forms.Button();
-            this.BtnAtualizar = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label8 = new System.Windows.Forms.Label();
             this.OptAsPadrao = new System.Windows.Forms.RadioButton();
             this.OptAsCertifico = new System.Windows.Forms.RadioButton();
+            this.OptConferido = new System.Windows.Forms.RadioButton();
+            this.label8 = new System.Windows.Forms.Label();
+            this.OptCarimboINB = new System.Windows.Forms.RadioButton();
+            this.CboCarimbo = new System.Windows.Forms.ComboBox();
+            this.OptChancela = new System.Windows.Forms.RadioButton();
+            this.BtnAssinarPDF = new System.Windows.Forms.Button();
+            this.BtnFechar = new System.Windows.Forms.Button();
+            this.assinarPDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BtnAtualizar = new System.Windows.Forms.Button();
             this.MnuBandeja.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,7 +89,7 @@
             this.CboCertificados.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboCertificados.FormattingEnabled = true;
             this.CboCertificados.Location = new System.Drawing.Point(105, 10);
-            this.CboCertificados.Margin = new System.Windows.Forms.Padding(9);
+            this.CboCertificados.Margin = new System.Windows.Forms.Padding(9, 9, 9, 9);
             this.CboCertificados.Name = "CboCertificados";
             this.CboCertificados.Size = new System.Drawing.Size(589, 28);
             this.CboCertificados.TabIndex = 3;
@@ -110,7 +114,7 @@
             // 
             this.ChkCargo.AutoSize = true;
             this.ChkCargo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.ChkCargo.Location = new System.Drawing.Point(6, 192);
+            this.ChkCargo.Location = new System.Drawing.Point(9, 232);
             this.ChkCargo.Margin = new System.Windows.Forms.Padding(2);
             this.ChkCargo.Name = "ChkCargo";
             this.ChkCargo.Size = new System.Drawing.Size(112, 24);
@@ -124,7 +128,7 @@
             // 
             this.ChkCRM.AutoSize = true;
             this.ChkCRM.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.ChkCRM.Location = new System.Drawing.Point(138, 193);
+            this.ChkCRM.Location = new System.Drawing.Point(141, 233);
             this.ChkCRM.Margin = new System.Windows.Forms.Padding(2);
             this.ChkCRM.Name = "ChkCRM";
             this.ChkCRM.Size = new System.Drawing.Size(105, 24);
@@ -138,7 +142,7 @@
             // 
             this.ChkCREA.AutoSize = true;
             this.ChkCREA.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.ChkCREA.Location = new System.Drawing.Point(258, 193);
+            this.ChkCREA.Location = new System.Drawing.Point(261, 233);
             this.ChkCREA.Margin = new System.Windows.Forms.Padding(2);
             this.ChkCREA.Name = "ChkCREA";
             this.ChkCREA.Size = new System.Drawing.Size(114, 24);
@@ -151,7 +155,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(51, 225);
+            this.label3.Location = new System.Drawing.Point(54, 265);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 20);
@@ -161,7 +165,7 @@
             // 
             // TxtCargo
             // 
-            this.TxtCargo.Location = new System.Drawing.Point(105, 220);
+            this.TxtCargo.Location = new System.Drawing.Point(108, 260);
             this.TxtCargo.Margin = new System.Windows.Forms.Padding(2);
             this.TxtCargo.Name = "TxtCargo";
             this.TxtCargo.Size = new System.Drawing.Size(392, 26);
@@ -171,7 +175,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 258);
+            this.label4.Location = new System.Drawing.Point(9, 298);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(94, 20);
@@ -181,7 +185,7 @@
             // 
             // TxtCRMCREA
             // 
-            this.TxtCRMCREA.Location = new System.Drawing.Point(105, 252);
+            this.TxtCRMCREA.Location = new System.Drawing.Point(108, 292);
             this.TxtCRMCREA.Margin = new System.Windows.Forms.Padding(2);
             this.TxtCRMCREA.Name = "TxtCRMCREA";
             this.TxtCRMCREA.Size = new System.Drawing.Size(203, 26);
@@ -204,14 +208,6 @@
             this.MnuFechar});
             this.MnuBandeja.Name = "MnuBandeja";
             this.MnuBandeja.Size = new System.Drawing.Size(199, 182);
-            // 
-            // assinarPDFToolStripMenuItem
-            // 
-            this.assinarPDFToolStripMenuItem.Image = global::INB.Assinador.View.Properties.Resources.assinatura;
-            this.assinarPDFToolStripMenuItem.Name = "assinarPDFToolStripMenuItem";
-            this.assinarPDFToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.assinarPDFToolStripMenuItem.Text = "&Assinar PDF";
-            this.assinarPDFToolStripMenuItem.Click += new System.EventHandler(this.assinarPDFToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -298,7 +294,7 @@
             this.ChkCarimboTempo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ChkCarimboTempo.Checked = true;
             this.ChkCarimboTempo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChkCarimboTempo.Location = new System.Drawing.Point(286, 130);
+            this.ChkCarimboTempo.Location = new System.Drawing.Point(289, 170);
             this.ChkCarimboTempo.Margin = new System.Windows.Forms.Padding(2);
             this.ChkCarimboTempo.Name = "ChkCarimboTempo";
             this.ChkCarimboTempo.Size = new System.Drawing.Size(162, 24);
@@ -313,7 +309,7 @@
             this.ChkAplicaPolitica.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ChkAplicaPolitica.Checked = true;
             this.ChkAplicaPolitica.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChkAplicaPolitica.Location = new System.Drawing.Point(380, 193);
+            this.ChkAplicaPolitica.Location = new System.Drawing.Point(383, 233);
             this.ChkAplicaPolitica.Margin = new System.Windows.Forms.Padding(2);
             this.ChkAplicaPolitica.Name = "ChkAplicaPolitica";
             this.ChkAplicaPolitica.Size = new System.Drawing.Size(125, 24);
@@ -325,7 +321,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(312, 255);
+            this.label2.Location = new System.Drawing.Point(315, 295);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 20);
@@ -341,7 +337,7 @@
             "SHA-1",
             "SHA-256",
             "SHA-512"});
-            this.CboDigestAlgorithm.Location = new System.Drawing.Point(394, 251);
+            this.CboDigestAlgorithm.Location = new System.Drawing.Point(397, 291);
             this.CboDigestAlgorithm.Name = "CboDigestAlgorithm";
             this.CboDigestAlgorithm.Size = new System.Drawing.Size(103, 28);
             this.CboDigestAlgorithm.TabIndex = 14;
@@ -349,7 +345,7 @@
             // 
             // TxtTimeStampServer
             // 
-            this.TxtTimeStampServer.Location = new System.Drawing.Point(105, 283);
+            this.TxtTimeStampServer.Location = new System.Drawing.Point(108, 323);
             this.TxtTimeStampServer.Margin = new System.Windows.Forms.Padding(2);
             this.TxtTimeStampServer.Name = "TxtTimeStampServer";
             this.TxtTimeStampServer.Size = new System.Drawing.Size(392, 26);
@@ -360,7 +356,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 286);
+            this.label5.Location = new System.Drawing.Point(13, 326);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(91, 20);
@@ -370,7 +366,7 @@
             // 
             // TxtUsuarioTS
             // 
-            this.TxtUsuarioTS.Location = new System.Drawing.Point(105, 315);
+            this.TxtUsuarioTS.Location = new System.Drawing.Point(108, 355);
             this.TxtUsuarioTS.Margin = new System.Windows.Forms.Padding(2);
             this.TxtUsuarioTS.Name = "TxtUsuarioTS";
             this.TxtUsuarioTS.Size = new System.Drawing.Size(203, 26);
@@ -380,7 +376,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 318);
+            this.label6.Location = new System.Drawing.Point(15, 358);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 20);
@@ -390,7 +386,7 @@
             // 
             // TxtSenhaTS
             // 
-            this.TxtSenhaTS.Location = new System.Drawing.Point(104, 346);
+            this.TxtSenhaTS.Location = new System.Drawing.Point(107, 386);
             this.TxtSenhaTS.Margin = new System.Windows.Forms.Padding(2);
             this.TxtSenhaTS.Name = "TxtSenhaTS";
             this.TxtSenhaTS.Size = new System.Drawing.Size(204, 26);
@@ -400,7 +396,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(18, 349);
+            this.label7.Location = new System.Drawing.Point(21, 389);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(80, 20);
@@ -414,7 +410,7 @@
             this.ChkWSService.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ChkWSService.Checked = true;
             this.ChkWSService.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChkWSService.Location = new System.Drawing.Point(25, 159);
+            this.ChkWSService.Location = new System.Drawing.Point(25, 199);
             this.ChkWSService.Margin = new System.Windows.Forms.Padding(2);
             this.ChkWSService.Name = "ChkWSService";
             this.ChkWSService.Size = new System.Drawing.Size(211, 24);
@@ -429,7 +425,7 @@
             this.ChkFileSocket.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ChkFileSocket.Checked = true;
             this.ChkFileSocket.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChkFileSocket.Location = new System.Drawing.Point(240, 162);
+            this.ChkFileSocket.Location = new System.Drawing.Point(243, 202);
             this.ChkFileSocket.Margin = new System.Windows.Forms.Padding(2);
             this.ChkFileSocket.Name = "ChkFileSocket";
             this.ChkFileSocket.Size = new System.Drawing.Size(208, 24);
@@ -443,7 +439,7 @@
             // 
             this.ChkSalvaArquivo.AutoSize = true;
             this.ChkSalvaArquivo.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.ChkSalvaArquivo.Location = new System.Drawing.Point(31, 131);
+            this.ChkSalvaArquivo.Location = new System.Drawing.Point(31, 171);
             this.ChkSalvaArquivo.Margin = new System.Windows.Forms.Padding(2);
             this.ChkSalvaArquivo.Name = "ChkSalvaArquivo";
             this.ChkSalvaArquivo.Size = new System.Drawing.Size(205, 24);
@@ -458,7 +454,7 @@
             this.ChkIgnora.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.ChkIgnora.Checked = true;
             this.ChkIgnora.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ChkIgnora.Location = new System.Drawing.Point(65, 376);
+            this.ChkIgnora.Location = new System.Drawing.Point(68, 416);
             this.ChkIgnora.Margin = new System.Windows.Forms.Padding(2);
             this.ChkIgnora.Name = "ChkIgnora";
             this.ChkIgnora.Size = new System.Drawing.Size(243, 24);
@@ -467,15 +463,121 @@
             this.ChkIgnora.UseVisualStyleBackColor = true;
             this.ChkIgnora.Visible = false;
             // 
+            // toolTip1
+            // 
+            this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
+            // OptAsPadrao
+            // 
+            this.OptAsPadrao.AutoSize = true;
+            this.OptAsPadrao.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.OptAsPadrao.Checked = true;
+            this.OptAsPadrao.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.OptAsPadrao.Location = new System.Drawing.Point(78, 43);
+            this.OptAsPadrao.Name = "OptAsPadrao";
+            this.OptAsPadrao.Size = new System.Drawing.Size(157, 24);
+            this.OptAsPadrao.TabIndex = 25;
+            this.OptAsPadrao.TabStop = true;
+            this.OptAsPadrao.Text = "Assinatura Padrão";
+            this.toolTip1.SetToolTip(this.OptAsPadrao, "Selo padrão de assinatura");
+            this.OptAsPadrao.UseVisualStyleBackColor = true;
+            this.OptAsPadrao.CheckedChanged += new System.EventHandler(this.OptAsPadrao_CheckedChanged);
+            // 
+            // OptAsCertifico
+            // 
+            this.OptAsCertifico.AutoSize = true;
+            this.OptAsCertifico.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.OptAsCertifico.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.OptAsCertifico.Location = new System.Drawing.Point(9, 68);
+            this.OptAsCertifico.Name = "OptAsCertifico";
+            this.OptAsCertifico.Size = new System.Drawing.Size(226, 24);
+            this.OptAsCertifico.TabIndex = 25;
+            this.OptAsCertifico.Text = "Certifico de Material/Produto";
+            this.toolTip1.SetToolTip(this.OptAsCertifico, "Selo de certifico de Material/Produto entregue e verificado");
+            this.OptAsCertifico.UseVisualStyleBackColor = true;
+            this.OptAsCertifico.CheckedChanged += new System.EventHandler(this.OptAsCertifico_CheckedChanged);
+            // 
+            // OptConferido
+            // 
+            this.OptConferido.AutoSize = true;
+            this.OptConferido.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.OptConferido.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.OptConferido.Location = new System.Drawing.Point(36, 92);
+            this.OptConferido.Name = "OptConferido";
+            this.OptConferido.Size = new System.Drawing.Size(199, 24);
+            this.OptConferido.TabIndex = 28;
+            this.OptConferido.Text = "Conferido com o Original";
+            this.toolTip1.SetToolTip(this.OptConferido, "Selo que autentica documento, atestando que ele foi conferido com o original");
+            this.OptConferido.UseVisualStyleBackColor = true;
+            this.OptConferido.CheckedChanged += new System.EventHandler(this.OptConferido_CheckedChanged);
+            // 
+            // label8
+            // 
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(323, 351);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(371, 90);
+            this.label8.TabIndex = 10;
+            this.label8.Text = resources.GetString("label8.Text");
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label8.Visible = false;
+            // 
+            // OptCarimboINB
+            // 
+            this.OptCarimboINB.AutoSize = true;
+            this.OptCarimboINB.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.OptCarimboINB.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.OptCarimboINB.Location = new System.Drawing.Point(110, 140);
+            this.OptCarimboINB.Name = "OptCarimboINB";
+            this.OptCarimboINB.Size = new System.Drawing.Size(125, 24);
+            this.OptCarimboINB.TabIndex = 26;
+            this.OptCarimboINB.Text = "Carimbo - INB";
+            this.OptCarimboINB.UseVisualStyleBackColor = true;
+            this.OptCarimboINB.CheckedChanged += new System.EventHandler(this.OptCarimboINB_CheckedChanged);
+            // 
+            // CboCarimbo
+            // 
+            this.CboCarimbo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CboCarimbo.Enabled = false;
+            this.CboCarimbo.FormattingEnabled = true;
+            this.CboCarimbo.Items.AddRange(new object[] {
+            "BUENA",
+            "CAETITÉ",
+            "CALDAS",
+            "FORTALEZA",
+            "RESENDE",
+            "RIO DE JANEIRO",
+            "SÃO PAULO"});
+            this.CboCarimbo.Location = new System.Drawing.Point(247, 137);
+            this.CboCarimbo.Name = "CboCarimbo";
+            this.CboCarimbo.Size = new System.Drawing.Size(208, 28);
+            this.CboCarimbo.Sorted = true;
+            this.CboCarimbo.TabIndex = 27;
+            // 
+            // OptChancela
+            // 
+            this.OptChancela.AutoSize = true;
+            this.OptChancela.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.OptChancela.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.OptChancela.Location = new System.Drawing.Point(62, 116);
+            this.OptChancela.Name = "OptChancela";
+            this.OptChancela.Size = new System.Drawing.Size(173, 24);
+            this.OptChancela.TabIndex = 29;
+            this.OptChancela.Text = "Chancela da Jurídica";
+            this.toolTip1.SetToolTip(this.OptChancela, "Chancela da Jurídica");
+            this.OptChancela.UseVisualStyleBackColor = true;
+            this.OptChancela.CheckedChanged += new System.EventHandler(this.OptChancela_CheckedChanged);
+            // 
             // BtnAssinarPDF
             // 
             this.BtnAssinarPDF.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.BtnAssinarPDF.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnAssinarPDF.Image = global::INB.Assinador.View.Properties.Resources.assinatura;
-            this.BtnAssinarPDF.Location = new System.Drawing.Point(619, 43);
-            this.BtnAssinarPDF.Margin = new System.Windows.Forms.Padding(5);
+            this.BtnAssinarPDF.Location = new System.Drawing.Point(619, 98);
+            this.BtnAssinarPDF.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.BtnAssinarPDF.Name = "BtnAssinarPDF";
-            this.BtnAssinarPDF.Size = new System.Drawing.Size(75, 64);
+            this.BtnAssinarPDF.Size = new System.Drawing.Size(75, 68);
             this.BtnAssinarPDF.TabIndex = 0;
             this.BtnAssinarPDF.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.BtnAssinarPDF, "Assinar PDF");
@@ -487,69 +589,38 @@
             this.BtnFechar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.BtnFechar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnFechar.Image = global::INB.Assinador.View.Properties.Resources.cancel;
-            this.BtnFechar.Location = new System.Drawing.Point(463, 43);
-            this.BtnFechar.Margin = new System.Windows.Forms.Padding(5);
+            this.BtnFechar.Location = new System.Drawing.Point(463, 98);
+            this.BtnFechar.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.BtnFechar.Name = "BtnFechar";
-            this.BtnFechar.Size = new System.Drawing.Size(75, 64);
+            this.BtnFechar.Size = new System.Drawing.Size(75, 68);
             this.BtnFechar.TabIndex = 0;
             this.BtnFechar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.BtnFechar, "Ocultar");
             this.BtnFechar.UseVisualStyleBackColor = true;
             this.BtnFechar.Click += new System.EventHandler(this.BtnFechar_Click);
             // 
+            // assinarPDFToolStripMenuItem
+            // 
+            this.assinarPDFToolStripMenuItem.Image = global::INB.Assinador.View.Properties.Resources.assinatura;
+            this.assinarPDFToolStripMenuItem.Name = "assinarPDFToolStripMenuItem";
+            this.assinarPDFToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.assinarPDFToolStripMenuItem.Text = "&Assinar PDF";
+            this.assinarPDFToolStripMenuItem.Click += new System.EventHandler(this.assinarPDFToolStripMenuItem_Click);
+            // 
             // BtnAtualizar
             // 
             this.BtnAtualizar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.BtnAtualizar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnAtualizar.Image = global::INB.Assinador.View.Properties.Resources.refresh;
-            this.BtnAtualizar.Location = new System.Drawing.Point(541, 43);
-            this.BtnAtualizar.Margin = new System.Windows.Forms.Padding(5);
+            this.BtnAtualizar.Location = new System.Drawing.Point(541, 98);
+            this.BtnAtualizar.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.BtnAtualizar.Name = "BtnAtualizar";
-            this.BtnAtualizar.Size = new System.Drawing.Size(75, 64);
+            this.BtnAtualizar.Size = new System.Drawing.Size(75, 68);
             this.BtnAtualizar.TabIndex = 4;
             this.BtnAtualizar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolTip1.SetToolTip(this.BtnAtualizar, "Recarregar Certificados");
             this.BtnAtualizar.UseVisualStyleBackColor = false;
             this.BtnAtualizar.Click += new System.EventHandler(this.BtnAtualizar_Click);
-            // 
-            // toolTip1
-            // 
-            this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            // 
-            // label8
-            // 
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(320, 311);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(371, 90);
-            this.label8.TabIndex = 10;
-            this.label8.Text = resources.GetString("label8.Text");
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label8.Visible = false;
-            // 
-            // OptAsPadrao
-            // 
-            this.OptAsPadrao.AutoSize = true;
-            this.OptAsPadrao.Checked = true;
-            this.OptAsPadrao.Location = new System.Drawing.Point(105, 51);
-            this.OptAsPadrao.Name = "OptAsPadrao";
-            this.OptAsPadrao.Size = new System.Drawing.Size(158, 24);
-            this.OptAsPadrao.TabIndex = 25;
-            this.OptAsPadrao.Text = "Assinatura Padrão";
-            this.toolTip1.SetToolTip(this.OptAsPadrao, "Selo padrão de assinatura");
-            this.OptAsPadrao.UseVisualStyleBackColor = true;
-            // 
-            // OptAsCertifico
-            // 
-            this.OptAsCertifico.AutoSize = true;
-            this.OptAsCertifico.Location = new System.Drawing.Point(105, 78);
-            this.OptAsCertifico.Name = "OptAsCertifico";
-            this.OptAsCertifico.Size = new System.Drawing.Size(227, 24);
-            this.OptAsCertifico.TabIndex = 25;
-            this.OptAsCertifico.Text = "Certifico de Material/Produto";
-            this.toolTip1.SetToolTip(this.OptAsCertifico, "Selo de certifico de Material/Produto entregue e verificado");
-            this.OptAsCertifico.UseVisualStyleBackColor = true;
             // 
             // FrmAssinador
             // 
@@ -558,8 +629,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.CancelButton = this.BtnFechar;
-            this.ClientSize = new System.Drawing.Size(702, 114);
+            this.ClientSize = new System.Drawing.Size(702, 172);
             this.ContextMenuStrip = this.MnuBandeja;
+            this.Controls.Add(this.OptChancela);
+            this.Controls.Add(this.OptConferido);
+            this.Controls.Add(this.CboCarimbo);
+            this.Controls.Add(this.OptCarimboINB);
             this.Controls.Add(this.OptAsCertifico);
             this.Controls.Add(this.OptAsPadrao);
             this.Controls.Add(this.ChkIgnora);
@@ -592,7 +667,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(5);
+            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.MaximizeBox = false;
             this.Name = "FrmAssinador";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -654,6 +729,10 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.RadioButton OptAsPadrao;
         private System.Windows.Forms.RadioButton OptAsCertifico;
+        private System.Windows.Forms.RadioButton OptCarimboINB;
+        private System.Windows.Forms.ComboBox CboCarimbo;
+        private System.Windows.Forms.RadioButton OptConferido;
+        private System.Windows.Forms.RadioButton OptChancela;
     }
 }
 

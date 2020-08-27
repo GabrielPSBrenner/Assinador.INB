@@ -16,30 +16,23 @@ using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Collections;
 using System.Collections.Generic;
+using INB.Assinador.Model;
 
 namespace INB.Assinador.View
 {
-
-
-
     public partial class FrmAssinador : Form
     {
-
-
         private INB.PDF.FrmPreview oFrm;
-
         private static bool ContinuaServico = true;
-
         private static TcpListener serverSocket;
         private WebSocketServer oWS;
-
         Point _Position;
         int _Pagina;
         int _Largura;
         int _Altura;
+        int _Rotation;
         double _Escala;
         bool fecha = false;
-
         private Thread t;
 
         //public const string Login = "";
@@ -68,7 +61,7 @@ namespace INB.Assinador.View
             Msg.Add("GIOP");
             Msg.Add("HELP");
             Msg.Add("default");
-            Msg.Add("DmdT");          
+            Msg.Add("DmdT");
             foreach (string obj in Msg)
             {
                 if (obj.Trim() == Mensagem.Trim())
@@ -84,27 +77,28 @@ namespace INB.Assinador.View
             InitializeComponent();
         }
 
-        private void PosicaoSelo(Point Position, int Pagina, int Largura, int Altura, double Escala)
+        private void PosicaoSelo(Point Position, int Pagina, int Largura, int Altura, double Escala, int Rotation)
         {
             _Position = Position;
             _Pagina = Pagina;
             _Largura = Largura;
             _Altura = Altura;
             _Escala = Escala;
+            _Rotation = Rotation;
         }
 
         private void CarregaCertificado()
         {
             CboCertificados.DataSource = null;
             CboCertificados.ValueMember = "SerialNumber";
-            CboCertificados.DisplayMember = "Subject";
+            CboCertificados.DisplayMember = "NomeCPFNPJ";
             CboCertificados.DataSource = CertSimples.ListaCertificado(INB.Assinador.Helper.Certificado.ListaCertificadosValidos());
         }
         private void FrmAssinador_Load(object sender, EventArgs e)
         {
             if (ChkIgnora.Checked)
             {
-                this.Height = 155;
+                this.Height = 211;
                 ChkCargo.Checked = false;
                 ChkCREA.Checked = false;
                 ChkCRM.Checked = false;
@@ -117,7 +111,7 @@ namespace INB.Assinador.View
             }
             else
             {
-                this.Height = 180;
+                this.Height = 510;
             }
 
 
@@ -161,10 +155,17 @@ namespace INB.Assinador.View
         {
             //tokenHandle = IntPtr.Zero;
             //bool returnValue = Impersonate.LogonUser(Login, Dominio, Senha, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, ref tokenHandle);
-
-            serverSocket = new TcpListener(Porta);
-            serverSocket.Start();
             int counter = 0;
+            try
+            {
+                serverSocket = new TcpListener(Porta);
+                serverSocket.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Não foi possível abrir  a porta, porque provavelmente já existe uma instancia do assinador aberta ou o usuáiro não tem permissão. Contate o Help-Desk.", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
 
             while (ContinuaServico)
             {
@@ -270,14 +271,61 @@ namespace INB.Assinador.View
                     TipoSelo = PDF.FrmPreview.eTipoSelo.Selo;
                 }
             }
-            else
+            else if (OptAsCertifico.Checked)
             {
                 TipoSelo = PDF.FrmPreview.eTipoSelo.SeloCertifico;
+            }
+            else if (OptConferido.Checked)
+            {
+                TipoSelo = PDF.FrmPreview.eTipoSelo.ConferidoOriginal;
+            }
+            else if (OptChancela.Checked)
+            {
+                TipoSelo = PDF.FrmPreview.eTipoSelo.ChancelaJuridica;
+            }
+            else if (OptCarimboINB.Checked)
+            {
+                if (CboCarimbo.Text.Trim() == "BUENA")
+                {
+                    TipoSelo = PDF.FrmPreview.eTipoSelo.Buena;
+                }
+                else if (CboCarimbo.Text.Trim() == "CAETITÉ")
+                {
+                    TipoSelo = PDF.FrmPreview.eTipoSelo.Caetite;
+                }
+                else if (CboCarimbo.Text.Trim() == "CALDAS")
+                {
+                    TipoSelo = PDF.FrmPreview.eTipoSelo.Caldas;
+                }
+                else if (CboCarimbo.Text.Trim() == "FORTALEZA")
+                {
+                    TipoSelo = PDF.FrmPreview.eTipoSelo.Fortaleza;
+                }
+                else if (CboCarimbo.Text.Trim() == "RESENDE")
+                {
+                    TipoSelo = PDF.FrmPreview.eTipoSelo.Resende;
+                }
+                else if (CboCarimbo.Text.Trim() == "RIO DE JANEIRO")
+                {
+                    TipoSelo = PDF.FrmPreview.eTipoSelo.RioDeJaneiro;
+                }
+                else if (CboCarimbo.Text.Trim() == "SÃO PAULO")
+                {
+                    TipoSelo = PDF.FrmPreview.eTipoSelo.SaoPaulo;
+                }
+                else
+                {
+                    TipoSelo = PDF.FrmPreview.eTipoSelo.Resende;
+                }
+            }
+            else
+            {
+                TipoSelo = PDF.FrmPreview.eTipoSelo.Selo;
             }
             return TipoSelo;
         }
 
-        public bool AssinarArquivo(byte[] Arquivo, out byte[] returnFile, bool SemAbrir = false)
+        public bool AssinarArquivo(byte[] Arquivo, out byte[] returnFile, bool SemAbrir = false, CertSimples oCertificado = null)
         {
             PDF.FrmPreview.eTipoSelo TipoSelo;
             TipoSelo = SeloUtilizado();
@@ -304,8 +352,81 @@ namespace INB.Assinador.View
                 {
                     MemoryStream SendFile = new MemoryStream(Arquivo);
                     byte[] ReceiveFile;
-                    INB.Assinador.Model.AssinaComTokenITextSharp.AssinaPDF(SendFile, out ReceiveFile, CboCertificados.SelectedValue.ToString(), Pagina, X, Y, _Escala, ChkCargo.Checked, ChkCREA.Checked, ChkCRM.Checked, TxtCargo.Text, TxtCRMCREA.Text, ChkCarimboTempo.Checked, TxtTimeStampServer.Text, TxtUsuarioTS.Text, TxtSenhaTS.Text, "Assinatura Digital de Documento", ChkAplicaPolitica.Checked, CboDigestAlgorithm.Text);
-                    //returnFile = new byte[ReceiveFile.Length];
+
+                    TipoAssinatura Tipo = TipoAssinatura.Normal;
+
+                    if (OptAsPadrao.Checked)
+                    {
+                        if (TxtCargo.Text.Trim() == "" && TxtCRMCREA.Text.Trim() == "")
+                        {
+                            Tipo = TipoAssinatura.Normal;
+                        }
+                        else
+                        {
+                            if (ChkCargo.Checked && ChkCRM.Checked == false)
+                            {
+                                Tipo = TipoAssinatura.Cargo;
+                            }
+                            else if (ChkCargo.Checked = false && ChkCRM.Checked)
+                            {
+                                Tipo = TipoAssinatura.CRM;
+                            }
+                            else if (ChkCargo.Checked && ChkCRM.Checked)
+                            {
+                                Tipo = TipoAssinatura.CargoCRM;
+                            }
+                            else if (ChkCargo.Checked && ChkCREA.Checked)
+                            {
+                                Tipo = TipoAssinatura.CargoCrea;
+                            }
+                        }
+                    }
+                    else if (OptAsCertifico.Checked)
+                    {
+                        Tipo = TipoAssinatura.Certifico;
+                    }
+                    else if (OptChancela.Checked)
+                    {
+                        Tipo = TipoAssinatura.ChancelaJuridica;
+                    }
+                    else if (OptCarimboINB.Checked)
+                    {
+                        if (CboCarimbo.Text.Trim() == "BUENA")
+                        {
+                            Tipo = TipoAssinatura.Buena;
+                        }
+                        else if (CboCarimbo.Text.Trim() == "CAETITÉ")
+                        {
+                            Tipo = TipoAssinatura.Caetite;
+                        }
+                        else if (CboCarimbo.Text.Trim() == "CALDAS")
+                        {
+                            Tipo = TipoAssinatura.Caldas;
+                        }
+                        else if (CboCarimbo.Text.Trim() == "FORTALEZA")
+                        {
+                            Tipo = TipoAssinatura.Fortaleza;
+                        }
+                        else if (CboCarimbo.Text.Trim() == "RESENDE")
+                        {
+                            Tipo = TipoAssinatura.Resende;
+                        }
+                        else if (CboCarimbo.Text.Trim() == "RIO DE JANEIRO")
+                        {
+                            Tipo = TipoAssinatura.RioDeJaneiro;
+                        }
+                        else if (CboCarimbo.Text.Trim() == "SÃO PAULO")
+                        {
+                            Tipo = TipoAssinatura.SaoPaulo;
+                        }
+                        else
+                        {
+                            Tipo = TipoAssinatura.Resende;
+                        }
+                    }
+
+                    INB.Assinador.Model.AssinaComTokenITextSharp.AssinaPDF(SendFile, out ReceiveFile, (CertSimples)CboCertificados.SelectedItem, Pagina, X, Y, _Rotation, ChkCarimboTempo.Checked, TxtTimeStampServer.Text, TxtUsuarioTS.Text, TxtSenhaTS.Text, "Assinatura Digital de Documento", ChkAplicaPolitica.Checked, CboDigestAlgorithm.Text, null, "Indústrias Nucleares do Brasil S/A - INB", "Assinador da INB", Tipo, TxtCargo.Text, TxtCRMCREA.Text);
+
                     returnFile = ReceiveFile;
                 }
                 return true;
@@ -317,7 +438,7 @@ namespace INB.Assinador.View
             }
         }
 
-        public bool AssinarArquivo(string Arquivo, out string returnFileName, bool SemAbrir = false)
+        public bool AssinarArquivo(string Arquivo, out string returnFileName, bool SemAbrir = false, CertSimples oCertificado = null)
         {
             returnFileName = "";
             PDF.FrmPreview.eTipoSelo TipoSelo;
@@ -350,11 +471,65 @@ namespace INB.Assinador.View
                     FileName = getFileName(PathFile, FileName.Substring(0, FileName.Length - 4));
                     SignedFileName = PathFile + FileName;
                     returnFileName = SignedFileName;
-                    INB.Assinador.Model.AssinaComTokenITextSharp.AssinaPDF(Arquivo, SignedFileName, CboCertificados.SelectedValue.ToString(), Pagina, X, Y, _Escala, ChkCargo.Checked, ChkCREA.Checked, ChkCRM.Checked, TxtCargo.Text, TxtCRMCREA.Text, ChkCarimboTempo.Checked, TxtTimeStampServer.Text, TxtUsuarioTS.Text, TxtSenhaTS.Text, "Assinatura Digital de Documento", ChkAplicaPolitica.Checked, CboDigestAlgorithm.Text);
+
+                    TipoAssinatura Tipo = TipoAssinatura.Normal;
+                    if (OptAsPadrao.Checked)
+                    {
+                        Tipo = TipoAssinatura.Normal;
+                    }
+                    else if (OptAsCertifico.Checked)
+                    {
+                        Tipo = TipoAssinatura.Certifico;
+                    }
+                    else if (OptConferido.Checked)
+                    {
+                        Tipo = TipoAssinatura.ConferidoOriginal;
+                    }
+                    else if (OptChancela.Checked)
+                    {
+                        Tipo = TipoAssinatura.ChancelaJuridica;
+                    }
+                    else if (OptCarimboINB.Checked)
+                    {
+                        if (CboCarimbo.Text.Trim() == "BUENA")
+                        {
+                            Tipo = TipoAssinatura.Buena;
+                        }
+                        else if (CboCarimbo.Text.Trim() == "CAETITÉ")
+                        {
+                            Tipo = TipoAssinatura.Caetite;
+                        }
+                        else if (CboCarimbo.Text.Trim() == "CALDAS")
+                        {
+                            Tipo = TipoAssinatura.Caldas;
+                        }
+                        else if (CboCarimbo.Text.Trim() == "FORTALEZA")
+                        {
+                            Tipo = TipoAssinatura.Fortaleza;
+                        }
+                        else if (CboCarimbo.Text.Trim() == "RESENDE")
+                        {
+                            Tipo = TipoAssinatura.Resende;
+                        }
+                        else if (CboCarimbo.Text.Trim() == "RIO DE JANEIRO")
+                        {
+                            Tipo = TipoAssinatura.RioDeJaneiro;
+                        }
+                        else if (CboCarimbo.Text.Trim() == "SÃO PAULO")
+                        {
+                            Tipo = TipoAssinatura.SaoPaulo;
+                        }
+                        else
+                        {
+                            Tipo = TipoAssinatura.Resende;
+                        }
+                    }
+
+                    INB.Assinador.Model.AssinaComTokenITextSharp.AssinaPDF(Arquivo, SignedFileName, (CertSimples)CboCertificados.SelectedItem, Pagina, X, Y, _Rotation, ChkCarimboTempo.Checked, TxtTimeStampServer.Text, TxtUsuarioTS.Text, TxtSenhaTS.Text, "Assinatura Digital de Documento", ChkAplicaPolitica.Checked, CboDigestAlgorithm.Text, "", "Indústrias Nucleares do Brasil S/A - INB", "Assinador da INB", Tipo, TxtCargo.Text, TxtCRMCREA.Text);
 
                     if (SemAbrir == false)
                     {
-                        if (MessageBox.Show("Arquivo assinado com sucesso.Deseja abri-lo?", ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        if (MessageBox.Show("Arquivo assinado com sucesso. Deseja abri-lo?", ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             System.Diagnostics.Process.Start(SignedFileName);
                         }
@@ -391,6 +566,17 @@ namespace INB.Assinador.View
                 }
                 else
                 {
+                    CertSimples oCert = (CertSimples)CboCertificados.SelectedItem;
+
+                    if (OptChancela.Checked)
+                    {
+                        string CPF = oCert.CPF;//CboCertificados.Text.Substring(CboCertificados.Text.IndexOf("CPF:", 0) + 4).Trim();
+                        if (ValidaUsuario.PermiteChancelaJuridica(CPF) == false)
+                        {
+                            MessageBox.Show("O selo de chancela da jurídica só é permitido para usuários autorizados.", ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
                     openFileDialog1.Filter = "Arquivos pdf (*.pdf)|*.pdf";
                     openFileDialog1.FileName = "";
                     if (openFileDialog1.ShowDialog() != DialogResult.Cancel)
@@ -398,7 +584,7 @@ namespace INB.Assinador.View
                         string ArquivoAssinado;
                         try
                         {
-                            AssinarArquivo(openFileDialog1.FileName, out ArquivoAssinado);
+                            AssinarArquivo(openFileDialog1.FileName, out ArquivoAssinado,false, oCert);
                         }
                         catch (Exception ex)
                         {
@@ -549,7 +735,7 @@ namespace INB.Assinador.View
                     if (Ignorar(Mensagem))
                     {
                         timer1.Enabled = true;
-                        return; 
+                        return;
                     }
                     else
                     {
@@ -558,7 +744,7 @@ namespace INB.Assinador.View
                         this.WindowState = FormWindowState.Normal;
                         this.BringToFront();
                         oCom = (Comunicacao)ConverterObjeto.RetornaObjeto(Mensagem);
-                    }                    
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -770,6 +956,44 @@ namespace INB.Assinador.View
             {
                 MessageBox.Show(ex.Message, ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void OptCarimboINB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (OptCarimboINB.Checked)
+            {
+                CboCarimbo.Enabled = true;
+                CboCarimbo.SelectedIndex = 0;
+                CboCarimbo.Focus();
+            }
+            else
+            {
+
+            }
+        }
+
+        private void OptAsPadrao_CheckedChanged(object sender, EventArgs e)
+        {
+            CboCarimbo.Enabled = false;
+            CboCarimbo.SelectedIndex = -1;
+        }
+
+        private void OptAsCertifico_CheckedChanged(object sender, EventArgs e)
+        {
+            CboCarimbo.Enabled = false;
+            CboCarimbo.SelectedIndex = -1;
+        }
+
+        private void OptConferido_CheckedChanged(object sender, EventArgs e)
+        {
+            CboCarimbo.Enabled = false;
+            CboCarimbo.SelectedIndex = -1;
+        }
+
+        private void OptChancela_CheckedChanged(object sender, EventArgs e)
+        {
+            CboCarimbo.Enabled = false;
+            CboCarimbo.SelectedIndex = -1;
         }
     }
 }

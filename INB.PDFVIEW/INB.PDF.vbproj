@@ -186,6 +186,15 @@
     <Content Include="Content\tessdata\eng.unicharset" />
     <Content Include="Content\tessdata\eng.user-words" />
     <Content Include="Content\tessdata\eng.word-dawg" />
+    <None Include="Resources\SeloChancela.png" />
+    <None Include="Resources\ConferidoOriginal.png" />
+    <None Include="Resources\CarimboSP.png" />
+    <None Include="Resources\CarimboRJ.png" />
+    <None Include="Resources\CarimboResende.png" />
+    <None Include="Resources\CarimboFortaleza.png" />
+    <None Include="Resources\CarimboCaldas.png" />
+    <None Include="Resources\CarimboCaetite.png" />
+    <None Include="Resources\CarimboBuena.png" />
     <None Include="Resources\seloCertifico.png" />
     <None Include="Resources\seloCRM.png" />
     <None Include="Resources\seloCREA.png" />

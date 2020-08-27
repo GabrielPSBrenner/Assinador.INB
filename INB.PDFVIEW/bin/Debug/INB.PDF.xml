@@ -27,6 +27,46 @@ INB.PDF
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:INB.PDF.My.Resources.Resources.CarimboBuena">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:INB.PDF.My.Resources.Resources.CarimboCaetite">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:INB.PDF.My.Resources.Resources.CarimboCaldas">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:INB.PDF.My.Resources.Resources.CarimboFortaleza">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:INB.PDF.My.Resources.Resources.CarimboResende">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:INB.PDF.My.Resources.Resources.CarimboRJ">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:INB.PDF.My.Resources.Resources.CarimboSP">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:INB.PDF.My.Resources.Resources.ConferidoOriginal">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:INB.PDF.My.Resources.Resources.escritorio_3237_close64">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
@@ -58,6 +98,11 @@ INB.PDF
 </summary>
 </member>
 <member name="P:INB.PDF.My.Resources.Resources.seloCertifico">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:INB.PDF.My.Resources.Resources.SeloChancela">
 <summary>
   Looks up a localized resource of type System.Drawing.Bitmap.
 </summary>
